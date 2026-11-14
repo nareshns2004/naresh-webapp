@@ -24,3 +24,20 @@ python3 -m http.server 8000
 | `og-image.png` | Share preview, rendered from `assets/og/og-source.html` at 1200×630 |
 
 See `CLAUDE.md` for the rules the content follows and `TODO.md` for the backlog.
+
+## 🤝 Open to roles
+
+![Open to roles](https://img.shields.io/badge/status-open%20to%20roles-2E7D32?style=flat-square)
+
+**Building training or inference clusters that have to be fast _and_ safe? Let’s talk.**
+
+I’m looking for GPU cluster networking, distributed-training infrastructure, inference-platform and AI-infrastructure security roles at AI labs and infra teams.
+
+| Role | Proof of work |
+|---|---|
+| GPU cluster networking | [nicprof: NIC counters to step time ↗](https://github.com/nareshns2004/ai-nic-performance-profiler) |
+| Distributed-training infrastructure | [goodput: fault attribution & recovery ↗](https://github.com/nareshns2004/goodput-fault-tolerant-training-orchestrator) |
+| Inference platforms | [kvwire: RDMA KV-cache transport ↗](https://github.com/nareshns2004/kvwire-disaggregated-inference-engine) |
+| AI-infrastructure security | [Field guide: AI-infra breaches →](https://portfolio-webapp-roan.vercel.app/posts/ai-infra-breaches.html) |
+
+**Open to roles in:** `USA` · `Canada` · `Europe`
