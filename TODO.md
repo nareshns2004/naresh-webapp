@@ -32,6 +32,8 @@ Backlog from CLAUDE.md, ordered by impact.
 
 - [x] **Discord** (`feature/discord-invite`): Discord invite added right after Gmail in the homepage socials row, post/404 footers and the ⌘K palette; footer "source" link removed.
 
+- [x] **Titles + README** (`fix/titles-and-readme-roles`): em dash removed from page titles, share title, image alt and JSON-LD job title (now "·"); README gains the "Open to roles" section, mirroring the GitHub profile.
+
 ## Open questions for Naresh
 
 - **Toolbox list:** the AI-infra-security tool list (SPIFFE/SPIRE, Falco/Tetragon, Sigstore/SLSA, confidential computing…) was added in the Nov 2026 refresh. Prune anything you can't defend in an interview.
@@ -42,4 +44,4 @@ Backlog from CLAUDE.md, ordered by impact.
 - ~~Hugging Face~~: done 13 Nov 2026. Four planned artifacts linked (model + Space from goodput, dataset + Space from kvwire); `infra-incident-intel` is dropped for good.
 - The removed write-ups (DPDK, virtualization, LLM OS, AI infra roadmap essays; XDP / DPDK PMD / RDMA / RoCE / SR-IOV drafts): rebuild any worth keeping as an on-site post, or add as `kind: "external"` in `data.js`.
 
-Next session starts with: review the Vercel preview of `feature/discord-invite`, then prune the Toolbox list and work through the open questions above (vLLM PR link) and the over-claiming READMEs in kernel-level-ai-traffic-shaper and distributed-training-framework-nccl.
+Next session starts with: review the Vercel preview of `fix/titles-and-readme-roles`, then prune the Toolbox list and work through the open questions above (vLLM PR link) and the over-claiming READMEs in kernel-level-ai-traffic-shaper and distributed-training-framework-nccl.
