@@ -34,6 +34,8 @@ Backlog from CLAUDE.md, ordered by impact.
 
 - [x] **Titles + README** (`fix/titles-and-readme-roles`): em dash removed from page titles, share title, image alt and JSON-LD job title (now "·"); README gains the "Open to roles" section, mirroring the GitHub profile.
 
+- [x] **Visitor count** (`fix/titles-and-readme-roles`): page-view badge (komarev, key `nareshns2004-portfolio`) under the contact card's "Open to roles in" locations, matching the GitHub profile.
+
 ## Open questions for Naresh
 
 - **Toolbox list:** the AI-infra-security tool list (SPIFFE/SPIRE, Falco/Tetragon, Sigstore/SLSA, confidential computing…) was added in the Nov 2026 refresh. Prune anything you can't defend in an interview.
