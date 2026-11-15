@@ -285,6 +285,8 @@ a.profile:hover { border-color: var(--pc); }
 .role-proof a:hover .role-link { color: var(--text); }
 .contact-meta { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 0.5rem; }
 .contact-meta-label { font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-dim); margin-right: 0.5rem; }
+.contact-visitors { margin-top: 0.75rem; }
+.visitor-badge { display: block; height: 20px; width: auto; border-radius: 3px; }
 
 /* ─── RESPONSIVE ─── */
 @media (max-width: 960px) {
