@@ -143,7 +143,7 @@
       <li><strong>Collectives run on RDMA.</strong> NCCL’s network transport uses InfiniBand verbs (over InfiniBand or RoCE), and with GPUDirect RDMA the NIC reads and writes GPU memory directly over PCIe, with no bounce through host memory. Toggle GPUDirect in the figure to see the extra hop it removes. It’s also the path my <a href="https://github.com/nareshns2004/kvwire-disaggregated-inference-engine" target="_blank" rel="noopener">kvwire</a> transport uses to move KV cache between prefill and decode GPUs.</li>
       <li><strong>RDMA needs a fabric that cooperates.</strong> Hardware transport assumes little or no loss, which is why RoCE fabrics run <a href="pfc-deadlock.html">PFC and ECN</a>, and why NIC counters, not tcpdump, are how you debug them. That’s the gap <a href="https://github.com/nareshns2004/ai-nic-performance-profiler" target="_blank" rel="noopener">nicprof</a> works in.</li>
       <li><strong>The kernel stack still carries everything else:</strong> control planes, checkpoint and dataset traffic over TCP, and inference front-ends. Its per-packet cost is why tuning (RSS, GRO, busy polling, IRQ affinity) matters at high rates. <a href="https://github.com/nareshns2004/kernel-performance-toolkit" target="_blank" rel="noopener">kptk</a> is my toolkit for the CPU side of that.</li>
-      <li><strong>eBPF is the programmable layer:</strong> XDP for early drops and steering, tc/eBPF for shaping and policy. My <a href="https://github.com/nareshns2004/kernel-level-ai-traffic-shaper" target="_blank" rel="noopener">traffic-shaper</a> repo is an early experiment there.</li>
+      <li><strong>eBPF is the programmable layer:</strong> XDP for early drops and steering, tc/eBPF for shaping and policy. My <a href="https://github.com/nareshns2004/kernel-level-ai-traffic-shaper" target="_blank" rel="noopener">traffic-shaper</a> repo is a paused prototype there; its status page lists what doesn’t build yet.</li>
       <li><strong>DPDK</strong> wins where packet rate dominates and you can afford dedicated cores, such as virtual switches, load balancers and packet processing appliances.</li>
     </ul>
   </div>
@@ -171,8 +171,6 @@
   <div class="footer-links">
     <a href="https://github.com/nareshns2004" target="_blank" rel="noopener">GitHub</a>
     <a href="https://huggingface.co/nareshns2004" target="_blank" rel="noopener">Hugging Face</a>
-    <a href="mailto:nareshns2004@gmail.com?subject=Opportunity%20for%20Naresh">Gmail</a>
-    <a href="https://discord.gg/WHtQAnRJ98" target="_blank" rel="noopener">Discord</a>
     <a href="https://www.linkedin.com/in/nareshns2004/" target="_blank" rel="noopener">LinkedIn</a>
     <a href="https://substack.com/@nareshns2004" target="_blank" rel="noopener">Substack</a>
     <a href="https://www.youtube.com/@nareshns2004" target="_blank" rel="noopener">YouTube</a>
