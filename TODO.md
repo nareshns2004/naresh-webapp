@@ -36,6 +36,8 @@ Backlog from CLAUDE.md, ordered by impact.
 
 - [x] **Visitor count** (`fix/titles-and-readme-roles`): page-view badge (komarev, key `nareshns2004-portfolio`) under the contact card's "Open to roles in" locations, matching the GitHub profile.
 
+- [x] **Visitor count fix + socials + project sync** (`fix/visitor-count-socials-projects`): komarev stopped counting arbitrary keys (`nareshns2004-portfolio` stayed at 0), so the badge now uses hits.sh (key `naresh.ai-ml-infra.com`, count restarts from 0) and loads eagerly instead of only when Contact scrolls into view. Gmail, Discord and Docker Hub removed from footers, ⌘K palette and JSON-LD. Synced with the Videos repos: nicprof 100 tests + simulator-only scope, kptk 59 tests, dtf = fault-aware NCCL layer, fused-attn repo = kernel lab, inference-engine placeholder dropped (archived, superseded by kvwire), traffic shaper marked paused.
+
 ## Open questions for Naresh
 
 - **Toolbox list:** the AI-infra-security tool list (SPIFFE/SPIRE, Falco/Tetragon, Sigstore/SLSA, confidential computing…) was added in the Nov 2026 refresh. Prune anything you can't defend in an interview.
@@ -46,4 +48,4 @@ Backlog from CLAUDE.md, ordered by impact.
 - ~~Hugging Face~~: done 13 Nov 2026. Four planned artifacts linked (model + Space from goodput, dataset + Space from kvwire); `infra-incident-intel` is dropped for good.
 - The removed write-ups (DPDK, virtualization, LLM OS, AI infra roadmap essays; XDP / DPDK PMD / RDMA / RoCE / SR-IOV drafts): rebuild any worth keeping as an on-site post, or add as `kind: "external"` in `data.js`.
 
-Next session starts with: review the Vercel preview of `fix/titles-and-readme-roles`, then prune the Toolbox list and work through the open questions above (vLLM PR link) and the over-claiming READMEs in kernel-level-ai-traffic-shaper and distributed-training-framework-nccl.
+Next session starts with: buy `ai-ml-infra.com`, add `naresh.ai-ml-infra.com` in Vercel → Domains, then merge `chore/custom-domain`.

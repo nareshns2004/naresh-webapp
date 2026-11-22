@@ -120,16 +120,8 @@
     upd();
   }
 
-  // Toast
-  let toastEl = null, toastT = 0;
-  function toast(msg) {
-    if (!toastEl) { toastEl = document.createElement('div'); toastEl.className = 'toast'; toastEl.setAttribute('role', 'status'); document.body.appendChild(toastEl); }
-    toastEl.textContent = msg; toastEl.classList.add('show');
-    clearTimeout(toastT); toastT = setTimeout(() => toastEl.classList.remove('show'), 1800);
-  }
 
   // Command palette: ⌘K / Ctrl+K / "/" opens; arrows + Enter; Esc closes.
-  const EMAIL = 'nareshns2004@gmail.com';
   const onHome = !!document.getElementById('writing-grid');
   const href = h => onHome && h.startsWith('#') ? h : new URL('index.html' + h, ROOT).href;
   const ext = u => ({ go: () => window.open(u, '_blank', 'noopener') });
@@ -148,18 +140,11 @@
     { k: 'repo', t: 'kptk: kernel performance toolkit', ...ext('https://github.com/nareshns2004/kernel-performance-toolkit') },
     { k: 'profile', t: 'GitHub', ...ext('https://github.com/nareshns2004') },
     { k: 'profile', t: 'Hugging Face', ...ext('https://huggingface.co/nareshns2004') },
-    { k: 'profile', t: 'Discord', ...ext('https://discord.gg/WHtQAnRJ98') },
     { k: 'profile', t: 'LinkedIn', ...ext('https://www.linkedin.com/in/nareshns2004/') },
     { k: 'profile', t: 'Substack', ...ext('https://substack.com/@nareshns2004') },
     { k: 'profile', t: 'YouTube', ...ext('https://www.youtube.com/@nareshns2004') },
-    { k: 'profile', t: 'Docker Hub', ...ext('https://hub.docker.com/u/nareshns2004') },
     { k: 'profile', t: 'X / Twitter · @naresh_swe24', ...ext('https://x.com/naresh_swe24') },
     { k: 'profile', t: 'LeetCode', ...ext('https://leetcode.com/u/nareshns2004/') },
-    { k: 'action', t: 'Copy email address', go: () => {
-        const ok = () => toast('Copied ' + EMAIL);
-        navigator.clipboard ? navigator.clipboard.writeText(EMAIL).then(ok, () => { location.href = 'mailto:' + EMAIL; }) : (location.href = 'mailto:' + EMAIL);
-      } },
-    { k: 'action', t: 'Email Naresh', go: () => { location.href = 'mailto:' + EMAIL + '?subject=Opportunity%20for%20Naresh'; } },
     { k: 'action', t: 'Toggle light / dark theme', go: () => themeBtn && themeBtn.click() },
   ];
   let pal = null, input, list, sel = 0, shown = [], lastFocus = null;
