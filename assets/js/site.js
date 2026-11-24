@@ -126,7 +126,7 @@
   const href = h => onHome && h.startsWith('#') ? h : new URL('index.html' + h, ROOT).href;
   const ext = u => ({ go: () => window.open(u, '_blank', 'noopener') });
   const items = [
-    ...[['Work', '#work'], ['Security · threat map', '#security'], ['Writing', '#writing'], ['Evidence', '#evidence'],
+    ...[['Work', '#work'], ['Core stack', '#stack'], ['Security · threat map', '#security'], ['Writing', '#writing'], ['Evidence', '#evidence'],
         ['Toolbox', '#foundations'], ['Profiles', '#profiles'], ['Contact', '#contact']]
       .map(([t, h]) => ({ k: 'section', t, go: () => { location.href = href(h); } })),
     ...(window.POSTS || []).map(p => ({ k: p.tag, t: p.title, go: () => { location.href = new URL(p.url, ROOT).href; } })),

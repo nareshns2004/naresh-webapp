@@ -38,6 +38,9 @@ Backlog from CLAUDE.md, ordered by impact.
 
 - [x] **Visitor count fix + socials + project sync** (`fix/visitor-count-socials-projects`): komarev stopped counting arbitrary keys (`nareshns2004-portfolio` stayed at 0), so the badge now uses hits.sh (key `naresh.ai-ml-infra.com`, count restarts from 0) and loads eagerly instead of only when Contact scrolls into view. Gmail, Discord and Docker Hub removed from footers, ⌘K palette and JSON-LD. Synced with the Videos repos: nicprof 100 tests + simulator-only scope, kptk 59 tests, dtf = fault-aware NCCL layer, fused-attn repo = kernel lab, inference-engine placeholder dropped (archived, superseded by kvwire), traffic shaper marked paused.
 
+- [x] **Core stack + roadmap** (`feature/core-skills-visual-polish`): new §Core stack section (L5 models & serving → L1 hardware, plus observability & languages) with logo/monogram tiles, each linked to the repo or post that uses it, animated packet rail and staggered entrance (static under reduced motion); Fig. 1 roadmap in Work mirroring goodput (M1a) and kvwire (M1) milestones; goodput status updated from "M1 of 6" to M1a; nav + ⌘K entry "Core stack".
+- [ ] When a milestone closes in goodput or kvwire, flip its `ms next` → `ms done` in Fig. 1 (add a `.ms.done` style then) and link the evidence.
+
 ## Open questions for Naresh
 
 - **Toolbox list:** the AI-infra-security tool list (SPIFFE/SPIRE, Falco/Tetragon, Sigstore/SLSA, confidential computing…) was added in the Nov 2026 refresh. Prune anything you can't defend in an interview.

@@ -58,6 +58,7 @@
     <a class="nav-brand" href="#top"><span class="brand-mark" aria-hidden="true">NK</span>Naresh Kumar</a>
     <ul class="nav-links" id="nav-links">
       <li><a href="#work">Work</a></li>
+      <li><a href="#stack">Stack</a></li>
       <li><a href="#security">Security</a></li>
       <li><a href="#writing">Writing</a></li>
       <li><a href="#evidence">Evidence</a></li>
@@ -126,7 +127,7 @@
   <a class="card proof-item reveal" href="https://github.com/nareshns2004/goodput-fault-tolerant-training-orchestrator" target="_blank" rel="noopener">
     <div class="proof-kicker"><span>Repo · reliability</span><span>↗</span></div>
     <div class="proof-fact">goodput: fault attribution &amp; recovery for multi-node training</div>
-    <div class="proof-sub">Design, interfaces, test harness public. M1 of 6.</div>
+    <div class="proof-sub">Design, interfaces, schemas, CPU harness public. Milestone M1a.</div>
   </a>
   <a class="card proof-item reveal" href="https://github.com/nareshns2004/ai-nic-performance-profiler" target="_blank" rel="noopener">
     <div class="proof-kicker"><span>Repo · runnable</span><span>↗</span></div>
@@ -136,7 +137,7 @@
   <a class="card proof-item reveal" href="https://github.com/nareshns2004/kvwire-disaggregated-inference-engine" target="_blank" rel="noopener">
     <div class="proof-kicker"><span>Repo · efficiency</span><span>↗</span></div>
     <div class="proof-fact">kvwire: RDMA KV-cache transport for disaggregated inference</div>
-    <div class="proof-sub">vLLM KV-connector plug-in. M1 in progress.</div>
+    <div class="proof-sub">vLLM KV-connector plug-in. M1: baselines &amp; hardware ceilings.</div>
   </a>
   <a class="card proof-item sec reveal" href="posts/ai-infra-breaches.html">
     <div class="proof-kicker"><span>Field guide · security</span><span>→</span></div>
@@ -166,7 +167,7 @@
         <div><dt>Problem</dt><dd>One bad GPU, NIC, cable or switch port stalls a collective, and <strong>every rank times out the same way</strong>.</dd></div>
         <div><dt>Why it’s hard</dt><dd>Symptoms are global and causes are local. Stock tooling detects in minutes, attributes nothing, and restarts the whole job, sometimes onto the same broken hardware.</dd></div>
         <div><dt>Approach</dt><dd>Inject faults with a ground-truth ledger, capture NCCL flight-recorder signatures, and correlate them with DCGM and NIC telemetry to name the <strong>culprit rank and component</strong>. Correct attribution makes small recoveries safe: re-init communicators in-process, replace one node, or restore from a peer’s in-memory checkpoint.</dd></div>
-        <div><dt>Status</dt><dd><span class="status status-wip">M1 of 6 · in progress</span> &nbsp;No results measured yet; every future number will link to a run.</dd></div>
+        <div><dt>Status</dt><dd><span class="status status-wip">M1a · in progress</span> &nbsp;No results measured yet; every future number will link to a run.</dd></div>
         <div><dt>Hugging Face</dt><dd>The injector’s ledger labels every incident by construction. That data trains one model, a <strong>grounded root-cause tier</strong> (Qwen3 + LoRA) whose verdicts cite evidence ids, so a script scores every answer against the ledger. A Space adds a <strong>signature-matching fast tier</strong>. To take goodput’s classifier slot, the model must beat goodput’s own rules, the zero-shot base model and a majority baseline. <span class="status status-early">design</span></dd></div>
       </dl>
       <div class="problem-links">
@@ -221,6 +222,116 @@
       </div>
     </article>
   </div>
+
+  <figure class="fig roadmap reveal">
+    <figcaption class="fig-bar"><span>Fig. 1 · Roadmap, as committed in each repo</span><span>● in progress ○ planned</span></figcaption>
+    <div class="ms-track" data-tone="sig">
+      <a class="ms-name" href="https://github.com/nareshns2004/goodput-fault-tolerant-training-orchestrator/blob/main/docs/MILESTONES.md" target="_blank" rel="noopener">goodput <span>MILESTONES.md ↗</span></a>
+      <ol class="ms-list">
+        <li class="ms now"><span class="ms-dot" aria-hidden="true"></span><b>M1a</b><span class="ms-scope">Scaffold, CPU harness, CI, prior-art gate</span><span class="sr-only"> · in progress</span></li>
+        <li class="ms next"><span class="ms-dot" aria-hidden="true"></span><b>M1b</b><span class="ms-scope">Workload harness, baselines, topology discovery</span><span class="sr-only"> · planned</span></li>
+        <li class="ms next"><span class="ms-dot" aria-hidden="true"></span><b>M2</b><span class="ms-scope">faultlab: injection harness, ground-truth ledger, safe revert</span><span class="sr-only"> · planned</span></li>
+        <li class="ms next"><span class="ms-dot" aria-hidden="true"></span><b>M3</b><span class="ms-scope">Flight-recorder signatures, culprit-rank attribution</span><span class="sr-only"> · planned</span></li>
+        <li class="ms next"><span class="ms-dot" aria-hidden="true"></span><b>M4</b><span class="ms-scope">Telemetry pipeline, GPU/NIC/fabric correlation</span><span class="sr-only"> · planned</span></li>
+        <li class="ms next"><span class="ms-dot" aria-hidden="true"></span><b>M5</b><span class="ms-scope">Topology-aware recovery, tiered checkpointing</span><span class="sr-only"> · planned</span></li>
+        <li class="ms next"><span class="ms-dot" aria-hidden="true"></span><b>M6</b><span class="ms-scope">Simulator, write-up, public release</span><span class="sr-only"> · planned</span></li>
+      </ol>
+    </div>
+    <div class="ms-track" data-tone="cop">
+      <a class="ms-name" href="https://github.com/nareshns2004/kvwire-disaggregated-inference-engine/blob/main/docs/MILESTONES.md" target="_blank" rel="noopener">kvwire <span>MILESTONES.md ↗</span></a>
+      <ol class="ms-list">
+        <li class="ms now"><span class="ms-dot" aria-hidden="true"></span><b>M1</b><span class="ms-scope">Baselines, perftest ceilings, prior-art gate</span><span class="sr-only"> · in progress</span></li>
+        <li class="ms next"><span class="ms-dot" aria-hidden="true"></span><b>M2</b><span class="ms-scope">RDMA KV transport in C++</span><span class="sr-only"> · planned</span></li>
+        <li class="ms next"><span class="ms-dot" aria-hidden="true"></span><b>M3</b><span class="ms-scope">Prefill/decode split inside vLLM</span><span class="sr-only"> · planned</span></li>
+        <li class="ms next"><span class="ms-dot" aria-hidden="true"></span><b>M4</b><span class="ms-scope">Triton KV re-layout kernel, gated on data</span><span class="sr-only"> · planned</span></li>
+        <li class="ms next"><span class="ms-dot" aria-hidden="true"></span><b>M5</b><span class="ms-scope">Failure-aware coordination, SLO scheduling</span><span class="sr-only"> · planned</span></li>
+        <li class="ms next"><span class="ms-dot" aria-hidden="true"></span><b>M6</b><span class="ms-scope">Write-up and release, every number linked to a run</span><span class="sr-only"> · planned</span></li>
+      </ol>
+    </div>
+    <p class="fig-note">Status mirrors each repo’s README. Nothing is marked done until its exit criterion is met and linked.</p>
+  </figure>
+</section>
+
+<!-- CORE STACK -->
+<!-- Logos: Simple Icons (CC0) sprite in assets/icons/stack.svg; technologies without one use a mono monogram.
+     A tile links only to work that actually uses it (repo or post); no ratings, by design (CLAUDE.md). -->
+<section class="section" id="stack">
+  <div class="section-head">
+    <p class="section-kicker">Core stack</p>
+    <h2 class="section-title">GPU networking &amp; distributed systems, from silicon to serving</h2>
+    <p class="section-lede">Five layers, one job: move bytes between GPUs fast, notice the moment they stop, and keep them yours. A tile with a link opens the repo or post where I use it. No ratings: the work is the rating.</p>
+  </div>
+  <div class="stack reveal">
+    <div class="stack-rail" aria-hidden="true"><span class="stack-pkt"></span><span class="stack-pkt p2"></span></div>
+    <div class="stack-layer" data-tone="sig">
+      <div class="stack-head"><span class="stack-id">L5</span><h3>Models &amp; serving</h3><p>Where tokens are produced and every millisecond of TTFT is billed.</p></div>
+      <div class="stack-tiles">
+        <div class="st-tile" style="--brand:#EE4C2C"><svg class="st-logo" aria-hidden="true" focusable="false"><use href="assets/icons/stack.svg#pytorch"/></svg><span class="st-name">PyTorch</span></div>
+        <a class="st-tile" href="https://github.com/nareshns2004/kvwire-disaggregated-inference-engine" target="_blank" rel="noopener"><span class="st-mono" aria-hidden="true">vLLM</span><span class="st-name">vLLM</span><span class="st-ev">kvwire ↗</span></a>
+        <a class="st-tile" href="https://github.com/nareshns2004/custom-cuda-fused-attention-triton" target="_blank" rel="noopener"><span class="st-mono" aria-hidden="true">CU</span><span class="st-name">CUDA</span><span class="st-ev">kernel lab ↗</span></a>
+        <a class="st-tile" href="https://github.com/nareshns2004/custom-cuda-fused-attention-triton" target="_blank" rel="noopener"><span class="st-mono" aria-hidden="true">Tr</span><span class="st-name">Triton</span><span class="st-ev">kernel lab ↗</span></a>
+        <a class="st-tile" style="--brand:#FFD21E" href="https://huggingface.co/nareshns2004" target="_blank" rel="noopener"><svg class="st-logo" aria-hidden="true" focusable="false"><use href="assets/icons/stack.svg#huggingface"/></svg><span class="st-name">Hugging Face</span><span class="st-ev">HF profile ↗</span></a>
+      </div>
+    </div>
+    <div class="stack-layer" data-tone="sig">
+      <div class="stack-head"><span class="stack-id">L4</span><h3>Collectives &amp; orchestration</h3><p>Where one bad rank becomes 512 timeouts, and recovery is decided.</p></div>
+      <div class="stack-tiles">
+        <a class="st-tile" href="https://github.com/nareshns2004/distributed-training-framework-nccl" target="_blank" rel="noopener"><span class="st-mono" aria-hidden="true">NC</span><span class="st-name">NCCL</span><span class="st-ev">NCCL layer ↗</span></a>
+        <a class="st-tile" style="--brand:#326CE5" href="posts/agent-blast-radius.html"><svg class="st-logo" aria-hidden="true" focusable="false"><use href="assets/icons/stack.svg#kubernetes"/></svg><span class="st-name">Kubernetes</span><span class="st-ev">post →</span></a>
+        <div class="st-tile"><span class="st-mono" aria-hidden="true">Sl</span><span class="st-name">Slurm</span></div>
+        <div class="st-tile" style="--brand:#028CF0"><svg class="st-logo" aria-hidden="true" focusable="false"><use href="assets/icons/stack.svg#ray"/></svg><span class="st-name">Ray</span></div>
+        <div class="st-tile" style="--brand:#2496ED"><svg class="st-logo" aria-hidden="true" focusable="false"><use href="assets/icons/stack.svg#docker"/></svg><span class="st-name">Docker</span></div>
+        <a class="st-tile" href="posts/checkpoint-interval.html"><span class="st-mono" aria-hidden="true">Ck</span><span class="st-name">Checkpoint-restart</span><span class="st-ev">post →</span></a>
+      </div>
+    </div>
+    <div class="stack-layer" data-tone="cop">
+      <div class="stack-head"><span class="stack-id">L3</span><h3>Transport &amp; fabric</h3><p>Where bytes move between GPUs, and where a pause frame can freeze a cluster.</p></div>
+      <div class="stack-tiles">
+        <a class="st-tile" href="https://github.com/nareshns2004/kvwire-disaggregated-inference-engine" target="_blank" rel="noopener"><span class="st-mono" aria-hidden="true">RD</span><span class="st-name">RDMA verbs</span><span class="st-ev">kvwire ↗</span></a>
+        <a class="st-tile" href="posts/pfc-deadlock.html"><span class="st-mono" aria-hidden="true">Ro</span><span class="st-name">RoCE v2</span><span class="st-ev">post →</span></a>
+        <a class="st-tile" href="posts/rdma-trust-model.html"><span class="st-mono" aria-hidden="true">IB</span><span class="st-name">InfiniBand</span><span class="st-ev">post →</span></a>
+        <a class="st-tile" href="posts/kv-cache-transfer.html"><span class="st-mono" aria-hidden="true">GD</span><span class="st-name">GPUDirect RDMA</span><span class="st-ev">post →</span></a>
+        <a class="st-tile" href="posts/pfc-deadlock.html"><span class="st-mono" aria-hidden="true">PF</span><span class="st-name">PFC · ECN · DCQCN</span><span class="st-ev">post →</span></a>
+        <a class="st-tile" href="posts/rail-topology.html"><span class="st-mono" aria-hidden="true">Ra</span><span class="st-name">Rail-optimized fabrics</span><span class="st-ev">post →</span></a>
+      </div>
+    </div>
+    <div class="stack-layer" data-tone="cop">
+      <div class="stack-head"><span class="stack-id">L2</span><h3>Host datapath</h3><p>Where the kernel, the NIC and the hypervisor decide who touches a packet.</p></div>
+      <div class="stack-tiles">
+        <a class="st-tile" style="--brand:#FCC624" href="https://github.com/nareshns2004/kernel-performance-toolkit" target="_blank" rel="noopener"><svg class="st-logo" aria-hidden="true" focusable="false"><use href="assets/icons/stack.svg#linux"/></svg><span class="st-name">Linux kernel</span><span class="st-ev">kptk ↗</span></a>
+        <a class="st-tile" href="posts/packet-path.html"><span class="st-mono" aria-hidden="true">bpf</span><span class="st-name">eBPF / XDP</span><span class="st-ev">post →</span></a>
+        <a class="st-tile" href="posts/packet-path.html"><span class="st-mono" aria-hidden="true">DP</span><span class="st-name">DPDK</span><span class="st-ev">post →</span></a>
+        <a class="st-tile" href="https://github.com/nareshns2004/ai-nic-performance-profiler" target="_blank" rel="noopener"><span class="st-mono" aria-hidden="true">SR</span><span class="st-name">SR-IOV</span><span class="st-ev">nicprof ↗</span></a>
+        <div class="st-tile" style="--brand:#FF6600"><svg class="st-logo" aria-hidden="true" focusable="false"><use href="assets/icons/stack.svg#qemu"/></svg><span class="st-name">KVM / QEMU</span></div>
+        <a class="st-tile" href="https://github.com/nareshns2004/kernel-performance-toolkit" target="_blank" rel="noopener"><span class="st-mono" aria-hidden="true">pf</span><span class="st-name">perf · ftrace</span><span class="st-ev">kptk ↗</span></a>
+      </div>
+    </div>
+    <div class="stack-layer" data-tone="ink">
+      <div class="stack-head"><span class="stack-id">L1</span><h3>Hardware</h3><p>GPUs, NICs and links: the parts that fail, and the counters that say which one.</p></div>
+      <div class="stack-tiles">
+        <a class="st-tile" style="--brand:#76B900" href="https://github.com/nareshns2004/goodput-fault-tolerant-training-orchestrator" target="_blank" rel="noopener"><svg class="st-logo" aria-hidden="true" focusable="false"><use href="assets/icons/stack.svg#nvidia"/></svg><span class="st-name">NVIDIA GPUs</span><span class="st-ev">goodput ↗</span></a>
+        <a class="st-tile" href="posts/rail-topology.html"><span class="st-mono" aria-hidden="true">NV</span><span class="st-name">NVLink</span><span class="st-ev">post →</span></a>
+        <a class="st-tile" href="https://github.com/nareshns2004/ai-nic-performance-profiler" target="_blank" rel="noopener"><span class="st-mono" aria-hidden="true">NIC</span><span class="st-name">RDMA NICs</span><span class="st-ev">nicprof ↗</span></a>
+        <a class="st-tile" href="posts/nccl-timeout-triage.html"><span class="st-mono" aria-hidden="true">DC</span><span class="st-name">DCGM · Xid</span><span class="st-ev">post →</span></a>
+        <div class="st-tile"><span class="st-mono" aria-hidden="true">PCIe</span><span class="st-name">PCIe</span></div>
+      </div>
+    </div>
+    <div class="stack-side">
+      <div class="stack-side-group"><h3>Observability</h3><div class="stack-tiles">
+        <div class="st-tile" style="--brand:#E6522C"><svg class="st-logo" aria-hidden="true" focusable="false"><use href="assets/icons/stack.svg#prometheus"/></svg><span class="st-name">Prometheus</span></div>
+        <div class="st-tile" style="--brand:#F46800"><svg class="st-logo" aria-hidden="true" focusable="false"><use href="assets/icons/stack.svg#grafana"/></svg><span class="st-name">Grafana</span></div>
+      </div></div>
+      <div class="stack-side-group"><h3>Languages</h3><div class="stack-tiles">
+        <div class="st-tile" style="--brand:#A8B9CC"><svg class="st-logo" aria-hidden="true" focusable="false"><use href="assets/icons/stack.svg#c"/></svg><span class="st-name">C</span></div>
+        <a class="st-tile" style="--brand:#00599C" href="https://github.com/nareshns2004/kvwire-disaggregated-inference-engine" target="_blank" rel="noopener"><svg class="st-logo" aria-hidden="true" focusable="false"><use href="assets/icons/stack.svg#cplusplus"/></svg><span class="st-name">C++</span><span class="st-ev">kvwire ↗</span></a>
+        <a class="st-tile" style="--brand:#3776AB" href="https://github.com/nareshns2004/ai-nic-performance-profiler" target="_blank" rel="noopener"><svg class="st-logo" aria-hidden="true" focusable="false"><use href="assets/icons/stack.svg#python"/></svg><span class="st-name">Python</span><span class="st-ev">nicprof ↗</span></a>
+        <div class="st-tile" style="--brand:#00ADD8"><svg class="st-logo" aria-hidden="true" focusable="false"><use href="assets/icons/stack.svg#go"/></svg><span class="st-name">Go</span></div>
+        <div class="st-tile" style="--brand:#4EAA25"><svg class="st-logo" aria-hidden="true" focusable="false"><use href="assets/icons/stack.svg#gnubash"/></svg><span class="st-name">Bash</span></div>
+        <div class="st-tile" style="--brand:#F05032"><svg class="st-logo" aria-hidden="true" focusable="false"><use href="assets/icons/stack.svg#git"/></svg><span class="st-name">Git</span></div>
+      </div></div>
+    </div>
+  </div>
+  <p class="fig-note stack-note">Brand marks are trademarks of their owners and appear only to name the technology. Full tool list in the <a href="#foundations">Toolbox</a>.</p>
 </section>
 
 <!-- SECURITY: THREAT MAP -->
