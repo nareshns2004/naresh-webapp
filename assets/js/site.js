@@ -105,6 +105,12 @@
     sections.forEach(s => so.observe(s));
   }
 
+  // A trail of big-cat paw prints leading into the footer (decoration)
+  const foot = document.querySelector('.footer');
+  if (foot) { const row = document.createElement('div'); row.className = 'paw-row'; row.setAttribute('aria-hidden', 'true');
+    for (let i = 0; i < 24; i++) { const p = document.createElement('i'); p.style.setProperty('--i', i); p.style.setProperty('--y', (i % 2 ? 6 : -6) + 'px'); row.appendChild(p); }
+    foot.before(row); }
+
   // Scroll progress (thin tricolour bar under the nav, with a hummingbird flying along it)
   const nav = document.querySelector('.nav');
   if (nav && !reduceMotion.matches) {

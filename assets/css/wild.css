@@ -28,17 +28,26 @@
 .foot { bottom: 0; transform: translateX(-50%); z-index: -1; }
 
 /* ─── habitats ─── */
-[data-habitat="rainforest"] { --hue: #2E8B57; }
-[data-habitat="savanna"]    { --hue: #C98A2B; --band: color-mix(in srgb, #C98A2B 16%, var(--paper)); }
-[data-habitat="wetland"]    { --hue: #3B8C7E; }
-[data-habitat="forest"]     { --hue: #4E7A3A; }
-[data-habitat="peaks"]      { --hue: #6B7FA6; }
+[data-habitat="rainforest"] { --hue: #2E8B57;
+  --band-bg: radial-gradient(40% 30% at 85% 30%, color-mix(in srgb, #F2C94C 10%, transparent), transparent 70%),
+             linear-gradient(180deg, var(--band), color-mix(in srgb, #1F7A4A 22%, var(--paper))); }
+[data-habitat="savanna"]    { --hue: #C98A2B; --band: color-mix(in srgb, #C98A2B 16%, var(--paper));
+  --band-bg: linear-gradient(180deg, var(--band), color-mix(in srgb, #E0A040 24%, var(--paper)) 70%, color-mix(in srgb, #B5762A 20%, var(--paper))); }
+[data-habitat="wetland"]    { --hue: #3B8C7E;
+  --band-bg: linear-gradient(180deg, var(--band), color-mix(in srgb, #2F8FA0 20%, var(--paper))); }
+[data-habitat="forest"]     { --hue: #4E7A3A;
+  --band-bg: linear-gradient(180deg, var(--band), color-mix(in srgb, #3E6B2E 24%, var(--paper))); }
+[data-habitat="peaks"]      { --hue: #6B7FA6; --band: color-mix(in srgb, #7FA6D9 18%, var(--paper));
+  --band-bg: linear-gradient(180deg, var(--band), color-mix(in srgb, #9BB7DD 12%, var(--paper)) 60%, color-mix(in srgb, #6F8FC0 18%, var(--paper))); }
 [data-habitat="lagoon"]     { --hue: #12A3A8;
   --band-bg: linear-gradient(180deg, var(--band), color-mix(in srgb, #12A3A8 6%, var(--paper)) 60%, color-mix(in srgb, #E2C48C 14%, var(--paper))); }
 [data-habitat="tundra"]     { --hue: #5E9FCB;
   --band-bg: radial-gradient(60% 50% at 20% 0%, color-mix(in srgb, #36D399 18%, transparent), transparent 70%),
              radial-gradient(50% 45% at 75% 6%, color-mix(in srgb, #A78BFA 16%, transparent), transparent 70%), var(--band); }
-[data-habitat="aviary"]     { --hue: #1E9C8A; --bloom1: #D6457E; --bloom2: #8B5CF6; }
+[data-habitat="aviary"]     { --hue: #1E9C8A; --bloom1: #D6457E; --bloom2: #8B5CF6;
+  --band-bg: radial-gradient(45% 35% at 90% 70%, color-mix(in srgb, #D6457E 12%, transparent), transparent 70%),
+             radial-gradient(40% 30% at 10% 40%, color-mix(in srgb, #8B5CF6 10%, transparent), transparent 70%),
+             linear-gradient(180deg, var(--band), color-mix(in srgb, #1E9C8A 18%, var(--paper))); }
 [data-habitat="sunset"]     { --hue: #E0703A;
   --band: color-mix(in srgb, #E0703A 20%, var(--paper));
   --band-bg: radial-gradient(28% 40% at 50% 0%, color-mix(in srgb, #FFC266 45%, transparent), transparent 70%),
@@ -54,8 +63,10 @@
   --accent: var(--signal); --accent2: var(--copper); --ok: var(--ink); --warn: var(--copper); --bad: var(--fault);
   --text: var(--ink); --text-mid: var(--ink-2); --text-dim: var(--graphite);
   --band: #0C2240; --back: #18406A; --deep: #6FB6D9;
-  --band-bg: radial-gradient(40% 30% at 30% 0%, rgba(140, 200, 255, 0.16), transparent 70%),
-             linear-gradient(180deg, #0C2240, #071830 55%, #040F20);
+  --band-bg: radial-gradient(40% 30% at 30% 0%, rgba(140, 200, 255, 0.18), transparent 70%),
+             radial-gradient(30% 25% at 85% 70%, rgba(110, 231, 242, 0.08), transparent 70%),
+             radial-gradient(30% 25% at 12% 85%, rgba(245, 139, 194, 0.07), transparent 70%),
+             linear-gradient(180deg, #0C2240, #071830 50%, #030B18);
   color: var(--ink);
 }
 [data-habitat="abyss"] .card { background: color-mix(in srgb, #0C2240 85%, transparent); }
@@ -84,6 +95,7 @@
 }
 .proof { margin-bottom: 190px; }
 .section[data-habitat="sunset"] { padding-bottom: 5rem; }
+.section[data-habitat="aviary"] { padding-top: 14rem; }   /* room for the flowering branch above the heading */
 
 /* ─── animals ─── */
 .an {
@@ -115,11 +127,30 @@
 @keyframes flap   { from { scale: 1 1; } to { scale: 0.45 1; } }
 @keyframes drift  { from { translate: 0 0; } to { translate: -40px 30px; } }
 
+/* illustrations (real colours), coats (pattern inside a silhouette), fractal glyphs */
+.an-art { background-color: transparent !important; background-position: center bottom; background-size: contain; background-repeat: no-repeat; -webkit-mask: none; mask: none; opacity: 1; }
+.an[class*="coat-"] { background-color: transparent; background-size: 30px 30px; background-repeat: repeat; opacity: 0.95; }
+.an-glyph { opacity: 0.45; }
+.an-inline { background: none; -webkit-mask: none; mask: none; opacity: 0.85; }
+.an-inline svg { width: 100%; height: 100%; display: block; }
+[data-habitat="forest"] .an-inline { opacity: 0.5; }
+
+/* paw-print trails: an animal walked across this habitat */
+.trail { position: absolute; left: 0; right: 0; height: 30px; }
+.trail i { position: absolute; top: 0; width: 16px; height: 16px; background: var(--deep); opacity: 0;
+  -webkit-mask-size: contain; mask-size: contain; -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat;
+  transform: translateY(var(--y)) rotate(90deg); animation: pawstep 18s linear infinite; animation-delay: calc(var(--i) * 0.4s); }
+@keyframes pawstep { 0% { opacity: 0; } 2% { opacity: 0.55; } 45% { opacity: 0.3; } 75%, 100% { opacity: 0; } }
+
 /* ─── particles ─── */
 .pt { position: absolute; display: block; border-radius: 50%; animation-delay: calc(var(--d, 0s) * -1); }
 .pt-bubble { width: calc(7px * var(--s)); height: calc(7px * var(--s)); border: 1px solid rgba(170, 220, 255, 0.55); animation: rise 9s linear infinite; }
 .pt-snow { width: calc(4px * var(--s)); height: calc(4px * var(--s)); background: color-mix(in srgb, #FFFFFF 70%, var(--hue)); animation: snow 12s linear infinite; opacity: 0.8; }
 .pt-firefly { width: 4px; height: 4px; background: #FFE27A; box-shadow: 0 0 8px 3px rgba(255, 220, 110, 0.6); animation: blink 4s ease-in-out infinite, drift 11s ease-in-out infinite alternate; display: none; }
+.pt-flake { width: calc(14px * var(--s)); height: calc(14px * var(--s)); border-radius: 0; background: color-mix(in srgb, #FFFFFF 75%, var(--hue));
+  -webkit-mask-size: contain; mask-size: contain; animation: flake 16s linear infinite; opacity: 0.8; }
+.pt-glow { width: 10px; height: 10px; background: #B8F6FF; box-shadow: 0 0 12px 6px rgba(110, 231, 242, 0.7); animation: blink 3s ease-in-out infinite; }
+@keyframes flake { from { translate: 0 -40px; rotate: 0deg; opacity: 0; } 15% { opacity: 0.85; } to { translate: -30px 180px; rotate: 180deg; opacity: 0; } }
 .pt-star { width: calc(2px * var(--s)); height: calc(2px * var(--s)); background: #FFFFFF; animation: twinkle 4s ease-in-out infinite alternate; display: none; }
 @keyframes rise    { from { translate: 0 0; opacity: 0; } 15% { opacity: 1; } to { translate: 10px -180px; opacity: 0; } }
 @keyframes snow    { from { translate: 0 -40px; opacity: 0; } 15% { opacity: 0.85; } to { translate: 30px 140px; opacity: 0; } }
@@ -158,5 +189,6 @@
 }
 @media (prefers-reduced-motion: reduce) {
   .an, .pt { animation: none !important; }
+  .trail i { animation: none !important; opacity: 0.3; }
   .pt-bubble, .pt-snow { opacity: 0.6; }
 }
