@@ -30,6 +30,14 @@
   "url": "https://portfolio-webapp-roan.vercel.app/",
   "jobTitle": "Secure AI/ML Infrastructure Engineer, GPU Cluster Networking & Distributed Systems",
   "knowsAbout": ["AI/ML infrastructure security", "GPU cluster networking", "Distributed training", "NCCL", "RDMA", "RoCE", "InfiniBand", "Disaggregated inference", "AI agent security", "Prompt injection", "Model supply-chain security", "Zero-trust architecture", "Multi-tenant inference isolation", "Incident triage and root-cause analysis", "DPDK", "SR-IOV", "KVM", "Linux kernel networking", "eBPF", "XDP"],
+  "workExample": {
+    "@type": "Book",
+    "name": "AI/ML Infrastructure Engineering",
+    "alternativeHeadline": "A layer-by-layer deep dive, from silicon to serving",
+    "author": { "@type": "Person", "name": "Naresh Kumar" },
+    "image": "https://portfolio-webapp-roan.vercel.app/assets/book/cover.svg",
+    "creativeWorkStatus": "In progress"
+  },
   "sameAs": [
     "https://github.com/nareshns2004",
     "https://huggingface.co/nareshns2004",
@@ -63,6 +71,7 @@
       <li><a href="#writing">Writing</a></li>
       <li><a href="#evidence">Evidence</a></li>
       <li><a href="#foundations">Toolbox</a></li>
+      <li><a href="#book">Book</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
     <div class="nav-right">
@@ -518,6 +527,61 @@
   </div>
 </section>
 
+<!-- BOOK -->
+<!-- TODO(naresh): confirm the working title, subtitle, part outline and "expected 2027" (from "about a year away", Nov 2026).
+     Cover is assets/book/cover.svg (generated, datasheet palette); swap in the publisher's cover when there is one.
+     When a pre-order page or mailing list exists, point the primary button at it. -->
+<section class="section" id="book">
+  <div class="section-head">
+    <p class="section-kicker">The book</p>
+    <h2 class="section-title">I’m writing the book I wanted when I started: AI/ML infrastructure, one layer at a time</h2>
+  </div>
+
+  <div class="book reveal">
+    <div class="book-art">
+      <div class="book-3d">
+        <img class="book-cover" src="assets/book/cover.svg" width="600" height="900" loading="lazy" decoding="async"
+             alt="Cover of AI/ML Infrastructure Engineering by Naresh Kumar: six stacked layers, silicon, host datapath, fabric, collectives, training and serving, inside a dashed trust boundary.">
+      </div>
+      <p class="fig-note book-cap">Working cover. The final one may differ.</p>
+    </div>
+
+    <div class="book-body">
+      <p class="book-status"><span class="status status-wip">Manuscript in progress</span><span class="book-eta">Expected 2027</span></p>
+      <h3 class="book-title">AI/ML Infrastructure Engineering <small>A layer-by-layer deep dive, from silicon to serving</small></h3>
+      <p class="book-pitch">
+        Most ML books start at the model and stop at the framework. This one starts at the wire. It follows a gradient
+        and a KV-cache block down through every layer they cross (the GPU, the host, the fabric, the collective, the
+        training job, the serving engine) and asks the same four questions at each one:
+        <b>how it works</b>, <b>how it fails</b>, <b>how to measure it</b> and <b>how to secure it</b>.
+      </p>
+      <p class="book-for">Written for engineers who run GPU clusters or are about to: platform, networking, SRE and ML engineers who want to know what happens below <code>torch.distributed</code>.</p>
+
+      <ol class="book-parts" aria-label="Working outline">
+        <li style="--tc:var(--graphite)"><span class="bp-id">L1</span><span class="bp-name">Silicon</span><span class="bp-desc">GPUs, HBM, NVLink, PCIe and NICs, and the counters that say which one broke.</span><a href="posts/nccl-timeout-triage.html">Related post →</a></li>
+        <li style="--tc:var(--copper)"><span class="bp-id">L2</span><span class="bp-name">Host datapath</span><span class="bp-desc">Kernel networking, NUMA, SR-IOV, DPDK and eBPF/XDP: who touches a packet, and what it costs.</span><a href="posts/packet-path.html">Related post →</a></li>
+        <li style="--tc:var(--copper)"><span class="bp-id">L3</span><span class="bp-name">Fabric</span><span class="bp-desc">RDMA, RoCE v2, InfiniBand, PFC/ECN/DCQCN and rail-optimized topologies.</span><a href="posts/pfc-deadlock.html">Related post →</a></li>
+        <li style="--tc:var(--signal)"><span class="bp-id">L4</span><span class="bp-name">Collectives</span><span class="bp-desc">NCCL, ring and tree all-reduce, and why one slow rank becomes every rank’s timeout.</span><a href="posts/ring-allreduce-failure.html">Related post →</a></li>
+        <li style="--tc:var(--signal)"><span class="bp-id">L5</span><span class="bp-name">Training at scale</span><span class="bp-desc">Parallelism, checkpoint-restart, fault tolerance and goodput as the metric that matters.</span><a href="posts/checkpoint-interval.html">Related post →</a></li>
+        <li style="--tc:var(--signal)"><span class="bp-id">L6</span><span class="bp-name">Serving</span><span class="bp-desc">KV cache, prefill/decode disaggregation, batching and the transport between them.</span><a href="posts/kv-cache-transfer.html">Related post →</a></li>
+        <li class="bp-all" style="--tc:var(--fault)"><span class="bp-id">L*</span><span class="bp-name">Trust, across every layer</span><span class="bp-desc">Zero trust for fabrics, model artifacts, multi-tenant serving and AI agents.</span><a href="posts/ai-infra-breaches.html">Related post →</a></li>
+      </ol>
+
+      <div class="book-cta">
+        <a class="btn btn-primary" href="https://substack.com/@nareshns2004" target="_blank" rel="noopener">Follow the writing on Substack ↗</a>
+        <a class="btn btn-outline" href="#writing">Read the posts it grows from →</a>
+      </div>
+
+      <div class="book-author">
+        <span class="brand-mark book-mark" aria-hidden="true">NK</span>
+        <p><b>Naresh Kumar</b> · <span class="book-sig">Below the framework layer.</span><br>
+        I build GPU cluster networking and distributed-training infrastructure. The book is where the repos, posts and
+        incident notes on this site get organized into one map of the stack.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- CONTACT -->
 <section class="section" id="contact">
   <div class="card contact reveal">
@@ -551,7 +615,7 @@
     <a class="social" href="https://www.youtube.com/@nareshns2004" target="_blank" rel="noopener me"><svg class="bi" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg><span>YouTube</span></a>
     <a class="social" href="https://x.com/naresh_swe24" target="_blank" rel="noopener me"><svg class="bi" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"/></svg><span>@naresh_swe24</span></a>
   </div>
-  <span>© Naresh Kumar · press <kbd>⌘K</kbd> to jump</span>
+  <span>© Naresh Kumar · author of <a href="#book"><cite>AI/ML Infrastructure Engineering</cite></a> (in progress) · press <kbd>⌘K</kbd> to jump</span>
   <div class="footer-links">
     <a href="#top">Back to top ↑</a>
   </div>

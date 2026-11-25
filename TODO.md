@@ -39,6 +39,8 @@ Backlog from CLAUDE.md, ordered by impact.
 - [x] **Visitor count fix + socials + project sync** (`fix/visitor-count-socials-projects`): komarev stopped counting arbitrary keys (`nareshns2004-portfolio` stayed at 0), so the badge now uses hits.sh (key `naresh.ai-ml-infra.com`, count restarts from 0) and loads eagerly instead of only when Contact scrolls into view. Gmail, Discord and Docker Hub removed from footers, ⌘K palette and JSON-LD. Synced with the Videos repos: nicprof 100 tests + simulator-only scope, kptk 59 tests, dtf = fault-aware NCCL layer, fused-attn repo = kernel lab, inference-engine placeholder dropped (archived, superseded by kvwire), traffic shaper marked paused.
 
 - [x] **Core stack + roadmap** (`feature/core-skills-visual-polish`): new §Core stack section (L5 models & serving → L1 hardware, plus observability & languages) with logo/monogram tiles, each linked to the repo or post that uses it, animated packet rail and staggered entrance (static under reduced motion); Fig. 1 roadmap in Work mirroring goodput (M1a) and kvwire (M1) milestones; goodput status updated from "M1 of 6" to M1a; nav + ⌘K entry "Core stack".
+- [x] **Book section** (`feature/book-section`): §The book between Profiles and Contact: working cover (`assets/book/cover.svg`, six stacked layers inside a dashed trust boundary), status "Manuscript in progress · expected 2027", pitch, L1–L6 + trust outline with each part linked to a related post, Substack follow CTA, author signature ("Below the framework layer."). Nav "Book", ⌘K entry, footer credit, JSON-LD `workExample` Book.
+- [ ] Book: confirm title, subtitle, outline and 2027 target (`TODO(naresh)` above the section); swap the primary button to a mailing list / pre-order page when one exists; replace the cover with the publisher's when there is one.
 - [ ] When a milestone closes in goodput or kvwire, flip its `ms next` → `ms done` in Fig. 1 (add a `.ms.done` style then) and link the evidence.
 
 ## Open questions for Naresh
@@ -51,4 +53,4 @@ Backlog from CLAUDE.md, ordered by impact.
 - ~~Hugging Face~~: done 13 Nov 2026. Four planned artifacts linked (model + Space from goodput, dataset + Space from kvwire); `infra-incident-intel` is dropped for good.
 - The removed write-ups (DPDK, virtualization, LLM OS, AI infra roadmap essays; XDP / DPDK PMD / RDMA / RoCE / SR-IOV drafts): rebuild any worth keeping as an on-site post, or add as `kind: "external"` in `data.js`.
 
-Next session starts with: buy `ai-ml-infra.com`, add `naresh.ai-ml-infra.com` in Vercel → Domains, then merge `chore/custom-domain`.
+Next session starts with: confirm the book's title/outline/target in `#book`, then buy `ai-ml-infra.com`, add `naresh.ai-ml-infra.com` in Vercel → Domains, then merge `chore/custom-domain`.

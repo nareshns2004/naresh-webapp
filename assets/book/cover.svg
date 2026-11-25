@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 900" width="600" height="900" role="img" aria-labelledby="t d">
+<title id="t">AI/ML Infrastructure Engineering, by Naresh Kumar (working cover)</title>
+<desc id="d">Book cover: six stacked isometric layers, silicon, host datapath, fabric, collectives, training and serving, inside a dashed red trust boundary, with a blue packet path running through every layer.</desc>
+<defs>
+ <pattern id="g" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="1" cy="1" r="1" fill="#2A3341"/></pattern>
+ <linearGradient id="v" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#151C27"/><stop offset="1" stop-color="#0B0F15"/></linearGradient>
+</defs>
+<rect width="600" height="900" fill="url(#v)"/>
+<rect width="600" height="900" fill="url(#g)" opacity=".7"/>
+<rect x="0" y="0" width="14" height="900" fill="#0A0D12"/><rect x="14" y="0" width="1" height="900" fill="#2A3341"/>
+<g font-family="'IBM Plex Mono', ui-monospace, Menlo, Consolas, monospace" fill="#A3ABB8" font-size="12" letter-spacing="2.4">
+ <text x="48" y="64">AI/ML INFRA · FIELD MANUAL</text>
+ <text x="552" y="64" text-anchor="end" fill="#F0935C">WORKING DRAFT</text>
+</g>
+<line x1="48" y1="82" x2="552" y2="82" stroke="#3B4656"/>
+<g font-family="'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif" fill="#ECE8E0" font-weight="600" letter-spacing="-1.5">
+ <text x="46" y="170" font-size="62">AI/ML</text>
+ <text x="46" y="238" font-size="62">Infrastructure</text>
+ <text x="46" y="306" font-size="62">Engineering</text>
+</g>
+<rect x="48" y="330" width="56" height="4" fill="#86A8FF"/>
+<g font-family="'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif" fill="#CFCAC0" font-size="21">
+ <text x="48" y="374">A layer-by-layer deep dive,</text>
+ <text x="48" y="402">from silicon to serving</text>
+</g>
+<path d="M58 534 L240 468 L422 534 L422 768 L240 824 L58 768 Z" fill="none" stroke="#FF7D73" stroke-width="1.5" stroke-dasharray="6 5" opacity=".9"/>
+<g><polygon points="80,742 240,782 240,794 80,754" fill="#A3ABB8" opacity=".55"/><polygon points="240,782 400,742 400,754 240,794" fill="#A3ABB8" opacity=".35"/><polygon points="80,742 240,702 400,742 240,782" fill="#10151D" stroke="#A3ABB8" stroke-width="1.5"/><polygon points="80,742 240,702 400,742 240,782" fill="#A3ABB8" opacity=".10"/></g>
+<line x1="400" y1="742" x2="438" y2="742" stroke="#3B4656"/>
+<text x="444" y="746" font-family="'IBM Plex Mono', ui-monospace, Menlo, Consolas, monospace" font-size="11.5" letter-spacing="1.5" fill="#CFCAC0"><tspan fill="#A3ABB8">L1</tspan> SILICON</text>
+<g><polygon points="80,702 240,742 240,754 80,714" fill="#F0935C" opacity=".55"/><polygon points="240,742 400,702 400,714 240,754" fill="#F0935C" opacity=".35"/><polygon points="80,702 240,662 400,702 240,742" fill="#10151D" stroke="#F0935C" stroke-width="1.5"/><polygon points="80,702 240,662 400,702 240,742" fill="#F0935C" opacity=".10"/></g>
+<line x1="400" y1="702" x2="438" y2="702" stroke="#3B4656"/>
+<text x="444" y="706" font-family="'IBM Plex Mono', ui-monospace, Menlo, Consolas, monospace" font-size="11.5" letter-spacing="1.5" fill="#CFCAC0"><tspan fill="#F0935C">L2</tspan> HOST DATAPATH</text>
+<g><polygon points="80,662 240,702 240,714 80,674" fill="#F0935C" opacity=".55"/><polygon points="240,702 400,662 400,674 240,714" fill="#F0935C" opacity=".35"/><polygon points="80,662 240,622 400,662 240,702" fill="#10151D" stroke="#F0935C" stroke-width="1.5"/><polygon points="80,662 240,622 400,662 240,702" fill="#F0935C" opacity=".10"/></g>
+<line x1="400" y1="662" x2="438" y2="662" stroke="#3B4656"/>
+<text x="444" y="666" font-family="'IBM Plex Mono', ui-monospace, Menlo, Consolas, monospace" font-size="11.5" letter-spacing="1.5" fill="#CFCAC0"><tspan fill="#F0935C">L3</tspan> FABRIC</text>
+<g><polygon points="80,622 240,662 240,674 80,634" fill="#86A8FF" opacity=".55"/><polygon points="240,662 400,622 400,634 240,674" fill="#86A8FF" opacity=".35"/><polygon points="80,622 240,582 400,622 240,662" fill="#10151D" stroke="#86A8FF" stroke-width="1.5"/><polygon points="80,622 240,582 400,622 240,662" fill="#86A8FF" opacity=".10"/></g>
+<line x1="400" y1="622" x2="438" y2="622" stroke="#3B4656"/>
+<text x="444" y="626" font-family="'IBM Plex Mono', ui-monospace, Menlo, Consolas, monospace" font-size="11.5" letter-spacing="1.5" fill="#CFCAC0"><tspan fill="#86A8FF">L4</tspan> COLLECTIVES</text>
+<g><polygon points="80,582 240,622 240,634 80,594" fill="#86A8FF" opacity=".55"/><polygon points="240,622 400,582 400,594 240,634" fill="#86A8FF" opacity=".35"/><polygon points="80,582 240,542 400,582 240,622" fill="#10151D" stroke="#86A8FF" stroke-width="1.5"/><polygon points="80,582 240,542 400,582 240,622" fill="#86A8FF" opacity=".10"/></g>
+<line x1="400" y1="582" x2="438" y2="582" stroke="#3B4656"/>
+<text x="444" y="586" font-family="'IBM Plex Mono', ui-monospace, Menlo, Consolas, monospace" font-size="11.5" letter-spacing="1.5" fill="#CFCAC0"><tspan fill="#86A8FF">L5</tspan> TRAINING</text>
+<g><polygon points="80,542 240,582 240,594 80,554" fill="#86A8FF" opacity=".55"/><polygon points="240,582 400,542 400,554 240,594" fill="#86A8FF" opacity=".35"/><polygon points="80,542 240,502 400,542 240,582" fill="#10151D" stroke="#86A8FF" stroke-width="1.5"/><polygon points="80,542 240,502 400,542 240,582" fill="#86A8FF" opacity=".10"/></g>
+<line x1="400" y1="542" x2="438" y2="542" stroke="#3B4656"/>
+<text x="444" y="546" font-family="'IBM Plex Mono', ui-monospace, Menlo, Consolas, monospace" font-size="11.5" letter-spacing="1.5" fill="#CFCAC0"><tspan fill="#86A8FF">L6</tspan> SERVING</text>
+<line x1="240" y1="782" x2="240" y2="494" stroke="#86A8FF" stroke-width="2" stroke-dasharray="2 6" stroke-linecap="round"/>
+<rect x="236" y="738" width="8" height="8" rx="1.5" fill="#86A8FF"/>
+<rect x="236" y="698" width="8" height="8" rx="1.5" fill="#86A8FF"/>
+<rect x="236" y="658" width="8" height="8" rx="1.5" fill="#86A8FF"/>
+<rect x="236" y="618" width="8" height="8" rx="1.5" fill="#86A8FF"/>
+<rect x="236" y="578" width="8" height="8" rx="1.5" fill="#86A8FF"/>
+<rect x="236" y="538" width="8" height="8" rx="1.5" fill="#86A8FF"/>
+<text x="444" y="490" font-family="'IBM Plex Mono', ui-monospace, Menlo, Consolas, monospace" font-size="11.5" letter-spacing="1.5" fill="#FF7D73">TRUST BOUNDARY</text>
+<line x1="48" y1="852" x2="552" y2="852" stroke="#3B4656"/>
+<g font-family="'IBM Plex Mono', ui-monospace, Menlo, Consolas, monospace">
+ <rect x="48" y="866" width="22" height="22" fill="#ECE8E0"/><text x="59" y="881.5" text-anchor="middle" font-size="10.5" font-weight="600" fill="#10151D">NK</text>
+ <text x="82" y="882" font-size="14" letter-spacing="3.5" fill="#ECE8E0">NARESH KUMAR</text>
+</g>
+</svg>
