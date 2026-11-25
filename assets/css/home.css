@@ -16,15 +16,6 @@
   mask-image: radial-gradient(ellipse 70% 70% at 75% 45%, black 20%, transparent 75%);
   opacity: 0.35;
 }
-/* jungle vines hanging into the hero from the top-right corner */
-.hero::after {
-  content: ''; position: absolute; z-index: -1; top: var(--nav-h); right: -2.5rem; width: 260px; height: 260px;
-  background: var(--moss); opacity: 0.3; pointer-events: none;
-  -webkit-mask: url(../ornaments/jungle.svg) top right / contain no-repeat; mask: url(../ornaments/jungle.svg) top right / contain no-repeat;
-  transform-origin: top center; animation: sway 9s ease-in-out infinite alternate;
-}
-@keyframes sway { from { transform: rotate(-1.2deg); } to { transform: rotate(1.2deg); } }
-@media (max-width: 860px) { .hero::after { width: 170px; height: 170px; right: -1rem; opacity: 0.16; } }
 .hero-eyebrow {
   font-family: var(--font-mono); font-size: 0.8rem; color: var(--text-mid);
   letter-spacing: 0.04em; margin-bottom: 1.25rem;
@@ -96,28 +87,14 @@
 main { counter-reset: sec; }
 .section-head { counter-increment: sec; }
 .section-head .section-kicker::before {
-  content: "§ " counter(sec, upper-roman);
-  font-family: var(--font-roman); font-weight: 700; font-size: 1.05rem; letter-spacing: 0.06em;
+  content: "§" counter(sec, decimal-leading-zero);
   color: var(--accent); margin-right: 0.75rem; padding-right: 0.75rem;
   border-right: 1px solid var(--border-bright);
 }
-/* each section carries an emblem: laurel, column, rosette, triquetra, paw, tree of life, fern, lancet, owl */
-.section-head .section-kicker { display: flex; align-items: center; flex-wrap: wrap; }
-.section-head .section-kicker .orn { order: -1; width: 36px; height: 36px; margin-right: 0.75rem; color: var(--gold); }
-.section-head .section-kicker .orn-paw, .section-head .section-kicker .orn-fern { color: var(--moss); }
 
 /* ─── TWO PROBLEMS ─── */
 .problems { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
 .problem { padding: 2rem; border-top: 3px solid var(--pc); display: flex; flex-direction: column; gap: 1.1rem; }
-.problem { position: relative; overflow: hidden; }
-.problem::after {          /* watermark: rosette (reliability), leopard (efficiency), Gothic lancet (trust) */
-  content: ''; position: absolute; top: 1rem; right: 1rem; width: 72px; height: 72px; background: var(--pc); opacity: 0.12; pointer-events: none;
-  -webkit-mask: var(--wm) top right / contain no-repeat; mask: var(--wm) top right / contain no-repeat;
-}
-.problem:nth-child(1) { --wm: url(../ornaments/rosette.svg); }
-.problem:nth-child(2) { --wm: url(../ornaments/leopard.svg); }
-.problem:nth-child(2)::after { width: 120px; }
-.problem:nth-child(3) { --wm: url(../ornaments/arch.svg); }
 .problem-kicker { font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--pc); }
 .problem h3 { font-family: var(--font-display); font-size: 1.45rem; line-height: 1.2; }
 .problem h3 small { display: block; font-family: var(--font-mono); font-size: 0.8rem; color: var(--text-dim); font-weight: 400; margin-top: 0.3rem; }
@@ -553,11 +530,4 @@ div.st-tile { border-style: dashed; }
 @media (prefers-reduced-motion: reduce) {
   .rp-n { transition: none; }
 }
-
-/* contact: a leopard resting in the corner of the card */
-
-.contact::after {
-  content: ''; position: absolute; right: -1rem; bottom: -0.5rem; width: 260px; height: 130px; background: var(--moss); opacity: 0.1; pointer-events: none;
-  -webkit-mask: url(../ornaments/leopard.svg) center / contain no-repeat; mask: url(../ornaments/leopard.svg) center / contain no-repeat;
-}
-.rp-n, .rs-n { font-family: var(--font-roman); font-weight: 700; letter-spacing: 0.02em; }
+.hero > * { min-width: 0; }   /* the long terminal line must not widen the grid track on phones */

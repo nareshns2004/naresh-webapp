@@ -1,0 +1,162 @@
+/* index.html only: the wildlife layer (drawn by assets/js/nature.js).
+   Each section is a habitat band. A band sets --hue; everything else is mixed from it and the page's own
+   --paper, so light and dark themes both work without a second palette:
+     --band  the band's background        --back / --back2  far and middle landscape layers
+     --deep  silhouettes (animals, trees)  --snow / --sand / --bloom1 / --bloom2  accents
+   Decoration only; text stays on the datasheet tokens. */
+
+[data-habitat] {
+  position: relative; isolation: isolate;
+  --band: color-mix(in srgb, var(--hue) 12%, var(--paper));
+  --back: color-mix(in srgb, var(--hue) 27%, var(--paper));
+  --back2: color-mix(in srgb, var(--hue) 46%, var(--paper));
+  --deep: color-mix(in srgb, var(--hue) 70%, var(--ink) 12%);
+  --snow: color-mix(in srgb, #FFFFFF 78%, var(--paper));
+  --sand: color-mix(in srgb, #E2C48C 40%, var(--paper));
+  --bloom1: #E5527A; --bloom2: #F29A38;
+}
+.section[data-habitat] { padding: 4.5rem 1.25rem 9.5rem; }
+.section[data-habitat]::before {           /* full-bleed band behind a max-width section */
+  content: ''; position: absolute; top: 0; bottom: 0; left: 50%; width: 100vw; transform: translateX(-50%);
+  background: var(--band-bg, var(--band)); z-index: -3;
+}
+.edge, .scene, .foot { position: absolute; left: 50%; width: 100vw; pointer-events: none; line-height: 0; }
+.edge { top: 0; transform: translate(-50%, -100%); z-index: -2; }
+.edge svg, .foot svg { display: block; }
+.scene { top: 0; bottom: 0; transform: translateX(-50%); z-index: -1; }
+.scene .over { position: absolute; top: 0; left: 0; }
+.foot { bottom: 0; transform: translateX(-50%); z-index: -1; }
+
+/* ─── habitats ─── */
+[data-habitat="rainforest"] { --hue: #2E8B57; }
+[data-habitat="savanna"]    { --hue: #C98A2B; --band: color-mix(in srgb, #C98A2B 16%, var(--paper)); }
+[data-habitat="wetland"]    { --hue: #3B8C7E; }
+[data-habitat="forest"]     { --hue: #4E7A3A; }
+[data-habitat="peaks"]      { --hue: #6B7FA6; }
+[data-habitat="lagoon"]     { --hue: #12A3A8;
+  --band-bg: linear-gradient(180deg, var(--band), color-mix(in srgb, #12A3A8 6%, var(--paper)) 60%, color-mix(in srgb, #E2C48C 14%, var(--paper))); }
+[data-habitat="tundra"]     { --hue: #5E9FCB;
+  --band-bg: radial-gradient(60% 50% at 20% 0%, color-mix(in srgb, #36D399 18%, transparent), transparent 70%),
+             radial-gradient(50% 45% at 75% 6%, color-mix(in srgb, #A78BFA 16%, transparent), transparent 70%), var(--band); }
+[data-habitat="aviary"]     { --hue: #1E9C8A; --bloom1: #D6457E; --bloom2: #8B5CF6; }
+[data-habitat="sunset"]     { --hue: #E0703A;
+  --band: color-mix(in srgb, #E0703A 20%, var(--paper));
+  --band-bg: radial-gradient(28% 40% at 50% 0%, color-mix(in srgb, #FFC266 45%, transparent), transparent 70%),
+             linear-gradient(180deg, var(--band), color-mix(in srgb, #F2A65A 10%, var(--paper)) 50%, var(--paper)); }
+
+/* deep sea: a dark band in both themes, with its own scoped tokens */
+[data-habitat="abyss"] {
+  --hue: #2F6FA8;
+  --paper: #0C2240; --paper-2: #122C50; --rule: #23426A; --rule-strong: #34587F;
+  --ink: #E8F1F8; --ink-2: #C7D8E6; --graphite: #93AECA;
+  --signal: #8DB8FF; --copper: #F4A26A; --fault: #FF8A80; --on-ink: #0C2240;
+  --bg: var(--paper); --bg2: var(--paper); --bg3: var(--paper-2); --border: var(--rule); --border-bright: var(--rule-strong);
+  --accent: var(--signal); --accent2: var(--copper); --ok: var(--ink); --warn: var(--copper); --bad: var(--fault);
+  --text: var(--ink); --text-mid: var(--ink-2); --text-dim: var(--graphite);
+  --band: #0C2240; --back: #18406A; --deep: #6FB6D9;
+  --band-bg: radial-gradient(40% 30% at 30% 0%, rgba(140, 200, 255, 0.16), transparent 70%),
+             linear-gradient(180deg, #0C2240, #071830 55%, #040F20);
+  color: var(--ink);
+}
+[data-habitat="abyss"] .card { background: color-mix(in srgb, #0C2240 85%, transparent); }
+
+/* sky (hero): dawn by day, stars by night */
+[data-habitat="sky"] {
+  --m1: color-mix(in srgb, #7F9CB8 32%, var(--paper)); --m2: color-mix(in srgb, #6F8DA8 46%, var(--paper)); --band: var(--paper);
+  --deep: color-mix(in srgb, #2C4A66 75%, var(--paper));
+  padding-bottom: 11rem;
+}
+.hero::before {
+  inset: 0 auto 0 50%; width: 100vw; transform: translateX(-50%); mask-image: none; opacity: 1; z-index: -3;
+  background:
+    radial-gradient(70px 70px at 78% 74px, #FFE1A8, rgba(255, 214, 150, 0.55) 40%, transparent 72%),
+    radial-gradient(150px 34px at 18% 120px, rgba(255, 255, 255, 0.85), transparent 70%),
+    radial-gradient(220px 40px at 46% 64px, rgba(255, 255, 255, 0.7), transparent 70%),
+    radial-gradient(180px 30px at 90% 200px, rgba(255, 255, 255, 0.6), transparent 70%),
+    linear-gradient(180deg, #CDE3F5 0%, #E3EEF7 38%, #F7E8D6 78%, var(--paper) 100%);
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .hero::before {
+  background: radial-gradient(34px 34px at 78% 80px, #F3EFDF, rgba(243, 239, 223, 0.25) 55%, transparent 75%),
+              linear-gradient(180deg, #071022 0%, #0D1A2E 55%, var(--paper) 100%); } }
+:root[data-theme="dark"] .hero::before {
+  background: radial-gradient(34px 34px at 78% 80px, #F3EFDF, rgba(243, 239, 223, 0.25) 55%, transparent 75%),
+              linear-gradient(180deg, #071022 0%, #0D1A2E 55%, var(--paper) 100%);
+}
+.proof { margin-bottom: 190px; }
+.section[data-habitat="sunset"] { padding-bottom: 5rem; }
+
+/* ─── animals ─── */
+.an {
+  position: absolute; display: block; background: var(--deep); opacity: 0.88;
+  -webkit-mask: center bottom / contain no-repeat; mask: center bottom / contain no-repeat;
+  scale: var(--fx, 1) 1; animation-delay: calc(var(--d, 0s) * -1);
+}
+.an-flip, .an-back { --fx: -1; }
+.an-fly    { animation: fly 70s linear infinite; }
+.an-slow   { animation-duration: 110s; }
+.an-soar   { animation: soar 16s ease-in-out infinite alternate; }
+.an-circle { animation: circle 24s linear infinite; }
+.an-hover  { animation: hover 2.6s ease-in-out infinite alternate; }
+.an-bob    { animation: bob 6s ease-in-out infinite alternate; }
+.an-glide  { animation: glide 26s ease-in-out infinite alternate; }
+.an-swim   { animation: swim 18s ease-in-out infinite; }
+.an-flutter { animation: flap 0.32s ease-in-out infinite alternate, drift 9s ease-in-out infinite alternate; }
+.an-late   { animation-delay: -7s; }
+.an-track  { opacity: 0.4; rotate: 12deg; }
+.an-track:nth-of-type(even) { rotate: -8deg; }
+@keyframes fly    { from { translate: calc(-1 * var(--x) - 12vw) 0; } to { translate: calc(112vw - var(--x)) -30px; } }
+@keyframes soar   { from { translate: 0 0; rotate: -4deg; } to { translate: 60px -18px; rotate: 4deg; } }
+@keyframes circle { from { transform: rotate(0deg) translateX(48px) rotate(0deg); } to { transform: rotate(360deg) translateX(48px) rotate(-360deg); } }
+@keyframes hover  { from { translate: 0 0; } to { translate: 4px -8px; } }
+@keyframes bob    { from { translate: 0 0; } to { translate: 0 -16px; } }
+@keyframes glide  { from { translate: 0 0; } to { translate: 70px 14px; } }
+@keyframes swim   { 0% { translate: 0 0; scale: var(--fx, 1) 1; } 46% { translate: 90px 8px; scale: var(--fx, 1) 1; }
+                    50% { translate: 90px 8px; scale: calc(var(--fx, 1) * -1) 1; } 96% { translate: 0 0; scale: calc(var(--fx, 1) * -1) 1; } 100% { scale: var(--fx, 1) 1; } }
+@keyframes flap   { from { scale: 1 1; } to { scale: 0.45 1; } }
+@keyframes drift  { from { translate: 0 0; } to { translate: -40px 30px; } }
+
+/* ─── particles ─── */
+.pt { position: absolute; display: block; border-radius: 50%; animation-delay: calc(var(--d, 0s) * -1); }
+.pt-bubble { width: calc(7px * var(--s)); height: calc(7px * var(--s)); border: 1px solid rgba(170, 220, 255, 0.55); animation: rise 9s linear infinite; }
+.pt-snow { width: calc(4px * var(--s)); height: calc(4px * var(--s)); background: color-mix(in srgb, #FFFFFF 70%, var(--hue)); animation: snow 12s linear infinite; opacity: 0.8; }
+.pt-firefly { width: 4px; height: 4px; background: #FFE27A; box-shadow: 0 0 8px 3px rgba(255, 220, 110, 0.6); animation: blink 4s ease-in-out infinite, drift 11s ease-in-out infinite alternate; display: none; }
+.pt-star { width: calc(2px * var(--s)); height: calc(2px * var(--s)); background: #FFFFFF; animation: twinkle 4s ease-in-out infinite alternate; display: none; }
+@keyframes rise    { from { translate: 0 0; opacity: 0; } 15% { opacity: 1; } to { translate: 10px -180px; opacity: 0; } }
+@keyframes snow    { from { translate: 0 -40px; opacity: 0; } 15% { opacity: 0.85; } to { translate: 30px 140px; opacity: 0; } }
+@keyframes blink   { 0%, 100% { opacity: 0.1; } 50% { opacity: 1; } }
+@keyframes twinkle { from { opacity: 0.25; } to { opacity: 1; } }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) :is(.pt-firefly, .pt-star) { display: block; } }
+:root[data-theme="dark"] :is(.pt-firefly, .pt-star) { display: block; }
+
+/* ─── kicker: the habitat's animal + its name ─── */
+.kicker-animal {
+  order: -1; width: 34px; height: 34px; margin-right: 0.7rem; background: var(--deep, var(--accent));
+  -webkit-mask: center / contain no-repeat; mask: center / contain no-repeat;
+}
+.section-head .section-kicker { display: flex; align-items: center; flex-wrap: wrap; }
+.habitat-tag {
+  margin-left: 0.75rem; padding: 0.1rem 0.55rem; border-radius: 999px; letter-spacing: 0.08em;
+  color: var(--deep); border: 1px solid color-mix(in srgb, var(--deep) 45%, transparent);
+  background: color-mix(in srgb, var(--paper) 60%, transparent);
+}
+
+/* problem cards: a big animal watermark in the corner */
+.problem { position: relative; overflow: hidden; }
+.problem::before {
+  content: ''; position: absolute; top: 0.9rem; right: 1rem; width: 96px; height: 72px; background: var(--pc); opacity: 0.14; pointer-events: none;
+  -webkit-mask: var(--wm) top right / contain no-repeat; mask: var(--wm) top right / contain no-repeat;
+}
+.problems > :nth-child(1) { --wm: url(../wildlife/elephant.svg); }
+.problems > :nth-child(2) { --wm: url(../wildlife/leopard.svg); }
+.problems > :nth-child(3) { --wm: url(../wildlife/owl.svg); }
+
+@media (max-width: 1279px) { .an-m { display: none; } }
+@media (max-width: 860px) {
+  .an { opacity: 0.5; }
+  .scene .over { opacity: 0.6; }
+  .an-track, .pt-firefly { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .an, .pt { animation: none !important; }
+  .pt-bubble, .pt-snow { opacity: 0.6; }
+}
