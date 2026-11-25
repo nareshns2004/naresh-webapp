@@ -148,7 +148,13 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
   font-family: var(--font-mono); font-size: 0.75rem; cursor: pointer;
 }
 
-@media (max-width: 860px) {
+/* nine nav links: tighten, then collapse earlier, so the brand and links never wrap */
+.nav-brand { white-space: nowrap; }
+@media (max-width: 1180px) {
+  .nav-links { gap: 1rem; }
+  .nav-status { display: none; }
+}
+@media (max-width: 960px) {
   .nav-toggle { display: inline-block; }
   .nav-status { display: none; }
   .nav-links {
