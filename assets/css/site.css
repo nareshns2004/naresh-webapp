@@ -10,6 +10,7 @@
   --ink: #15171C;    --ink-2: #353A44;    --graphite: #555C6A;
   --signal: #1D4ED8; --copper: #B4470E;   --fault: #C2261D;
   --on-ink: #F7F5F0;
+  --moss: #46613A;   --gold: #A47A22;   /* ornament-only: jungle + illuminated gold, never status */
   color-scheme: light;
 
   --bg: var(--paper);
@@ -29,6 +30,7 @@
   --font-mono: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
   --font-display: 'IBM Plex Sans', system-ui, sans-serif;
   --font-prose: 'IBM Plex Sans', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-roman: 'Cinzel', 'Trajan Pro', Georgia, serif;   /* inscriptional capitals: brand, kickers, initials */
 
   --max: 1120px;
   --radius: 4px;
@@ -40,6 +42,7 @@
     --ink: #ECE8E0;    --ink-2: #CFCAC0;    --graphite: #A3ABB8;
     --signal: #86A8FF; --copper: #F0935C;   --fault: #FF7D73;
     --on-ink: #10151D;
+    --moss: #8DB07A;   --gold: #D8B460;
     color-scheme: dark;
   }
 }
@@ -48,6 +51,7 @@
   --ink: #ECE8E0;    --ink-2: #CFCAC0;    --graphite: #A3ABB8;
   --signal: #86A8FF; --copper: #F0935C;   --fault: #FF7D73;
   --on-ink: #10151D;
+  --moss: #8DB07A;   --gold: #D8B460;
   color-scheme: dark;
 }
 
@@ -272,9 +276,93 @@ a.card:hover { border-color: var(--ink); transform: translateY(-2px); }
 .reveal.visible:nth-child(4) { transition-delay: 0.18s; } .reveal.visible:nth-child(5) { transition-delay: 0.24s; }
 .no-js .reveal { opacity: 1; transform: none; }
 
+/* ─── OLD WORLD & WILD (Nov 2026) ───
+   Celtic, Gothic, Slavic, Greek and Roman ornament plus jungle and big cats. Every ornament is a one-colour
+   SVG in assets/ornaments/ used as a CSS mask, so it takes a token colour and follows light/dark.
+   Decoration only: aria-hidden, never carries meaning, still under reduced motion. */
+.orn {
+  display: inline-block; flex: none; width: 1.15em; height: 1.15em; vertical-align: -0.2em;
+  background: currentColor; -webkit-mask: var(--orn) center / contain no-repeat; mask: var(--orn) center / contain no-repeat;
+}
+.orn-triquetra { --orn: url(../ornaments/triquetra.svg); }
+.orn-rosette   { --orn: url(../ornaments/rosette.svg); }
+.orn-laurel    { --orn: url(../ornaments/laurel.svg); }
+.orn-column    { --orn: url(../ornaments/column.svg); }
+.orn-arch      { --orn: url(../ornaments/arch.svg); }
+.orn-paw       { --orn: url(../ornaments/paw.svg); }
+.orn-tree      { --orn: url(../ornaments/tree.svg); }
+.orn-fern      { --orn: url(../ornaments/fern.svg); }
+.orn-owl       { --orn: url(../ornaments/owl.svg); }
+.orn-leopard   { --orn: url(../ornaments/leopard.svg); width: 2.2em; }
+
+/* Brand: NK on a heraldic shield, name in Roman capitals */
+.brand-mark {
+  width: 28px; height: 32px; border-radius: 3px 3px 50% 50% / 3px 3px 42% 42%;
+  font-family: var(--font-roman); font-weight: 700; font-size: 0.7rem; padding-bottom: 3px;
+  box-shadow: inset 0 0 0 1.5px color-mix(in srgb, var(--gold) 70%, transparent);
+}
+.nav-brand { font-family: var(--font-roman); font-weight: 600; letter-spacing: 0.04em; }
+
+/* Ornamental rule between sections: Greek key — emblem — Greek key */
+.orn-rule {
+  max-width: var(--max); margin: 4.5rem auto -2.5rem; padding: 0 1.25rem;
+  display: flex; align-items: center; gap: 1rem; color: var(--gold);
+}
+.orn-rule::before, .orn-rule::after {
+  content: ''; flex: 1; height: 12px; background: currentColor; opacity: 0.55;
+  -webkit-mask: url(../ornaments/meander.svg) left center / 12px 12px repeat-x;
+  mask: url(../ornaments/meander.svg) left center / 12px 12px repeat-x;
+}
+.orn-rule::after { -webkit-mask-position: right center; mask-position: right center; }
+.orn-rule .orn { width: 26px; height: 26px; }
+.orn-rule .orn-paw { color: var(--moss); transform: rotate(90deg); }
+
+/* A paw-print trail: big-cat tracks that lead on to the next section */
+.paw-trail { display: flex; justify-content: center; gap: 1.1rem; color: var(--moss); margin: 3.5rem auto -2rem; }
+.paw-trail .orn { width: 18px; height: 18px; transform: rotate(90deg) translateX(var(--y, 0)); opacity: 0.25;
+  animation: pad 3.6s ease-in-out infinite; animation-delay: calc(var(--i) * 0.35s); }
+.paw-trail .orn:nth-child(odd) { --y: -7px; }
+.paw-trail .orn:nth-child(even) { --y: 7px; }
+@keyframes pad { 0%, 100% { opacity: 0.18; } 20% { opacity: 0.85; } 55% { opacity: 0.3; } }
+
+/* Illuminated initial (manuscript drop cap) */
+.illuminated::first-letter {
+  float: left; font-family: var(--font-roman); font-weight: 700; font-size: 3.4em; line-height: 0.82;
+  margin: 0.08em 0.12em 0 0; padding: 0.06em 0.12em 0.04em; color: var(--gold);
+  border: 1px solid color-mix(in srgb, var(--gold) 55%, transparent); border-radius: 2px;
+  background: color-mix(in srgb, var(--gold) 9%, transparent);
+}
+
+/* The leopard that prowls along the scroll-progress bar */
+.nav-prowler {
+  position: absolute; bottom: 1px; left: calc(var(--progress, 0) * (100% - 30px)); width: 30px; height: 13px;
+  background: var(--copper); -webkit-mask: url(../ornaments/leopard.svg) center / contain no-repeat; mask: url(../ornaments/leopard.svg) center / contain no-repeat;
+  pointer-events: none; opacity: 0.9;
+}
+
+/* Footer: a vine on the ground and a leopard walking it */
+.footer { position: relative; border-top: 0; }
+.footer::before {
+  content: ''; position: absolute; left: 1.25rem; right: 1.25rem; top: 0; height: 12px; color: var(--gold); background: currentColor; opacity: 0.5;
+  -webkit-mask: url(../ornaments/meander.svg) left center / 12px 12px repeat-x; mask: url(../ornaments/meander.svg) left center / 12px 12px repeat-x;
+}
+.footer::after {
+  content: ''; position: absolute; top: -40px; left: 1.25rem; width: 84px; height: 42px; background: var(--moss);
+  -webkit-mask: url(../ornaments/leopard.svg) center / contain no-repeat; mask: url(../ornaments/leopard.svg) center / contain no-repeat;
+  animation: prowl 48s linear infinite;
+}
+@keyframes prowl {
+  0% { transform: translateX(0) scaleX(1); }  49% { transform: translateX(min(1000px, calc(100vw - 9rem))) scaleX(1); }
+  50% { transform: translateX(min(1000px, calc(100vw - 9rem))) scaleX(-1); } 99% { transform: translateX(0) scaleX(-1); }
+  100% { transform: translateX(0) scaleX(1); }
+}
+.motto { flex-basis: 100%; font-family: var(--font-roman); letter-spacing: 0.08em; color: var(--text-mid); }
+.motto i { font-family: var(--font-mono); font-style: normal; letter-spacing: 0; color: var(--text-dim); }
+
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after { animation: none !important; transition: none !important; }
   .reveal { opacity: 1; transform: none; }
-  .nav-progress { display: none; }
+  .nav-progress, .nav-prowler { display: none; }
+  .paw-trail .orn { opacity: 0.55; }
 }
