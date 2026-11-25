@@ -54,7 +54,7 @@
 <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/css/site.css">
 <link rel="stylesheet" href="assets/css/home.css">
 </head>
@@ -161,10 +161,12 @@
   </a>
 </section>
 
+<div class="paw-trail" aria-hidden="true"><span class="orn orn-paw" style="--i:0"></span><span class="orn orn-paw" style="--i:1"></span><span class="orn orn-paw" style="--i:2"></span><span class="orn orn-paw" style="--i:3"></span><span class="orn orn-paw" style="--i:4"></span><span class="orn orn-paw" style="--i:5"></span><span class="orn orn-paw" style="--i:6"></span><span class="orn orn-paw" style="--i:7"></span><span class="orn orn-paw" style="--i:8"></span></div>
+
 <!-- THREE PROBLEMS -->
 <section class="section" id="work">
   <div class="section-head">
-    <p class="section-kicker">Work</p>
+    <p class="section-kicker"><span class="orn orn-laurel" aria-hidden="true"></span>Work</p>
     <h2 class="section-title">Three problems I work on</h2>
     <p class="section-lede">AI lab infrastructure splits along three lines: keep the job running, make each GPU-hour count, and make sure nobody else gets to use either. Kernel and fabric depth is the foundation for all three.</p>
   </div>
@@ -262,12 +264,14 @@
   </figure>
 </section>
 
+<div class="orn-rule" aria-hidden="true"><span class="orn orn-triquetra"></span></div>
+
 <!-- CORE STACK -->
 <!-- Logos: Simple Icons (CC0) sprite in assets/icons/stack.svg; technologies without one use a mono monogram.
      A tile links only to work that actually uses it (repo or post); no ratings, by design (CLAUDE.md). -->
 <section class="section" id="stack">
   <div class="section-head">
-    <p class="section-kicker">Core stack</p>
+    <p class="section-kicker"><span class="orn orn-column" aria-hidden="true"></span>Core stack</p>
     <h2 class="section-title">GPU networking &amp; distributed systems, from silicon to serving</h2>
     <p class="section-lede">Five layers, one job: move bytes between GPUs fast, notice the moment they stop, and keep them yours. A tile with a link opens the repo or post where I use it. No ratings: the work is the rating.</p>
   </div>
@@ -344,10 +348,12 @@
   <p class="fig-note stack-note">Brand marks are trademarks of their owners and appear only to name the technology. Full tool list in the <a href="#foundations">Toolbox</a>.</p>
 </section>
 
+<div class="orn-rule" aria-hidden="true"><span class="orn orn-rosette"></span></div>
+
 <!-- SECURITY: THREAT MAP -->
 <section class="section" id="security">
   <div class="section-head">
-    <p class="section-kicker">Security</p>
+    <p class="section-kicker"><span class="orn orn-rosette" aria-hidden="true"></span>Security</p>
     <h2 class="section-title">The AI-infra attack surface, layer by layer</h2>
     <p class="section-lede">Pick a layer. Each one shows what goes wrong, the controls I design for, and the public incidents that already happened there, each linked to its advisory or CVE.</p>
   </div>
@@ -362,10 +368,12 @@
   <p class="fig-note">Each layer is a trust boundary. An attacker who crosses one gets everything that layer was trusted with. <a href="posts/agent-blast-radius.html">Measure an agent’s blast radius →</a></p>
 </section>
 
+<div class="orn-rule" aria-hidden="true"><span class="orn orn-triquetra"></span></div>
+
 <!-- WRITING -->
 <section class="section" id="writing">
   <div class="section-head">
-    <p class="section-kicker">Writing</p>
+    <p class="section-kicker"><span class="orn orn-triquetra" aria-hidden="true"></span>Writing</p>
     <h2 class="section-title">Simulators, capacity models &amp; threat models</h2>
     <p class="section-lede">Each post runs in the browser: break a ring, size a KV transfer, disassemble a malicious checkpoint, measure an agent’s blast radius. Every model states its assumptions.</p>
   </div>
@@ -388,12 +396,14 @@
   </div>
 </section>
 
+<div class="orn-rule" aria-hidden="true"><span class="orn orn-paw"></span></div>
+
 <!-- UPSTREAM & EVIDENCE -->
 <!-- TODO(naresh): add upstream entries with links: vLLM PR, the cudagraph padding issue, the libbpf BTF fix.
      The previous "Achievements" (14 Mpps XDP classifier, 1.8 μs RDMA write, LFD460 top 5%) were removed: no evidence links. -->
 <section class="section" id="evidence">
   <div class="section-head">
-    <p class="section-kicker">Upstream &amp; evidence</p>
+    <p class="section-kicker"><span class="orn orn-paw" aria-hidden="true"></span>Upstream &amp; evidence</p>
     <h2 class="section-title">Things you can run or read</h2>
     <p class="section-lede">Each entry says what problem it addresses and links to the source.</p>
   </div>
@@ -429,10 +439,12 @@
   </div>
 </section>
 
+<div class="orn-rule" aria-hidden="true"><span class="orn orn-rosette"></span></div>
+
 <!-- FOUNDATIONS / TOOLBOX -->
 <section class="section" id="foundations">
   <div class="section-head">
-    <p class="section-kicker">Toolbox</p>
+    <p class="section-kicker"><span class="orn orn-tree" aria-hidden="true"></span>Toolbox</p>
     <h2 class="section-title">Skill → the artifact that shows it</h2>
     <p class="section-lede">No self-ratings. Each area links to the repo or write-up behind it, with an honest stage.</p>
   </div>
@@ -502,10 +514,12 @@
   </div>
 </section>
 
+<div class="orn-rule" aria-hidden="true"><span class="orn orn-triquetra"></span></div>
+
 <!-- PROFILES -->
 <section class="section" id="profiles">
   <div class="section-head">
-    <p class="section-kicker">Profiles</p>
+    <p class="section-kicker"><span class="orn orn-fern" aria-hidden="true"></span>Profiles</p>
     <h2 class="section-title">Where the work lives</h2>
   </div>
 
@@ -528,13 +542,15 @@
   </div>
 </section>
 
+<div class="orn-rule" aria-hidden="true"><span class="orn orn-paw"></span></div>
+
 <!-- BOOK -->
 <!-- TODO(naresh): confirm the working title, subtitle, part outline and "expected 2027" (from "about a year away", Nov 2026).
      Cover is assets/book/cover.svg (generated, datasheet palette); swap in the publisher's cover when there is one.
      When a pre-order page or mailing list exists, point the primary button at it. -->
 <section class="section" id="book">
   <div class="section-head">
-    <p class="section-kicker">The book</p>
+    <p class="section-kicker"><span class="orn orn-arch" aria-hidden="true"></span>The book</p>
     <h2 class="section-title">I’m writing the book I wanted when I started: AI/ML infrastructure, one layer at a time</h2>
   </div>
 
@@ -550,7 +566,7 @@
     <div class="book-body">
       <p class="book-status"><span class="status status-wip">Manuscript in progress</span><span class="book-eta">Expected 2027</span></p>
       <h3 class="book-title">AI/ML Infrastructure Engineering <small>A layer-by-layer deep dive, from silicon to serving</small></h3>
-      <p class="book-pitch">
+      <p class="book-pitch illuminated">
         Most ML books start at the model and stop at the framework. This one starts at the wire. It follows a gradient
         and a KV-cache block down through every layer they cross (the GPU, the host, the fabric, the collective, the
         training job, the serving engine) and asks the same four questions at each one:
@@ -583,49 +599,36 @@
   </div>
 </section>
 
+<div class="orn-rule" aria-hidden="true"><span class="orn orn-rosette"></span></div>
+
 <!-- REFERENCES -->
 <!-- Curriculum + papers. Every link was checked (HTTP 200, or DOI / ISBN confirmed via Crossref / Open Library where the
-     publisher blocks scripts) on 25 Nov 2026. Papers with Code now redirects to Hugging Face Papers, so it's linked as such.
+     publisher blocks scripts) on 25 Nov 2026. The "Start here" sites (abiaryan.com, huyenchip.com) and the "Find more papers"
+     block were removed on 26 Nov 2026 at Naresh's request; don't re-add them.
      TODO(naresh): prune or add; keep each entry to a public course page, publisher page, free edition or companion repo. -->
 <section class="section" id="references">
   <div class="section-head">
-    <p class="section-kicker">References</p>
+    <p class="section-kicker"><span class="orn orn-owl" aria-hidden="true"></span>References</p>
     <h2 class="section-title">A curriculum for getting into AI/ML infrastructure</h2>
-    <p class="section-lede">The books, courses, repos and papers I’d hand anyone starting out, in the order I’d read them: bottom of the stack first, the same order as <a href="#book">the book</a>. Every link goes to a course page, the publisher, a free edition or the code.</p>
-  </div>
-
-  <div class="ref-start">
-    <p class="ref-label">Start here</p>
-    <div class="ref-featured">
-      <article class="card ref-site reveal" style="--pc:var(--signal)">
-        <a class="ref-domain" href="https://abiaryan.com/" target="_blank" rel="noopener">abiaryan.com <span aria-hidden="true">↗</span></a>
-        <p>AI infrastructure and inference systems, taught as a stack: kernels and compilers, GPU communication, networking, serving, scheduling, observability, all the way to $/token. The philosophy fits this whole page: don’t accept the abstraction; take it apart and measure it.</p>
-        <p class="ref-also">Also: <a href="https://gpuengineering.com/" target="_blank" rel="noopener">gpuengineering.com ↗</a> <span>a public GPU-engineering curriculum: CUDA, kernels, serving engines, multi-GPU systems</span></p>
-      </article>
-      <article class="card ref-site reveal" style="--pc:var(--copper)">
-        <a class="ref-domain" href="https://huyenchip.com/" target="_blank" rel="noopener">huyenchip.com <span aria-hidden="true">↗</span></a>
-        <p>AI system design and bringing AI into production: long-form essays, guides and open-source lists that connect models to the systems that serve them.</p>
-        <p class="ref-also">Also: <a href="https://huyenchip.com/books/" target="_blank" rel="noopener">Designing Machine Learning Systems &amp; AI Engineering ↗</a> <a href="https://stanford-cs329s.github.io/" target="_blank" rel="noopener">CS 329S: ML Systems Design ↗</a></p>
-      </article>
-    </div>
+    <p class="section-lede illuminated">The books, courses, repos and papers I’d hand anyone starting out, in the order I’d read them: bottom of the stack first, the same order as <a href="#book">the book</a>. Every link goes to a course page, the publisher, a free edition or the code.</p>
   </div>
 
   <figure class="fig ref-path reveal">
     <figcaption class="fig-bar"><span>Fig. 2 · The path, bottom of the stack first</span><span>7 stages · 27 resources · 34 papers</span></figcaption>
     <ol class="rp-steps">
-      <li style="--tc:var(--graphite)"><a href="#ref-s1"><span class="rp-n">01</span><span class="rp-t">Systems foundations</span></a></li>
-      <li style="--tc:var(--copper)"><a href="#ref-s2"><span class="rp-n">02</span><span class="rp-t">Networking</span></a></li>
-      <li style="--tc:var(--copper)"><a href="#ref-s3"><span class="rp-n">03</span><span class="rp-t">Distributed systems</span></a></li>
-      <li style="--tc:var(--signal)"><a href="#ref-s4"><span class="rp-n">04</span><span class="rp-t">GPUs &amp; kernels</span></a></li>
-      <li style="--tc:var(--signal)"><a href="#ref-s5"><span class="rp-n">05</span><span class="rp-t">ML &amp; LLMs</span></a></li>
-      <li style="--tc:var(--graphite)"><a href="#ref-s6"><span class="rp-n">06</span><span class="rp-t">Cloud &amp; orchestration</span></a></li>
-      <li style="--tc:var(--fault)"><a href="#ref-s7"><span class="rp-n">07</span><span class="rp-t">AI infra at scale</span></a></li>
+      <li style="--tc:var(--graphite)"><a href="#ref-s1"><span class="rp-n">I</span><span class="rp-t">Systems foundations</span></a></li>
+      <li style="--tc:var(--copper)"><a href="#ref-s2"><span class="rp-n">II</span><span class="rp-t">Networking</span></a></li>
+      <li style="--tc:var(--copper)"><a href="#ref-s3"><span class="rp-n">III</span><span class="rp-t">Distributed systems</span></a></li>
+      <li style="--tc:var(--signal)"><a href="#ref-s4"><span class="rp-n">IV</span><span class="rp-t">GPUs &amp; kernels</span></a></li>
+      <li style="--tc:var(--signal)"><a href="#ref-s5"><span class="rp-n">V</span><span class="rp-t">ML &amp; LLMs</span></a></li>
+      <li style="--tc:var(--graphite)"><a href="#ref-s6"><span class="rp-n">VI</span><span class="rp-t">Cloud &amp; orchestration</span></a></li>
+      <li style="--tc:var(--fault)"><a href="#ref-s7"><span class="rp-n">VII</span><span class="rp-t">AI infra at scale</span></a></li>
     </ol>
   </figure>
 
   <div class="ref-grid">
     <article class="card ref-stage reveal" id="ref-s1" style="--tc:var(--graphite)">
-      <h3><span class="rs-n">01</span>Systems foundations</h3>
+      <h3><span class="rs-n">I</span>Systems foundations</h3>
       <p class="rs-why">How an OS schedules, allocates and does I/O, and how to measure it when it doesn’t.</p>
       <ul class="rs-list">
         <li><span class="rs-type">book</span><span class="rs-main"><a href="https://pages.cs.wisc.edu/~remzi/OSTEP/" target="_blank" rel="noopener">Operating Systems: Three Easy Pieces ↗</a><span class="rs-by">Remzi &amp; Andrea Arpaci-Dusseau · free online</span> <a class="rs-x" href="https://github.com/remzi-arpacidusseau/ostep-projects" target="_blank" rel="noopener">projects ↗</a></span></li>
@@ -634,7 +637,7 @@
       </ul>
     </article>
     <article class="card ref-stage reveal" id="ref-s2" style="--tc:var(--copper)">
-      <h3><span class="rs-n">02</span>Networking</h3>
+      <h3><span class="rs-n">II</span>Networking</h3>
       <p class="rs-why">From TCP/IP to the Linux stack to the leaf-spine fabric a GPU cluster runs on.</p>
       <ul class="rs-list">
         <li><span class="rs-type">book</span><span class="rs-main"><a href="https://gaia.cs.umass.edu/kurose_ross/index.php" target="_blank" rel="noopener">Computer Networking: A Top-Down Approach ↗</a><span class="rs-by">Jim Kurose &amp; Keith Ross</span> <a class="rs-x" href="https://gaia.cs.umass.edu/kurose_ross/online_lectures.htm" target="_blank" rel="noopener">free lectures ↗</a></span></li>
@@ -643,7 +646,7 @@
       </ul>
     </article>
     <article class="card ref-stage reveal" id="ref-s3" style="--tc:var(--copper)">
-      <h3><span class="rs-n">03</span>Distributed systems</h3>
+      <h3><span class="rs-n">III</span>Distributed systems</h3>
       <p class="rs-why">Replication, consensus and failure: the vocabulary every training job and serving fleet speaks.</p>
       <ul class="rs-list">
         <li><span class="rs-type">book</span><span class="rs-main"><a href="https://dataintensive.net/" target="_blank" rel="noopener">Designing Data-Intensive Applications ↗</a><span class="rs-by">Martin Kleppmann</span></span></li>
@@ -651,7 +654,7 @@
       </ul>
     </article>
     <article class="card ref-stage reveal" id="ref-s4" style="--tc:var(--signal)">
-      <h3><span class="rs-n">04</span>GPUs &amp; kernels</h3>
+      <h3><span class="rs-n">IV</span>GPUs &amp; kernels</h3>
       <p class="rs-why">How a GPU executes, why memory bandwidth usually wins, and how to write a kernel that knows it.</p>
       <ul class="rs-list">
         <li><span class="rs-type">book</span><span class="rs-main"><a href="https://shop.elsevier.com/books/programming-massively-parallel-processors/hwu/978-0-323-91231-0" target="_blank" rel="noopener">Programming Massively Parallel Processors, 4th ed. ↗</a><span class="rs-by">Wen-mei Hwu, David Kirk &amp; Izzat El Hajj</span></span></li>
@@ -660,7 +663,7 @@
       </ul>
     </article>
     <article class="card ref-stage reveal" id="ref-s5" style="--tc:var(--signal)">
-      <h3><span class="rs-n">05</span>ML &amp; LLMs</h3>
+      <h3><span class="rs-n">V</span>ML &amp; LLMs</h3>
       <p class="rs-why">Enough ML to know what the cluster is computing, and why the model shapes the infrastructure.</p>
       <ul class="rs-list">
         <li><span class="rs-type">course</span><span class="rs-main"><a href="https://cs229.stanford.edu/" target="_blank" rel="noopener">CS229: Machine Learning ↗</a><span class="rs-by">Stanford</span></span></li>
@@ -673,7 +676,7 @@
       </ul>
     </article>
     <article class="card ref-stage reveal" id="ref-s6" style="--tc:var(--graphite)">
-      <h3><span class="rs-n">06</span>Cloud &amp; orchestration</h3>
+      <h3><span class="rs-n">VI</span>Cloud &amp; orchestration</h3>
       <p class="rs-why">Where the cluster actually lives: accounts, identity, networks and the scheduler on top.</p>
       <ul class="rs-list">
         <li><span class="rs-type">cert</span><span class="rs-main"><a href="https://aws.amazon.com/certification/certified-solutions-architect-associate/" target="_blank" rel="noopener">AWS Solutions Architect – Associate ↗</a><span class="rs-by">AWS certification</span></span></li>
@@ -684,7 +687,7 @@
       </ul>
     </article>
     <article class="card ref-stage reveal" id="ref-s7" style="--tc:var(--fault)">
-      <h3><span class="rs-n">07</span>AI infra at scale</h3>
+      <h3><span class="rs-n">VII</span>AI infra at scale</h3>
       <p class="rs-why">Where the six layers meet: parallelism, collectives and clusters of thousands of GPUs.</p>
       <ul class="rs-list">
         <li><span class="rs-type">book</span><span class="rs-main"><a href="https://github.com/stas00/ml-engineering" target="_blank" rel="noopener">Machine Learning Engineering Open Book ↗</a><span class="rs-by">Stas Bekman · free</span></span></li>
@@ -747,14 +750,9 @@
     </div>
   </div>
 
-  <div class="ref-more reveal">
-    <p class="ref-label">Find more papers</p>
-    <ul>
-      <li><a href="https://paperswelove.org/" target="_blank" rel="noopener">Papers We Love ↗</a> <span>community-curated CS classics, with talks; <a href="https://github.com/papers-we-love/papers-we-love" target="_blank" rel="noopener">repo by topic ↗</a></span></li>
-      <li><a href="https://huggingface.co/papers/trending" target="_blank" rel="noopener">Hugging Face Papers ↗</a> <span>trending papers with code and models; <a href="https://paperswithcode.com/" target="_blank" rel="noopener">paperswithcode.com</a> now redirects here</span></li>
-    </ul>
-  </div>
 </section>
+
+<div class="orn-rule" aria-hidden="true"><span class="orn orn-triquetra"></span></div>
 
 <!-- CONTACT -->
 <section class="section" id="contact">
@@ -789,9 +787,10 @@
     <a class="social" href="https://www.youtube.com/@nareshns2004" target="_blank" rel="noopener me"><svg class="bi" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg><span>YouTube</span></a>
     <a class="social" href="https://x.com/naresh_swe24" target="_blank" rel="noopener me"><svg class="bi" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"/></svg><span>@naresh_swe24</span></a>
   </div>
+  <p class="motto"><span aria-hidden="true">🏛️ ☘️ </span>Festina lente <i>· make haste, slowly · the Roman rule for fast systems that don’t fall over</i><span aria-hidden="true"> 🌿 🐆</span></p>
   <span>© Naresh Kumar · author of <a href="#book"><cite>AI/ML Infrastructure Engineering</cite></a> (in progress) · press <kbd>⌘K</kbd> to jump</span>
   <div class="footer-links">
-    <a href="#top">Back to top ↑</a>
+    <a href="#top">Back to top <span aria-hidden="true">🐾</span></a>
   </div>
 </footer>
 
