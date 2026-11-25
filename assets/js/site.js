@@ -105,17 +105,17 @@
     sections.forEach(s => so.observe(s));
   }
 
-  // Scroll progress (thin tricolour bar under the nav, with a leopard prowling along it)
+  // Scroll progress (thin tricolour bar under the nav, with a hummingbird flying along it)
   const nav = document.querySelector('.nav');
   if (nav && !reduceMotion.matches) {
     const bar = document.createElement('div'); bar.className = 'nav-progress'; bar.setAttribute('aria-hidden', 'true');
-    const cat = document.createElement('div'); cat.className = 'nav-prowler'; cat.setAttribute('aria-hidden', 'true');
-    nav.append(bar, cat);
+    const bird = document.createElement('div'); bird.className = 'nav-prowler'; bird.setAttribute('aria-hidden', 'true');
+    nav.append(bar, bird);
     let ticking = false;
     const upd = () => {
       const h = document.documentElement.scrollHeight - innerHeight;
       const p = h > 0 ? Math.min(1, scrollY / h).toFixed(4) : 0;
-      bar.style.setProperty('--progress', p); cat.style.setProperty('--progress', p);
+      bar.style.setProperty('--progress', p); bird.style.setProperty('--progress', p);
       ticking = false;
     };
     addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(upd); } }, { passive: true });
