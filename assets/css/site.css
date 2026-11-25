@@ -301,6 +301,11 @@ a.card:hover { border-color: var(--ink); transform: translateY(-2px); }
 }
 .art-credit { flex-basis: 100%; font-size: 0.68rem; color: var(--text-dim); }
 .art-credit a { color: inherit; }
+.paw-row { max-width: var(--max); margin: 4rem auto -3.5rem; padding: 0 1.25rem; display: flex; justify-content: space-between; pointer-events: none; }
+.paw-row i { width: 15px; height: 15px; background: color-mix(in srgb, #8A6A3E 70%, var(--paper)); opacity: 0; transform: translateY(var(--y)) rotate(90deg);
+  -webkit-mask: url(../wildlife/paw-cat.svg) center / contain no-repeat; mask: url(../wildlife/paw-cat.svg) center / contain no-repeat;
+  animation: pawrow 14s linear infinite; animation-delay: calc(var(--i) * 0.35s); }
+@keyframes pawrow { 0% { opacity: 0; } 3% { opacity: 0.6; } 50% { opacity: 0.35; } 80%, 100% { opacity: 0; } }
 @keyframes parade { from { left: -480px; } to { left: 100%; } }
 
 @media (prefers-reduced-motion: reduce) {
@@ -308,4 +313,5 @@ a.card:hover { border-color: var(--ink); transform: translateY(-2px); }
   *, *::before, *::after { animation: none !important; transition: none !important; }
   .reveal { opacity: 1; transform: none; }
   .nav-progress, .nav-prowler { display: none; }
+  .paw-row i { opacity: 0.35; }
 }
