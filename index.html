@@ -72,6 +72,7 @@
       <li><a href="#evidence">Evidence</a></li>
       <li><a href="#foundations">Toolbox</a></li>
       <li><a href="#book">Book</a></li>
+      <li><a href="#references">References</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
     <div class="nav-right">
@@ -579,6 +580,179 @@
         incident notes on this site get organized into one map of the stack.</p>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- REFERENCES -->
+<!-- Curriculum + papers. Every link was checked (HTTP 200, or DOI / ISBN confirmed via Crossref / Open Library where the
+     publisher blocks scripts) on 25 Nov 2026. Papers with Code now redirects to Hugging Face Papers, so it's linked as such.
+     TODO(naresh): prune or add; keep each entry to a public course page, publisher page, free edition or companion repo. -->
+<section class="section" id="references">
+  <div class="section-head">
+    <p class="section-kicker">References</p>
+    <h2 class="section-title">A curriculum for getting into AI/ML infrastructure</h2>
+    <p class="section-lede">The books, courses, repos and papers I’d hand anyone starting out, in the order I’d read them: bottom of the stack first, the same order as <a href="#book">the book</a>. Every link goes to a course page, the publisher, a free edition or the code.</p>
+  </div>
+
+  <div class="ref-start">
+    <p class="ref-label">Start here</p>
+    <div class="ref-featured">
+      <article class="card ref-site reveal" style="--pc:var(--signal)">
+        <a class="ref-domain" href="https://abiaryan.com/" target="_blank" rel="noopener">abiaryan.com <span aria-hidden="true">↗</span></a>
+        <p>AI infrastructure and inference systems, taught as a stack: kernels and compilers, GPU communication, networking, serving, scheduling, observability, all the way to $/token. The philosophy fits this whole page: don’t accept the abstraction; take it apart and measure it.</p>
+        <p class="ref-also">Also: <a href="https://gpuengineering.com/" target="_blank" rel="noopener">gpuengineering.com ↗</a> <span>a public GPU-engineering curriculum: CUDA, kernels, serving engines, multi-GPU systems</span></p>
+      </article>
+      <article class="card ref-site reveal" style="--pc:var(--copper)">
+        <a class="ref-domain" href="https://huyenchip.com/" target="_blank" rel="noopener">huyenchip.com <span aria-hidden="true">↗</span></a>
+        <p>AI system design and bringing AI into production: long-form essays, guides and open-source lists that connect models to the systems that serve them.</p>
+        <p class="ref-also">Also: <a href="https://huyenchip.com/books/" target="_blank" rel="noopener">Designing Machine Learning Systems &amp; AI Engineering ↗</a> <a href="https://stanford-cs329s.github.io/" target="_blank" rel="noopener">CS 329S: ML Systems Design ↗</a></p>
+      </article>
+    </div>
+  </div>
+
+  <figure class="fig ref-path reveal">
+    <figcaption class="fig-bar"><span>Fig. 2 · The path, bottom of the stack first</span><span>7 stages · 27 resources · 34 papers</span></figcaption>
+    <ol class="rp-steps">
+      <li style="--tc:var(--graphite)"><a href="#ref-s1"><span class="rp-n">01</span><span class="rp-t">Systems foundations</span></a></li>
+      <li style="--tc:var(--copper)"><a href="#ref-s2"><span class="rp-n">02</span><span class="rp-t">Networking</span></a></li>
+      <li style="--tc:var(--copper)"><a href="#ref-s3"><span class="rp-n">03</span><span class="rp-t">Distributed systems</span></a></li>
+      <li style="--tc:var(--signal)"><a href="#ref-s4"><span class="rp-n">04</span><span class="rp-t">GPUs &amp; kernels</span></a></li>
+      <li style="--tc:var(--signal)"><a href="#ref-s5"><span class="rp-n">05</span><span class="rp-t">ML &amp; LLMs</span></a></li>
+      <li style="--tc:var(--graphite)"><a href="#ref-s6"><span class="rp-n">06</span><span class="rp-t">Cloud &amp; orchestration</span></a></li>
+      <li style="--tc:var(--fault)"><a href="#ref-s7"><span class="rp-n">07</span><span class="rp-t">AI infra at scale</span></a></li>
+    </ol>
+  </figure>
+
+  <div class="ref-grid">
+    <article class="card ref-stage reveal" id="ref-s1" style="--tc:var(--graphite)">
+      <h3><span class="rs-n">01</span>Systems foundations</h3>
+      <p class="rs-why">How an OS schedules, allocates and does I/O, and how to measure it when it doesn’t.</p>
+      <ul class="rs-list">
+        <li><span class="rs-type">book</span><span class="rs-main"><a href="https://pages.cs.wisc.edu/~remzi/OSTEP/" target="_blank" rel="noopener">Operating Systems: Three Easy Pieces ↗</a><span class="rs-by">Remzi &amp; Andrea Arpaci-Dusseau · free online</span> <a class="rs-x" href="https://github.com/remzi-arpacidusseau/ostep-projects" target="_blank" rel="noopener">projects ↗</a></span></li>
+        <li><span class="rs-type">book</span><span class="rs-main"><a href="https://www.informit.com/store/linux-kernel-development-9780672329463" target="_blank" rel="noopener">Linux Kernel Development, 3rd ed. ↗</a><span class="rs-by">Robert Love</span></span></li>
+        <li><span class="rs-type">book</span><span class="rs-main"><a href="https://www.brendangregg.com/systems-performance-2nd-edition-book.html" target="_blank" rel="noopener">Systems Performance, 2nd ed. ↗</a><span class="rs-by">Brendan Gregg</span> <a class="rs-x" href="https://www.brendangregg.com/linuxperf.html" target="_blank" rel="noopener">Linux perf map ↗</a> <a class="rs-x" href="https://github.com/brendangregg/FlameGraph" target="_blank" rel="noopener">FlameGraph ↗</a></span></li>
+      </ul>
+    </article>
+    <article class="card ref-stage reveal" id="ref-s2" style="--tc:var(--copper)">
+      <h3><span class="rs-n">02</span>Networking</h3>
+      <p class="rs-why">From TCP/IP to the Linux stack to the leaf-spine fabric a GPU cluster runs on.</p>
+      <ul class="rs-list">
+        <li><span class="rs-type">book</span><span class="rs-main"><a href="https://gaia.cs.umass.edu/kurose_ross/index.php" target="_blank" rel="noopener">Computer Networking: A Top-Down Approach ↗</a><span class="rs-by">Jim Kurose &amp; Keith Ross</span> <a class="rs-x" href="https://gaia.cs.umass.edu/kurose_ross/online_lectures.htm" target="_blank" rel="noopener">free lectures ↗</a></span></li>
+        <li><span class="rs-type">book</span><span class="rs-main"><a href="https://doi.org/10.1007/978-1-4302-6197-1" target="_blank" rel="noopener">Linux Kernel Networking ↗</a><span class="rs-by">Rami Rosen</span></span></li>
+        <li><span class="rs-type">book</span><span class="rs-main"><a href="https://github.com/ddutt/cloud-native-data-center-networking" target="_blank" rel="noopener">Cloud Native Data Center Networking ↗</a><span class="rs-by">Dinesh Dutt · companion code</span></span></li>
+      </ul>
+    </article>
+    <article class="card ref-stage reveal" id="ref-s3" style="--tc:var(--copper)">
+      <h3><span class="rs-n">03</span>Distributed systems</h3>
+      <p class="rs-why">Replication, consensus and failure: the vocabulary every training job and serving fleet speaks.</p>
+      <ul class="rs-list">
+        <li><span class="rs-type">book</span><span class="rs-main"><a href="https://dataintensive.net/" target="_blank" rel="noopener">Designing Data-Intensive Applications ↗</a><span class="rs-by">Martin Kleppmann</span></span></li>
+        <li><span class="rs-type">course</span><span class="rs-main"><a href="https://pdos.csail.mit.edu/6.824/" target="_blank" rel="noopener">MIT 6.5840: Distributed Systems ↗</a><span class="rs-by">Robert Morris et al. · labs in Go</span></span></li>
+      </ul>
+    </article>
+    <article class="card ref-stage reveal" id="ref-s4" style="--tc:var(--signal)">
+      <h3><span class="rs-n">04</span>GPUs &amp; kernels</h3>
+      <p class="rs-why">How a GPU executes, why memory bandwidth usually wins, and how to write a kernel that knows it.</p>
+      <ul class="rs-list">
+        <li><span class="rs-type">book</span><span class="rs-main"><a href="https://shop.elsevier.com/books/programming-massively-parallel-processors/hwu/978-0-323-91231-0" target="_blank" rel="noopener">Programming Massively Parallel Processors, 4th ed. ↗</a><span class="rs-by">Wen-mei Hwu, David Kirk &amp; Izzat El Hajj</span></span></li>
+        <li><span class="rs-type">course</span><span class="rs-main"><a href="https://github.com/gpu-mode/lectures" target="_blank" rel="noopener">GPU MODE lectures ↗</a><span class="rs-by">Community lecture series · code + slides</span></span></li>
+        <li><span class="rs-type">docs</span><span class="rs-main"><a href="https://docs.nvidia.com/cuda/cuda-programming-guide/" target="_blank" rel="noopener">CUDA Programming Guide ↗</a><span class="rs-by">NVIDIA</span></span></li>
+      </ul>
+    </article>
+    <article class="card ref-stage reveal" id="ref-s5" style="--tc:var(--signal)">
+      <h3><span class="rs-n">05</span>ML &amp; LLMs</h3>
+      <p class="rs-why">Enough ML to know what the cluster is computing, and why the model shapes the infrastructure.</p>
+      <ul class="rs-list">
+        <li><span class="rs-type">course</span><span class="rs-main"><a href="https://cs229.stanford.edu/" target="_blank" rel="noopener">CS229: Machine Learning ↗</a><span class="rs-by">Stanford</span></span></li>
+        <li><span class="rs-type">course</span><span class="rs-main"><a href="https://stanford-cs221.github.io/autumn2024/" target="_blank" rel="noopener">CS221: AI Principles &amp; Techniques ↗</a><span class="rs-by">Stanford</span></span></li>
+        <li><span class="rs-type">course</span><span class="rs-main"><a href="https://cs231n.stanford.edu/" target="_blank" rel="noopener">CS231n: Deep Learning for Computer Vision ↗</a><span class="rs-by">Stanford</span></span></li>
+        <li><span class="rs-type">course</span><span class="rs-main"><a href="https://cme295.stanford.edu/" target="_blank" rel="noopener">CME 295: Transformers &amp; Large Language Models ↗</a><span class="rs-by">Stanford</span></span></li>
+        <li><span class="rs-type">course</span><span class="rs-main"><a href="https://cme296.stanford.edu/" target="_blank" rel="noopener">CME 296: Diffusion &amp; Large Vision Models ↗</a><span class="rs-by">Stanford</span></span></li>
+        <li><span class="rs-type">course</span><span class="rs-main"><a href="https://stanford-cs336.github.io/spring2025/" target="_blank" rel="noopener">CS336: Language Modeling from Scratch ↗</a><span class="rs-by">Stanford · build the whole stack yourself</span></span></li>
+        <li><span class="rs-type">repo</span><span class="rs-main"><a href="https://karpathy.ai/zero-to-hero.html" target="_blank" rel="noopener">Neural Networks: Zero to Hero ↗</a><span class="rs-by">Andrej Karpathy</span> <a class="rs-x" href="https://github.com/karpathy/nanoGPT" target="_blank" rel="noopener">nanoGPT ↗</a></span></li>
+      </ul>
+    </article>
+    <article class="card ref-stage reveal" id="ref-s6" style="--tc:var(--graphite)">
+      <h3><span class="rs-n">06</span>Cloud &amp; orchestration</h3>
+      <p class="rs-why">Where the cluster actually lives: accounts, identity, networks and the scheduler on top.</p>
+      <ul class="rs-list">
+        <li><span class="rs-type">cert</span><span class="rs-main"><a href="https://aws.amazon.com/certification/certified-solutions-architect-associate/" target="_blank" rel="noopener">AWS Solutions Architect – Associate ↗</a><span class="rs-by">AWS certification</span></span></li>
+        <li><span class="rs-type">cert</span><span class="rs-main"><a href="https://aws.amazon.com/certification/certified-security-specialty/" target="_blank" rel="noopener">AWS Security – Specialty ↗</a><span class="rs-by">AWS certification</span></span></li>
+        <li><span class="rs-type">book</span><span class="rs-main"><a href="https://github.com/kubernetes-up-and-running/examples" target="_blank" rel="noopener">Kubernetes: Up &amp; Running, 3rd ed. ↗</a><span class="rs-by">Burns, Beda, Hightower &amp; Evenson · companion code</span></span></li>
+        <li><span class="rs-type">repo</span><span class="rs-main"><a href="https://github.com/kelseyhightower/kubernetes-the-hard-way" target="_blank" rel="noopener">Kubernetes the Hard Way ↗</a><span class="rs-by">Kelsey Hightower</span></span></li>
+        <li><span class="rs-type">cert</span><span class="rs-main"><a href="https://training.linuxfoundation.org/certification/certified-kubernetes-administrator-cka/" target="_blank" rel="noopener">CKA: Certified Kubernetes Administrator ↗</a><span class="rs-by">CNCF / Linux Foundation</span></span></li>
+      </ul>
+    </article>
+    <article class="card ref-stage reveal" id="ref-s7" style="--tc:var(--fault)">
+      <h3><span class="rs-n">07</span>AI infra at scale</h3>
+      <p class="rs-why">Where the six layers meet: parallelism, collectives and clusters of thousands of GPUs.</p>
+      <ul class="rs-list">
+        <li><span class="rs-type">book</span><span class="rs-main"><a href="https://github.com/stas00/ml-engineering" target="_blank" rel="noopener">Machine Learning Engineering Open Book ↗</a><span class="rs-by">Stas Bekman · free</span></span></li>
+        <li><span class="rs-type">book</span><span class="rs-main"><a href="https://huggingface.co/spaces/nanotron/ultrascale-playbook" target="_blank" rel="noopener">The Ultra-Scale Playbook ↗</a><span class="rs-by">Hugging Face · free</span></span></li>
+        <li><span class="rs-type">book</span><span class="rs-main"><a href="https://jax-ml.github.io/scaling-book/" target="_blank" rel="noopener">How to Scale Your Model ↗</a><span class="rs-by">Google DeepMind · free</span></span></li>
+        <li><span class="rs-type">repo</span><span class="rs-main"><a href="https://github.com/NVIDIA/nccl-tests" target="_blank" rel="noopener">nccl-tests ↗</a><span class="rs-by">NVIDIA · the first thing to run on a new cluster</span></span></li>
+      </ul>
+    </article>
+  </div>
+
+  <div class="ref-papers">
+    <h3 class="ref-sub">Must-read papers, by layer</h3>
+    <div class="rpp-grid">
+      <div class="rpp-group reveal" style="--tc:var(--graphite)"><h4>Foundations</h4><ul>
+        <li><a href="https://arxiv.org/abs/1706.03762" target="_blank" rel="noopener">Attention Is All You Need ↗</a><span class="rpp-v">NeurIPS 2017</span></li>
+        <li><a href="https://doi.org/10.1145/1498765.1498785" target="_blank" rel="noopener">Roofline: An Insightful Visual Performance Model ↗</a><span class="rpp-v">CACM 2009</span></li>
+        <li><a href="https://arxiv.org/abs/1704.04760" target="_blank" rel="noopener">In-Datacenter Performance Analysis of a TPU ↗</a><span class="rpp-v">ISCA 2017</span></li>
+        <li><a href="https://arxiv.org/abs/2001.08361" target="_blank" rel="noopener">Scaling Laws for Neural Language Models ↗</a><span class="rpp-v">2020</span></li>
+        <li><a href="https://arxiv.org/abs/2203.15556" target="_blank" rel="noopener">Training Compute-Optimal LLMs (Chinchilla) ↗</a><span class="rpp-v">NeurIPS 2022</span></li>
+      </ul></div>
+      <div class="rpp-group reveal" style="--tc:var(--signal)"><h4>Training &amp; parallelism</h4><ul>
+        <li><a href="https://arxiv.org/abs/1909.08053" target="_blank" rel="noopener">Megatron-LM: Model Parallelism ↗</a><span class="rpp-v">2019</span></li>
+        <li><a href="https://arxiv.org/abs/2104.04473" target="_blank" rel="noopener">Efficient Large-Scale LM Training on GPU Clusters ↗</a><span class="rpp-v">SC 2021</span></li>
+        <li><a href="https://arxiv.org/abs/1910.02054" target="_blank" rel="noopener">ZeRO: Memory Optimizations Toward Trillion-Parameter Models ↗</a><span class="rpp-v">SC 2020</span></li>
+        <li><a href="https://arxiv.org/abs/1811.06965" target="_blank" rel="noopener">GPipe: Pipeline Parallelism ↗</a><span class="rpp-v">NeurIPS 2019</span></li>
+        <li><a href="https://arxiv.org/abs/2006.16668" target="_blank" rel="noopener">GShard: Conditional Computation &amp; Automatic Sharding ↗</a><span class="rpp-v">ICLR 2021</span></li>
+        <li><a href="https://arxiv.org/abs/2006.15704" target="_blank" rel="noopener">PyTorch Distributed: Data Parallel Training ↗</a><span class="rpp-v">VLDB 2020</span></li>
+        <li><a href="https://arxiv.org/abs/2304.11277" target="_blank" rel="noopener">PyTorch FSDP: Fully Sharded Data Parallel ↗</a><span class="rpp-v">VLDB 2023</span></li>
+      </ul></div>
+      <div class="rpp-group reveal" style="--tc:var(--copper)"><h4>Fabric &amp; collectives</h4><ul>
+        <li><a href="https://doi.org/10.1145/2785956.2787484" target="_blank" rel="noopener">Congestion Control for Large-Scale RDMA Deployments (DCQCN) ↗</a><span class="rpp-v">SIGCOMM 2015</span></li>
+        <li><a href="https://www.microsoft.com/en-us/research/wp-content/uploads/2016/11/rdma_sigcomm2016.pdf" target="_blank" rel="noopener">RDMA over Commodity Ethernet at Scale ↗</a><span class="rpp-v">SIGCOMM 2016</span></li>
+        <li><a href="https://doi.org/10.1145/3651890.3672233" target="_blank" rel="noopener">RDMA over Ethernet for Distributed Training at Meta Scale ↗</a><span class="rpp-v">SIGCOMM 2024</span></li>
+        <li><a href="https://doi.org/10.1145/3651890.3672265" target="_blank" rel="noopener">Alibaba HPN: A Data Center Network for LLM Training ↗</a><span class="rpp-v">SIGCOMM 2024</span></li>
+        <li><a href="https://arxiv.org/abs/1802.05799" target="_blank" rel="noopener">Horovod: Fast and Easy Distributed Deep Learning ↗</a><span class="rpp-v">2018</span></li>
+        <li><a href="https://arxiv.org/abs/2507.04786" target="_blank" rel="noopener">Demystifying NCCL: GPU Communication Protocols &amp; Algorithms ↗</a><span class="rpp-v">2025</span></li>
+      </ul></div>
+      <div class="rpp-group reveal" style="--tc:var(--signal)"><h4>Serving &amp; inference</h4><ul>
+        <li><a href="https://arxiv.org/abs/2205.14135" target="_blank" rel="noopener">FlashAttention: IO-Aware Exact Attention ↗</a><span class="rpp-v">NeurIPS 2022</span></li>
+        <li><a href="https://arxiv.org/abs/2307.08691" target="_blank" rel="noopener">FlashAttention-2 ↗</a><span class="rpp-v">ICLR 2024</span></li>
+        <li><a href="https://www.usenix.org/conference/osdi22/presentation/yu" target="_blank" rel="noopener">Orca: Iteration-Level Scheduling for Generative Models ↗</a><span class="rpp-v">OSDI 2022</span></li>
+        <li><a href="https://arxiv.org/abs/2211.05102" target="_blank" rel="noopener">Efficiently Scaling Transformer Inference ↗</a><span class="rpp-v">MLSys 2023</span></li>
+        <li><a href="https://arxiv.org/abs/2309.06180" target="_blank" rel="noopener">PagedAttention (vLLM) ↗</a><span class="rpp-v">SOSP 2023</span></li>
+        <li><a href="https://arxiv.org/abs/2312.07104" target="_blank" rel="noopener">SGLang: Structured LM Programs &amp; RadixAttention ↗</a><span class="rpp-v">NeurIPS 2024</span></li>
+        <li><a href="https://arxiv.org/abs/2311.18677" target="_blank" rel="noopener">Splitwise: Phase Splitting for LLM Inference ↗</a><span class="rpp-v">ISCA 2024</span></li>
+        <li><a href="https://arxiv.org/abs/2401.09670" target="_blank" rel="noopener">DistServe: Disaggregating Prefill and Decoding ↗</a><span class="rpp-v">OSDI 2024</span></li>
+        <li><a href="https://arxiv.org/abs/2407.00079" target="_blank" rel="noopener">Mooncake: KVCache-Centric Disaggregated Serving ↗</a><span class="rpp-v">FAST 2025</span></li>
+      </ul></div>
+      <div class="rpp-group reveal" style="--tc:var(--fault)"><h4>Reliability &amp; operations at scale</h4><ul>
+        <li><a href="https://research.google/pubs/the-tail-at-scale/" target="_blank" rel="noopener">The Tail at Scale ↗</a><span class="rpp-v">CACM 2013</span></li>
+        <li><a href="https://research.google/pubs/large-scale-cluster-management-at-google-with-borg/" target="_blank" rel="noopener">Large-Scale Cluster Management at Google with Borg ↗</a><span class="rpp-v">EuroSys 2015</span></li>
+        <li><a href="https://www.usenix.org/conference/nsdi24/presentation/jiang-ziheng" target="_blank" rel="noopener">MegaScale: LLM Training on 10,000+ GPUs ↗</a><span class="rpp-v">NSDI 2024</span></li>
+        <li><a href="https://arxiv.org/abs/2403.07648" target="_blank" rel="noopener">Characterization of LLM Development in the Datacenter ↗</a><span class="rpp-v">NSDI 2024</span></li>
+        <li><a href="https://arxiv.org/abs/2407.21783" target="_blank" rel="noopener">The Llama 3 Herd of Models (infrastructure &amp; reliability sections) ↗</a><span class="rpp-v">2024</span></li>
+      </ul></div>
+      <div class="rpp-group reveal" style="--tc:var(--fault)"><h4>Security</h4><ul>
+        <li><a href="https://arxiv.org/abs/2302.12173" target="_blank" rel="noopener">Indirect Prompt Injection in LLM-Integrated Apps ↗</a><span class="rpp-v">AISec 2023</span></li>
+        <li><a href="https://arxiv.org/abs/2403.06634" target="_blank" rel="noopener">Stealing Part of a Production Language Model ↗</a><span class="rpp-v">ICML 2024</span></li>
+      </ul></div>
+    </div>
+  </div>
+
+  <div class="ref-more reveal">
+    <p class="ref-label">Find more papers</p>
+    <ul>
+      <li><a href="https://paperswelove.org/" target="_blank" rel="noopener">Papers We Love ↗</a> <span>community-curated CS classics, with talks; <a href="https://github.com/papers-we-love/papers-we-love" target="_blank" rel="noopener">repo by topic ↗</a></span></li>
+      <li><a href="https://huggingface.co/papers/trending" target="_blank" rel="noopener">Hugging Face Papers ↗</a> <span>trending papers with code and models; <a href="https://paperswithcode.com/" target="_blank" rel="noopener">paperswithcode.com</a> now redirects here</span></li>
+    </ul>
   </div>
 </section>
 
