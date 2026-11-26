@@ -1,25 +1,38 @@
 <!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><title>OG image source</title>
-<!-- Source for /og-image.png. Render at 1200×630, e.g.
-     chromium --headless --hide-scrollbars --virtual-time-budget=4000 --window-size=1200,630 --screenshot=og-image.png og-source.html -->
+<!-- Source for /og-image.png (wildlife theme, Nov 2026). Serve the repo root over HTTP so the masks load, then render at 1200×630, e.g.
+     python3 -m http.server 8765 &   chromium --headless --hide-scrollbars --virtual-time-budget=4000 --window-size=1200,630 \
+       --screenshot=og-image.png http://127.0.0.1:8765/assets/og/og-source.html
+     Silhouettes: assets/wildlife/ (credits in assets/wildlife/CREDITS.md). -->
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@500;600&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{width:1200px;height:630px;background:#F7F5F0;color:#15171C;font-family:'IBM Plex Sans',sans-serif;overflow:hidden;position:relative}
-.top{position:absolute;left:64px;right:64px;top:44px;display:flex;justify-content:space-between;font:500 20px 'IBM Plex Mono',monospace;color:#555C6A;border-bottom:1.5px solid #15171C;padding-bottom:14px}
+body{width:1200px;height:630px;color:#15171C;font-family:'IBM Plex Sans',sans-serif;overflow:hidden;position:relative;
+  background:radial-gradient(90px 90px at 1010px 70px,#FFE1A8,rgba(255,214,150,.5) 45%,transparent 75%),
+             radial-gradient(200px 36px at 300px 92px,rgba(255,255,255,.85),transparent 70%),
+             linear-gradient(180deg,#CDE3F5 0%,#E4EEF7 40%,#F7E8D6 70%,#F7F5F0 100%)}
+.top{position:absolute;left:64px;right:64px;top:34px;display:flex;justify-content:space-between;align-items:center;font:500 20px 'IBM Plex Mono',monospace;color:#3E4654}
 .top b{color:#15171C;font-weight:600}
-.l{position:absolute;left:64px;top:118px;width:640px}
-h1{font-weight:600;font-size:50px;line-height:1.13;letter-spacing:-1.2px}
+.brand{display:flex;align-items:center;gap:12px}
+.mark{display:inline-grid;place-items:center;width:38px;height:38px;border-radius:2px 60% 2px 60%;background:linear-gradient(135deg,#2E8B57,#12A3A8 55%,#C98A2B);color:#F7F5F0;font:600 14px 'IBM Plex Mono',monospace}
+.l{position:absolute;left:64px;top:108px;width:640px}
+h1{font-weight:600;font-size:47px;line-height:1.12;letter-spacing:-1.2px}
 h1 .s{color:#B4470E}h1 .r{color:#1D4ED8}h1 .f{color:#C2261D}
-h1{font-size:56px}
-.t{position:absolute;left:64px;bottom:52px;display:flex;gap:10px}
-.t span{font:500 18px 'IBM Plex Mono',monospace;padding:5px 12px;border:1px solid #BDB6A6;border-radius:3px}
-.fig{position:absolute;right:64px;top:118px;width:400px;border:1.5px solid #15171C;background:#F7F5F0}
-.fig .bar{font:500 14px 'IBM Plex Mono',monospace;letter-spacing:.06em;padding:7px 12px;border-bottom:1.5px solid #15171C}
+.t{position:absolute;left:64px;top:300px;display:flex;flex-wrap:wrap;gap:10px;width:640px}
+.t span{font:500 17px 'IBM Plex Mono',monospace;padding:4px 11px;border:1px solid #9E9786;border-radius:3px;background:rgba(247,245,240,.7)}
+.fig{position:absolute;right:64px;top:96px;width:330px;border:1.5px solid #15171C;background:#F7F5F0;z-index:2}
+.fig .bar{font:500 12px 'IBM Plex Mono',monospace;letter-spacing:.06em;padding:6px 10px;border-bottom:1.5px solid #15171C}
 .fig svg{display:block;width:100%}
 svg text{font-family:'IBM Plex Mono',monospace}
+.land{position:absolute;left:0;bottom:0;width:1200px;height:250px}
+.an{position:absolute;background:var(--c,#7A5A2C);-webkit-mask:var(--m) center bottom/contain no-repeat;mask:var(--m) center bottom/contain no-repeat;z-index:1}
+.flip{transform:scaleX(-1)}
+.sea{position:absolute;left:0;right:0;bottom:0;height:54px;background:linear-gradient(180deg,#1C5D8A,#0C2240 75%);z-index:3}
+.sea .an{--c:#8FD3E8}
+.tag{position:absolute;left:64px;bottom:66px;z-index:4;font:500 13px 'IBM Plex Mono',monospace;letter-spacing:.14em;text-transform:uppercase;color:#4A3A1C}
 </style></head><body>
-<div class="top"><span><b>Naresh Kumar</b> · Secure AI/ML infrastructure</span><span>GPU networking · zero trust</span></div>
+<div class="top"><span class="brand"><span class="mark">NK</span><span><b>Naresh Kumar</b> · Secure AI/ML infrastructure</span></span><span>GPU networking · zero trust</span></div>
 <div class="l"><h1>Frontier models deserve infrastructure that can’t be <span class="r">stalled</span>, <span class="s">slowed</span>, or <span class="f">stolen</span>.</h1></div>
+<div class="t"><span>NCCL · RDMA</span><span>Distributed training</span><span>Disaggregated inference</span><span style="color:#C2261D;border-color:#C2261D">AI-infra security</span></div>
 <div class="fig"><div class="bar">FIG. 0 · RING UNDER FAILURE &amp; ATTACK</div>
 <svg viewBox="0 0 400 380">
 <defs><pattern id="h" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="6" stroke="#555C6A" stroke-width="2"/></pattern></defs>
@@ -40,5 +53,46 @@ svg text{font-family:'IBM Plex Mono',monospace}
 <rect x="24" y="330" width="352" height="16" fill="none" stroke="#BDB6A6"/>
 <rect x="24" y="330" width="170" height="16" fill="#1D4ED8"/><rect x="194" y="330" width="80" height="16" fill="url(#h)"/><rect x="274" y="330" width="44" height="16" fill="#C2261D"/><rect x="318" y="330" width="58" height="16" fill="#1D4ED8"/>
 </svg></div>
-<div class="t"><span>NCCL · RDMA</span><span>Distributed training</span><span>Disaggregated inference</span><span style="color:#C2261D;border-color:#C2261D">AI-infra security</span></div>
+
+<!-- birds in the dawn sky -->
+<i class="an" style="--m:url(../wildlife/crane-fly.svg);--c:#4A5E7A;left:470px;top:404px;width:66px;height:20px"></i>
+<i class="an" style="--m:url(../wildlife/crane-fly.svg);--c:#4A5E7A;left:442px;top:420px;width:54px;height:16px"></i>
+<i class="an" style="--m:url(../wildlife/crane-fly.svg);--c:#4A5E7A;left:416px;top:434px;width:46px;height:14px"></i>
+<i class="an" style="--m:url(../wildlife/eagle-soar.svg);--c:#5A3E2A;left:640px;top:398px;width:76px;height:30px"></i>
+<i class="an" style="--m:url(../wildlife/albatross.svg);--c:#4A5E7A;left:200px;top:410px;width:96px;height:20px"></i>
+
+<!-- landscape: far mountains, savanna with acacias and baobab, grass -->
+<svg class="land" viewBox="0 0 1200 250" preserveAspectRatio="none">
+<path d="M0 250V120L70 90L150 118L240 64L330 112L420 80L500 110L600 70L690 104L780 60L870 100L960 76L1050 108L1130 72L1200 96V250Z" fill="#B7C7D8"/>
+<path d="M240 64L262 80L250 82L240 76L230 82L220 78Z M600 70L622 86L600 84L586 86Z M780 60L800 76L784 74L770 78Z" fill="#F4F6F8"/>
+<path d="M0 250V150Q150 128 300 146T620 140T900 136T1200 144V250Z" fill="#9FB4C8"/>
+<path d="M0 250V176Q200 160 420 172T820 168T1200 172V250Z" fill="#E6C99A"/>
+<g fill="#7A5A2C"><path d="M118 180Q122 150 132 132L136 134Q128 152 124 180Z"/><ellipse cx="132" cy="128" rx="48" ry="8"/><ellipse cx="150" cy="122" rx="30" ry="6"/><ellipse cx="112" cy="124" rx="26" ry="6"/>
+<path d="M1064 178Q1068 150 1076 136L1080 138Q1074 154 1070 178Z"/><ellipse cx="1078" cy="132" rx="40" ry="7"/><ellipse cx="1060" cy="127" rx="24" ry="5"/>
+</g>
+<path d="M0 250V190Q300 182 600 188T1200 186V250Z" fill="#D9B77F"/>
+<g stroke="#8A6A3A" stroke-width="1.4" opacity=".6"><path d="M14 192l-3 -8M18 192l2 -9"/><path d="M51 192l-3 -8M55 192l2 -9"/><path d="M88 192l-3 -8M92 192l2 -9"/><path d="M125 192l-3 -8M129 192l2 -9"/><path d="M162 192l-3 -8M166 192l2 -9"/><path d="M199 192l-3 -8M203 192l2 -9"/><path d="M236 192l-3 -8M240 192l2 -9"/><path d="M273 192l-3 -8M277 192l2 -9"/><path d="M310 192l-3 -8M314 192l2 -9"/><path d="M347 192l-3 -8M351 192l2 -9"/><path d="M384 192l-3 -8M388 192l2 -9"/><path d="M421 192l-3 -8M425 192l2 -9"/><path d="M458 192l-3 -8M462 192l2 -9"/><path d="M495 192l-3 -8M499 192l2 -9"/><path d="M532 192l-3 -8M536 192l2 -9"/><path d="M569 192l-3 -8M573 192l2 -9"/><path d="M606 192l-3 -8M610 192l2 -9"/><path d="M643 192l-3 -8M647 192l2 -9"/><path d="M680 192l-3 -8M684 192l2 -9"/><path d="M717 192l-3 -8M721 192l2 -9"/><path d="M754 192l-3 -8M758 192l2 -9"/><path d="M791 192l-3 -8M795 192l2 -9"/><path d="M828 192l-3 -8M832 192l2 -9"/><path d="M865 192l-3 -8M869 192l2 -9"/><path d="M902 192l-3 -8M906 192l2 -9"/><path d="M939 192l-3 -8M943 192l2 -9"/><path d="M976 192l-3 -8M980 192l2 -9"/><path d="M1013 192l-3 -8M1017 192l2 -9"/><path d="M1050 192l-3 -8M1054 192l2 -9"/><path d="M1087 192l-3 -8M1091 192l2 -9"/><path d="M1124 192l-3 -8M1128 192l2 -9"/><path d="M1161 192l-3 -8M1165 192l2 -9"/><path d="M1198 192l-3 -8M1202 192l2 -9"/></g>
+</svg>
+<i class="an" style="--m:url(../wildlife/giraffe.svg);background:url(../wildlife/coat-giraffe.svg) 0 0/22px 22px;left:176px;bottom:52px;width:120px;height:120px" ></i>
+<i class="an" style="--m:url(../wildlife/giraffe.svg);background:url(../wildlife/coat-giraffe.svg) 0 0/18px 18px;left:262px;bottom:54px;width:82px;height:82px"></i>
+<i class="an" style="--m:url(../wildlife/zebra.svg);background:url(../wildlife/coat-zebra.svg) 0 0/20px 20px;left:430px;bottom:54px;width:56px;height:56px"></i>
+<i class="an" style="--m:url(../wildlife/leopard.svg);background:url(../wildlife/coat-leopard.svg) 0 0/18px 18px;left:540px;bottom:54px;width:46px;height:46px"></i>
+<i class="an" style="--m:url(../wildlife/oryx.svg);--c:#8A6A3A;left:770px;bottom:54px;width:66px;height:72px"></i>
+<i class="an flip" style="--m:url(../wildlife/elephant.svg);--c:#6E5A44;left:900px;bottom:54px;width:96px;height:96px"></i>
+<i class="an" style="--m:url(../wildlife/rhino.svg);--c:#6E5A44;left:1040px;bottom:54px;width:62px;height:62px"></i>
+<i class="an" style="--m:url(../wildlife/vulture.svg);--c:#5A4632;left:1064px;top:396px;width:30px;height:30px"></i>
+<i class="an" style="--m:url(../wildlife/paw-cat.svg);--c:#8A6A3A;left:640px;bottom:60px;width:14px;height:14px;transform:rotate(90deg);opacity:.6"></i>
+<i class="an" style="--m:url(../wildlife/paw-cat.svg);--c:#8A6A3A;left:664px;bottom:68px;width:14px;height:14px;transform:rotate(90deg);opacity:.6"></i>
+<i class="an" style="--m:url(../wildlife/paw-cat.svg);--c:#8A6A3A;left:688px;bottom:60px;width:14px;height:14px;transform:rotate(90deg);opacity:.6"></i>
+
+<!-- a strip of deep sea along the bottom -->
+<div class="sea">
+<i class="an" style="--m:url(../wildlife/narwhal.svg);left:90px;bottom:12px;width:110px;height:30px"></i>
+<i class="an" style="--m:url(../wildlife/jelly-cyan.svg);background:url(../wildlife/jelly-cyan.svg) center/contain no-repeat;-webkit-mask:none;mask:none;left:290px;bottom:4px;width:24px;height:46px"></i>
+<i class="an" style="--m:url(../wildlife/manta-ray.svg);left:420px;bottom:8px;width:40px;height:36px"></i>
+<i class="an" style="--m:url(../wildlife/school-of-fish.svg);left:600px;bottom:10px;width:34px;height:34px"></i>
+<i class="an" style="--m:url(../wildlife/sea-turtle.svg);left:760px;bottom:10px;width:34px;height:34px"></i>
+<i class="an" style="--m:url(../wildlife/jelly-pink.svg);background:url(../wildlife/jelly-pink.svg) center/contain no-repeat;-webkit-mask:none;mask:none;left:900px;bottom:4px;width:24px;height:46px"></i>
+<i class="an" style="--m:url(../wildlife/octopus.svg);left:1060px;bottom:8px;width:38px;height:38px"></i>
+</div>
 </body></html>
