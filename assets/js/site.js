@@ -110,7 +110,7 @@
   const footEl = document.querySelector('.footer');
   if (siteCss && footEl) {
     const WL = new URL('../wildlife/', siteCss.href);
-    const AR = { crocodile: 3.1, walrus: 1.54, seal: 2, narwhal: 3.6, oryx: 0.91, elk: 0.91, caribou: 0.91, 'moose-bull': 1.11, cassowary: 0.77,
+    const AR = { 't-rex': 1.43, sauropod: 1.05, triceratops: 1.67, stegosaurus: 1.85, plesiosaur: 2.2, smilodon: 2, megaloceros: 1.05, crocodile: 3.1, walrus: 1.54, seal: 2, narwhal: 3.6, oryx: 0.91, elk: 0.91, caribou: 0.91, 'moose-bull': 1.11, cassowary: 0.77,
       peacock: 1.72, 'crane-fly': 3.3, 'arctic-tern': 2.1, frigatebird: 2.7, 'eagle-soar': 2.5, 'vulture-soar': 2.5, albatross: 4.8, flock: 3.2,
       'man-of-war': 0.45, 'jelly-pink': 0.5, 'jelly-cyan': 0.5, panda: 0.93 };
     // [file, height, options]  f = flip to face right, c=#hex colour, coat-*, art (full colour), up=N px above the lane floor
@@ -118,7 +118,7 @@
       sky: { speed: 46, items: [['eagle-soar', 30, 'up=10'], ['arctic-tern', 20, 'up=24'], ['vulture-soar', 38, 'c=#7A5A3A'], ['frigatebird', 22, 'up=18'],
         ['crane-fly', 18, 'up=4'], ['crane-fly', 15, 'up=14'], ['crane-fly', 13, 'up=24'], ['albatross', 22, 'up=12'], ['eagle-soar', 26, 'c=#8A5A35 up=20'],
         ['swallow', 18, 'up=6'], ['vulture-soar', 30, 'up=16'], ['seagull', 20, 'up=2'], ['flock', 22, 'up=20'], ['arctic-tern', 16, 'up=8'],
-        ['eagle-soar', 34, 'c=#9A6A3E up=2'], ['frigatebird', 26, 'up=22'], ['hummingbird', 16, 'up=10 c=#1FA67A'], ['vulture-soar', 42, 'c=#6E5A4A up=6'], ['albatross', 18, 'up=26']] },
+        ['eagle-soar', 34, 'c=#9A6A3E up=2'], ['frigatebird', 26, 'up=22'], ['hummingbird', 16, 'up=10 c=#1FA67A'], ['vulture-soar', 42, 'c=#6E5A4A up=6'], ['albatross', 18, 'up=26'], ['pterodactylus', 34, 'c=#8A5A35 up=8'], ['pterodactylus', 26, 'c=#8A5A35 up=26']] },
       land: { speed: 30, items: [
         // savanna
         ['elephant', 62], ['elephant', 34], ['giraffe', 78, 'f coat-giraffe'], ['zebra', 46, 'f coat-zebra'], ['zebra', 42, 'f coat-zebra'], ['rhino', 44, 'f'],
@@ -131,10 +131,14 @@
         ['leopard', 36, 'f coat-leopard'], ['tiger', 44, 'f coat-tiger'], ['gorilla', 44], ['cassowary', 54, 'c=#1E2A3A'], ['crocodile', 22],
         ['frog', 16, 'c=#4E9A3E'], ['peacock', 40, 'c=#1F7A8C'], ['flamingo', 50, 'c=#E8789A'], ['heron', 50],
         // polar ice
-        ['polar-bear', 44, 'c=#C9D6E2'], ['caribou', 62], ['caribou', 54], ['walrus', 36], ['seal', 22], ['penguin', 34], ['penguin', 30], ['penguin', 26], ['fox', 24, 'c=#D5DEE6']] },
+        ['polar-bear', 44, 'c=#C9D6E2'], ['caribou', 62], ['caribou', 54], ['walrus', 36], ['seal', 22], ['penguin', 34], ['penguin', 30], ['penguin', 26], ['fox', 24, 'c=#D5DEE6'],
+        // ice age
+        ['mammoth', 66, 'c=#6B4A2B'], ['mammoth', 44, 'c=#6B4A2B'], ['smilodon', 34, 'c=#B07A3A'], ['megaloceros', 72, 'c=#7A5230'], ['rhino', 42, 'f c=#6B4A2B'], ['dodo', 30, 'c=#7A7A8C'],
+        // deep time
+        ['sauropod', 84, 'c=#5E6B3A'], ['stegosaurus', 44, 'c=#6B5A2E'], ['triceratops', 46, 'c=#7A5A3A'], ['velociraptor', 30, 'c=#5A4A3A'], ['velociraptor', 26, 'c=#5A4A3A'], ['t-rex', 70, 'c=#4A3A2A']] },
       sea: { speed: 24, items: [['whale', 46, 'f'], ['narwhal', 22], ['narwhal', 18], ['dolphin', 34], ['manta-ray', 40, 'up=6'], ['jelly-pink', 46, 'art up=6'],
         ['sea-turtle', 34], ['school-of-fish', 34], ['octopus', 36], ['man-of-war', 50, 'art'], ['angler-fish', 28], ['tropical-fish', 22, 'c=#F2C230'],
-        ['squid', 32], ['jelly-cyan', 42, 'art up=10'], ['clownfish', 18, 'c=#F07C2A'], ['seahorse', 30], ['giant-squid', 40], ['whale', 38, 'f'], ['crab', 18, 'c=#E4683A']] },
+        ['squid', 32], ['jelly-cyan', 42, 'art up=10'], ['clownfish', 18, 'c=#F07C2A'], ['seahorse', 30], ['giant-squid', 40], ['whale', 38, 'f'], ['crab', 18, 'c=#E4683A'], ['plesiosaur', 34, 'c=#A6D8EA'], ['ammonite', 26, 'c=#E8C9A0'], ['trilobite', 18, 'c=#C9A27A']] },
     };
     const proc = document.createElement('div'); proc.className = 'procession'; proc.setAttribute('aria-hidden', 'true');
     Object.entries(LANES).forEach(([lane, { speed, items }]) => {
