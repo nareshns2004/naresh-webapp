@@ -306,6 +306,26 @@ a.card:hover { border-color: var(--ink); transform: translateY(-2px); }
   -webkit-mask: url(../wildlife/paw-cat.svg) center / contain no-repeat; mask: url(../wildlife/paw-cat.svg) center / contain no-repeat;
   animation: pawrow 14s linear infinite; animation-delay: calc(var(--i) * 0.35s); }
 @keyframes pawrow { 0% { opacity: 0; } 3% { opacity: 0.6; } 50% { opacity: 0.35; } 80%, 100% { opacity: 0; } }
+/* the procession: sky, land and deep-sea lanes marching left to right in an endless loop */
+.procession { margin-top: 5rem; pointer-events: none; }
+.lane { position: relative; overflow: hidden; }
+.lane-sky { height: 70px; --c: color-mix(in srgb, #5A73A0 72%, var(--ink)); }
+.lane-land { height: 92px; --c: color-mix(in srgb, #6F8A3E 78%, var(--ink)); }
+.lane-land::after { content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 12px; background: color-mix(in srgb, #2E8B57 55%, var(--paper));
+  -webkit-mask: url(../wildlife/grass.svg) left bottom / 46px 12px repeat-x; mask: url(../wildlife/grass.svg) left bottom / 46px 12px repeat-x; }
+.lane-sea { height: 78px; --c: #8FD3E8; background: linear-gradient(180deg, #1C5D8A, #0C2240 70%, #071830); }
+.lane-sea::before { content: ''; position: absolute; inset: 0 0 auto; height: 3px; background: linear-gradient(90deg, transparent, rgba(160, 220, 255, 0.5), transparent); }
+.track { position: absolute; left: 0; bottom: 6px; display: flex; align-items: flex-end; width: max-content; animation: march var(--t, 120s) linear infinite; }
+.lane-sea .track { bottom: 12px; }
+.pa { display: block; flex: none; background-color: var(--c);
+  -webkit-mask-position: center bottom; mask-position: center bottom; -webkit-mask-size: contain; mask-size: contain; -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat; }
+.pa.flip { transform: scaleX(-1); }
+.pa.coated { background-size: 24px 24px; }
+.pa.art { background-color: transparent; background-position: center bottom; background-size: contain; background-repeat: no-repeat; }
+@keyframes march { from { transform: translateX(-50%); } to { transform: translateX(0); } }
+.footer.has-procession { margin-top: 0; }
+.footer.has-procession::before, .footer.has-procession::after { display: none; }
+.procession + .paw-row { margin: 0.6rem auto 0; }
 @keyframes parade { from { left: -480px; } to { left: 100%; } }
 
 @media (prefers-reduced-motion: reduce) {
@@ -314,4 +334,5 @@ a.card:hover { border-color: var(--ink); transform: translateY(-2px); }
   .reveal { opacity: 1; transform: none; }
   .nav-progress, .nav-prowler { display: none; }
   .paw-row i { opacity: 0.35; }
+  .track { animation: none; }
 }
