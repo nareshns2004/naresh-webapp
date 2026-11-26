@@ -50,6 +50,12 @@
       const ex = tx + Math.cos(a) * L, ey = ty + Math.sin(a) * L * 0.6 + L * 0.35, mx = tx + Math.cos(a) * L * 0.5, my = ty + Math.sin(a) * L * 0.5 - 6;
       out += P(`M${n(tx)} ${n(ty)}Q${n(mx)} ${n(my - 6)} ${n(ex)} ${n(ey)}Q${n(mx)} ${n(my + 5)} ${n(tx)} ${n(ty)}Z`, v); }
     return out; };
+  const baobab = (r, x, g, h, v) => { const tw = h * 0.22, ty = g - h * 0.62;
+    let out = P(`M${n(x - tw)} ${g + 4}Q${n(x - tw * 0.7)} ${n(g - h * 0.3)} ${n(x - tw * 0.55)} ${n(ty)}L${n(x + tw * 0.55)} ${n(ty)}Q${n(x + tw * 0.7)} ${n(g - h * 0.3)} ${n(x + tw)} ${g + 4}Z`, v);
+    for (let i = 0; i < 7; i++) { const a = -Math.PI / 2 + (i - 3) * 0.32, L = h * between(r, 0.22, 0.38), sx = x + (i - 3) * tw * 0.16;
+      out += S(`M${n(sx)} ${n(ty + 2)}Q${n(sx + Math.cos(a) * L * 0.4)} ${n(ty - L * 0.5)} ${n(sx + Math.cos(a) * L)} ${n(ty + Math.sin(a) * L)}`, v, 2.4);
+      out += `<circle cx="${n(sx + Math.cos(a) * L)}" cy="${n(ty + Math.sin(a) * L)}" r="${n(h * 0.06)}" ${fill(v)}/>`; }
+    return out; };
   const reeds = (r, x, g, v) => { let out = '';
     for (let i = 0; i < 9; i++) { const bx = x + between(r, -16, 16), L = between(r, 26, 62), lean = between(r, -10, 10);
       out += S(`M${n(bx)} ${g}Q${n(bx + lean * 0.3)} ${n(g - L * 0.6)} ${n(bx + lean)} ${n(g - L)}`, v, 1.6);
@@ -124,6 +130,7 @@
       return [h, b + `<rect x="-60" y="132" width="${W + 120}" height="40" ${fill('--band')}/>`]; },
     savanna(r) { const h = 150; let b = P(ground(wave(r, 128, 14, 120), h), '--back');
       [[90, 70], [250, 46], [560, 34], [980, 40], [1190, 82], [1330, 52]].forEach(([x, th]) => b += acacia(r, x, 134, th, x === 90 || x === 1190 ? '--deep' : '--back2'));
+      b += baobab(r, 760, 134, 64, '--back2') + baobab(r, 1430, 136, 50, '--back2');
       b += P(ground(wave(r, 140, 6, 140), h), '--band');
       for (let i = 0; i < 70; i++) { const x = between(r, 0, W), y = 141; b += S(`M${n(x)} ${y}l${n(between(r, -4, 4))} -${n(between(r, 5, 11))}M${n(x + 3)} ${y}l${n(between(r, -3, 5))} -${n(between(r, 4, 9))}`, '--deep', 1.2, 'opacity=".55"'); }
       return [h, b]; },
@@ -169,10 +176,29 @@
       for (let x = -40; x < W + 60; x += between(r, 60, 140)) b += bloom(x, between(r, 42, 66), between(r, 3.5, 5.5), r() < 0.5 ? '--bloom1' : '--bloom2');
       for (let x = 30; x < W; x += between(r, 110, 200)) { const kind = pick(r, ['hibiscus', 'orchid', 'passion']); b += FLOWER[kind](x, between(r, 40, 60), between(r, 0.55, 0.8)); }
       return [h, b + P(ground(wave(r, 80, 8, 70), h), '--band')]; },
-    dusk(r) { const h = 160; let b = P(ground(wave(r, 116, 34, 260), h), '--back');
+    dusk(r) { const h = 160; let b = `<circle cx="720" cy="112" r="74" style="fill:#FFB347" opacity=".55"/><circle cx="720" cy="112" r="52" style="fill:#FFC46B" opacity=".9"/>`;
+      b += P(ground(wave(r, 116, 34, 260), h), '--back');
       [[150, 92, '--deep'], [1290, 70, '--deep'], [420, 40, '--back2'], [1060, 46, '--back2']].forEach(([x, th, v]) => b += acacia(r, x, x === 150 || x === 1290 ? 132 : 122, th, v));
       [560, 600, 640, 690, 760, 800, 850, 890].forEach((x, i) => { const top = 112 - (i % 3) * 9; b += S(`M${x} 146L${x + 2} ${top}`, '--deep', 2) + FLOWER.sunflower(x + 2, top, 0.55 - (i % 3) * 0.06); });
       return [h, b + P(ground(wave(r, 140, 10, 160), h), '--band')]; },
+    volcanic(r) { const h = 200; let b = '';
+      b += `<circle cx="1080" cy="40" r="60" style="fill:#FF7A2F" opacity=".18"/>`;
+      for (let i = 0; i < 9; i++) b += `<circle cx="${n(1080 + i * 14 + between(r, -10, 10))}" cy="${n(30 - i * 9)}" r="${n(14 + i * 4)}" style="fill:#7D7470" opacity="${n(0.5 - i * 0.04)}"/>`;
+      b += P('M900 200L1040 52L1060 46L1100 46L1120 52L1280 200Z', '--back2');
+      b += P('M1056 48L1080 40L1104 48L1096 70L1086 56L1076 76L1066 58Z', '--lava');
+      b += P(ground(wave(r, 150, 30, 200), h), '--back');
+      for (let x = 20; x < W; x += between(r, 110, 220)) b += r() < 0.5 ? palm(r, x, 168, between(r, 50, 90), '--deep') : P(pine(x, 170, between(r, 60, 110)), '--deep');
+      for (let i = 0; i < 22; i++) { const x = between(r, 0, W); b += leaf(x, 176, -2.2, 22, 6, '--deep', 0.8) + leaf(x, 176, -0.9, 22, 6, '--deep', 0.8) + leaf(x, 176, -1.57, 26, 6, '--deep', 0.8); }
+      return [h, b + P(ground(wave(r, 178, 6, 120), h), '--band')]; },
+    glacier(r) { const h = 190; let b = '';
+      for (let x = -40; x < W + 60;) { const w = between(r, 120, 260), top = between(r, 20, 70);
+        b += P(`M${n(x)} 140L${n(x + w * 0.1)} ${n(top)}L${n(x + w * 0.55)} ${n(top - 10)}L${n(x + w)} ${n(top + 12)}L${n(x + w * 1.05)} 140Z`, '--back');
+        b += P(`M${n(x + w * 0.55)} ${n(top - 10)}L${n(x + w)} ${n(top + 12)}L${n(x + w * 0.9)} 140L${n(x + w * 0.62)} 140Z`, '--snow', 'opacity=".8"');
+        for (let k = 1; k < 4; k++) b += S(`M${n(x + w * 0.15)} ${n(top + k * 24)}h${n(w * 0.8)}`, '--deep', 1, 'opacity=".2"');
+        x += w; }
+      b += P(ground(wave(r, 150, 20, 220), h), '--back2');
+      for (let i = 0; i < 60; i++) { const x = between(r, 0, W); b += S(`M${n(x)} 172l${n(between(r, -3, 3))} -${n(between(r, 4, 9))}`, '--deep', 1, 'opacity=".4"'); }
+      return [h, b + P(ground(wave(r, 172, 6, 140), h), '--band')]; },
   };
 
   /* ── overhangs: creepers and a flowering branch that hang into the top of a section ── */
@@ -203,20 +229,30 @@
     return [h, b]; };
 
   /* ── animals ── a = [file, x (% of viewport), y = feet (px from section top; negative = up on the horizon; 'bN' = N px above the bottom), height px, options] */
-  const AR = { oryx: 200 / 220, elk: 200 / 220, caribou: 200 / 220, 'moose-bull': 200 / 180, cassowary: 132 / 172, narwhal: 290 / 80, walrus: 200 / 130,
+  const AR = { 't-rex': 200 / 140, sauropod: 210 / 200, triceratops: 200 / 120, stegosaurus: 222 / 120, plesiosaur: 2.2, smilodon: 2, megaloceros: 180 / 172, oryx: 200 / 220, elk: 200 / 220, caribou: 200 / 220, 'moose-bull': 200 / 180, cassowary: 132 / 172, narwhal: 290 / 80, walrus: 200 / 130,
     'arctic-tern': 150 / 70, frigatebird: 200 / 74, seal: 2, 'bald-eagle': 100 / 150, panda: 140 / 150, 'man-of-war': 100 / 220, 'jelly-pink': 0.5, 'jelly-cyan': 0.5, peacock: 200 / 116, crocodile: 200 / 64, 'eagle-soar': 2.5, 'vulture-soar': 2.5, albatross: 240 / 50, 'crane-fly': 200 / 60, flock: 140 / 44, 'bird-of-paradise': 120 / 124 };
   const HAB = {
     sky:        { foot: 'mountains', animals: [['arctic-tern', 40, 190, 22, 'fly d32'], ['arctic-tern', 43, 210, 18, 'fly d32'], ['frigatebird', 66, 70, 26, 'fly slow d80'], ['vulture-soar', 76, 230, 40, 'soar c=#3A3530'], ['swallow', 70, 260, 18, 'fly d40'], ['albatross', 58, 120, 26, 'fly slow d55'], ['eagle-soar', 2, 420, 34, 'soar m'], ['crane-fly', 30, 92, 22, 'fly d20'], ['crane-fly', 27.5, 106, 18, 'fly d20'], ['crane-fly', 25, 120, 16, 'fly d20'], ['crane-fly', 22.5, 132, 14, 'fly d20'], ['flock', 84, 150, 22, 'fly slow d10'], ['eagle-soar', 50, 52, 22, 'soar'], ['vulture-soar', 92, 330, 24, 'circle m']] },
-    rainforest: { trail: ['paw-cat', 'b175'], edge: 'canopy', over: creepers, animals: [['cassowary', 15, 'b150', 84, 'm c=#1E2A3A'], ['leopard', 78, -98, 40, 'coat-leopard'], ['parrot', 96, 330, 40, 'flip m c=#D7263D'], ['butterfly', 88, 260, 22, 'flutter m c=#2E86DE'], ['hummingbird', 6, 260, 26, 'hover m c=#1FA67A'], ['glyph-fern', 0, 'b170', 230, 'm'], ['glyph-fern', 93, 420, 200, 'flip m'], ['gorilla', 89.5, 'b150', 60, 'm'], ['snake', 9, 'b150', 40, 'm'], ['toucan', 4, -96, 44, 'flip'], ['sloth', 92.5, 120, 66, 'm'], ['hummingbird', 10, 120, 30, 'hover m'], ['butterfly', 95, 210, 26, 'flutter m'], ['butterfly', 3, 300, 22, 'flutter m'], ['frog', 96, 'b150', 34, 'm'], ['tiger', 2.5, 'b150', 76, 'coat-tiger m']] },
-    savanna:    { trail: ['paw-cat', 'b175'], edge: 'savanna', animals: [['oryx', 58, -12, 76, ''], ['leopard', 26, -12, 48, 'coat-leopard'], ['giraffe', 33, -14, 106, 'coat-giraffe flip'], ['zebra', 64, -12, 52, 'coat-zebra'], ['zebra', 75, -12, 46, 'coat-zebra flip'], ['ostrich', 51, -12, 44, 'flip'], ['lion', 96, 280, 46, 'm c=#B87A2A'], ['vulture', 82.4, -96, 30, ''], ['giraffe', 7, -18, 128, ''], ['giraffe', 11.5, -14, 92, ''], ['zebra', 70, -12, 56, ''], ['elephant', 82, -14, 84, 'flip'], ['rhino', 93, -12, 52, ''], ['ostrich', 47, -12, 50, ''], ['vulture-soar', 94, 200, 26, 'circle m'], ['vulture-soar', 3, 330, 20, 'circle late m']] },
-    wetland:    { trail: ['paw-bird', 'b175'], edge: 'reeds', animals: [['flamingo', 30, -14, 54, 'c=#E8789A'], ['flamingo', 32.5, -12, 46, 'c=#E8789A flip'], ['frog', 57, -16, 22, 'c=#4E9A3E'], ['swan', 50, -12, 34, ''], ['otter', 62, -10, 30, ''], ['beaver', 36, -10, 30, ''], ['crocodile', 22, -14, 30, 'flip'], ['hippo', 76, -10, 56, ''], ['heron', 89, -18, 84, ''], ['shoebill-stork', 6, -16, 70, 'flip'], ['dragonfly', 94, 120, 26, 'hover m'], ['dragonfly', 4, 200, 22, 'hover late m']] },
-    forest:     { trail: ['paw-bear', 'b175'], edge: 'pines', animals: [['panda', 30, -6, 74, 'art'], ['elk', 52, -10, 96, ''], ['moose-bull', 42, -10, 84, ''], ['owl', 97, 360, 44, 'm c=#8C6A3E'], ['glyph-tree', 2, 'b160', 220, 'm'], ['glyph-tree', 90, 'b160', 200, 'm'], ['moose', 70, -8, 66, ''], ['deer', 8, -10, 82, ''], ['polar-bear', 86, -10, 60, 'flip'], ['fox', 93, -10, 44, ''], ['owl', 3, 190, 52, 'm'], ['squirrel', 96, 160, 34, 'm'], ['rabbit', 14, -8, 28, '']], particles: ['firefly', 26] },
-    peaks:      { trail: ['deer-track', 'b175'], edge: 'peaks', animals: [['bald-eagle', 93, 380, 88, 'art m'], ['vulture-soar', 66, -110, 40, 'soar c=#2F2A26'], ['eagle-soar', 40, -96, 30, 'soar late c=#4A2F1B'], ['arctic-tern', 25, -120, 24, 'fly d12'], ['swallow', 60, -120, 24, 'fly'], ['eagle-soar', 14, -112, 36, 'soar'], ['vulture-soar', 82, -120, 28, 'circle'], ['deer-track', 95, 120, 26, 'track m'], ['deer-track', 93, 170, 26, 'track m'], ['deer-track', 95.5, 220, 26, 'track m'], ['deer-track', 93.5, 270, 26, 'track m']] },
-    lagoon:     { trail: ['paw-bird', 'b175'], edge: 'waves', animals: [['frigatebird', 50, -150, 30, 'fly slow d30'], ['flamingo', 12.5, -24, 64, 'c=#F07FA0'], ['flamingo', 5, -26, 84, 'c=#E8789A'], ['clownfish', 90, 380, 26, 'swim m c=#F07C2A'], ['tropical-fish', 6, 380, 32, 'swim m c=#F2C230'], ['glyph-nautilus', 1, 'b150', 150, 'm'], ['dolphin', 42, -40, 46, 'bob'], ['seagull', 30, -120, 24, 'fly slow'], ['flamingo', 5, -26, 84, ''], ['flamingo', 9, -22, 70, ''], ['eating-pelican', 70, -30, 56, ''], ['sea-turtle', 3, 260, 60, 'swim m'], ['tropical-fish', 94, 200, 34, 'swim back m'], ['clownfish', 96, 300, 28, 'swim m'], ['seahorse', 2.5, 'b170', 56, 'bob m'], ['coral', 95, 'b150', 90, 'm'], ['crab', 7, 'b150', 32, 'm']] },
-    tundra:     { trail: ['paw-bear', 'b175'], edge: 'ice', animals: [['walrus', 28, -18, 54, ''], ['seal', 40, -14, 34, ''], ['seal', 47, -12, 28, 'flip'], ['caribou', 62, -20, 92, ''], ['caribou', 68, -18, 74, 'flip'], ['arctic-tern', 20, -150, 26, 'fly d5'], ['arctic-tern', 23, -138, 20, 'fly d5'], ['arctic-tern', 76, 120, 22, 'fly d50'], ['polar-bear', 82, -24, 70, ''], ['penguin', 8, -20, 52, ''], ['penguin', 11, -18, 44, 'flip'], ['penguin', 13.5, -16, 38, ''], ['wolf-howl', 95, 140, 64, 'm'], ['fox', 3, 220, 40, 'm']], particles: ['snow', 40], flakes: 16 },
-    abyss:      { edge: 'surface', animals: [['man-of-war', 58, 120, 140, 'art bob'], ['man-of-war', 30, 70, 90, 'art bob late'], ['jelly-pink', 2, 360, 120, 'art bob m'], ['jelly-cyan', 91, 600, 120, 'art bob late m'], ['jelly-pink', 96, 900, 80, 'art bob m'], ['narwhal', 38, 'b104', 40, 'glide back'], ['narwhal', 54, 'b128', 32, 'glide back late'], ['squid', 4, 'b560', 70, 'bob m'], ['giant-squid', 86, 'b40', 150, 'bob late m'], ['angler-fish', 3, 'b90', 56, 'm'], ['glow', 6.6, 'b142', 10, 'm'], ['whale-tail', 84, -26, 60, ''], ['whale', 1, 230, 110, 'glide m'], ['octopus', 93, 'b200', 110, 'bob m'], ['jellyfish', 95, 120, 60, 'bob m'], ['jellyfish', 4, 520, 44, 'bob late m'], ['manta-ray', 90, 420, 70, 'glide back m'], ['school-of-fish', 6, 'b220', 70, 'swim m']], particles: ['bubble', 30] },
-    aviary:     { edge: 'bush', over: branch, animals: [['peacock', 70, 'b160', 76, 'm c=#1F7A8C'], ['bird-of-paradise', 46, 90, 56, 'c=#E9A23B'], ['parrot', 30, 40, 44, 'c=#D7263D'], ['hummingbird', 8, 300, 28, 'hover m c=#1FA67A'], ['cassowary', 96, 'b160', 90, 'm c=#1E2A3A'], ['glyph-sunflower', 1, 'b180', 120, 'm'], ['parrot', 21, 80, 62, 'flip'], ['bird-of-paradise', 38.5, 122, 74, ''], ['toucan', 4.5, 52, 46, ''], ['hummingbird', 92, 120, 32, 'hover m'], ['peacock', 87, 'b160', 80, 'm'], ['crane-fly', 60, 30, 26, 'fly'], ['butterfly', 97, 300, 22, 'flutter m']] },
-    sunset:     { trail: ['paw-dog', 'b120'], edge: 'dusk', animals: [['oryx', 70, -20, 66, ''], ['ostrich', 24, -20, 46, ''], ['frigatebird', 30, -170, 24, 'fly slow d15'], ['arctic-tern', 66, -150, 18, 'fly d25'], ['elephant', 13, -24, 74, ''], ['elephant', 17.5, -22, 44, ''], ['giraffe', 85, -22, 112, ''], ['zebra', 93, -18, 50, ''], ['flock', 55, -120, 30, 'fly slow'], ['crane-fly', 40, -96, 18, 'fly']] },
+    rainforest: { extra: [['monstera-leaf', 96, 40, 110, 'm fossil'], ['monstera-leaf', 0, 60, 90, 'flip m fossil']],  fx: ['rays', 'mist', 'motes'], trail: ['paw-cat', 'b175'], edge: 'canopy', over: creepers, animals: [['cassowary', 15, 'b150', 84, 'm c=#1E2A3A'], ['leopard', 78, -98, 40, 'coat-leopard'], ['parrot', 96, 330, 40, 'flip m c=#D7263D'], ['butterfly', 88, 260, 22, 'flutter m c=#2E86DE'], ['hummingbird', 6, 260, 26, 'hover m c=#1FA67A'], ['glyph-fern', 0, 'b170', 230, 'm'], ['glyph-fern', 93, 420, 200, 'flip m'], ['gorilla', 89.5, 'b150', 60, 'm'], ['snake', 9, 'b150', 40, 'm'], ['toucan', 4, -96, 44, 'flip'], ['sloth', 92.5, 120, 66, 'm'], ['hummingbird', 10, 120, 30, 'hover m'], ['butterfly', 95, 210, 26, 'flutter m'], ['butterfly', 3, 300, 22, 'flutter m'], ['frog', 96, 'b150', 34, 'm'], ['tiger', 2.5, 'b150', 76, 'coat-tiger m']] },
+    savanna:    { fx: ['haze', 'dust'], trail: ['paw-cat', 'b175'], edge: 'savanna', animals: [['oryx', 58, -12, 76, ''], ['leopard', 26, -12, 48, 'coat-leopard'], ['giraffe', 33, -14, 106, 'coat-giraffe flip'], ['zebra', 64, -12, 52, 'coat-zebra'], ['zebra', 75, -12, 46, 'coat-zebra flip'], ['ostrich', 51, -12, 44, 'flip'], ['lion', 96, 280, 46, 'm c=#B87A2A'], ['vulture', 82.4, -96, 30, ''], ['giraffe', 7, -18, 128, ''], ['giraffe', 11.5, -14, 92, ''], ['zebra', 70, -12, 56, ''], ['elephant', 82, -14, 84, 'flip'], ['rhino', 93, -12, 52, ''], ['ostrich', 47, -12, 50, ''], ['vulture-soar', 94, 200, 26, 'circle m'], ['vulture-soar', 3, 330, 20, 'circle late m']] },
+    wetland:    { fx: ['shimmer', 'mist'], trail: ['paw-bird', 'b175'], edge: 'reeds', animals: [['flamingo', 30, -14, 54, 'c=#E8789A'], ['flamingo', 32.5, -12, 46, 'c=#E8789A flip'], ['frog', 57, -16, 22, 'c=#4E9A3E'], ['swan', 50, -12, 34, ''], ['otter', 62, -10, 30, ''], ['beaver', 36, -10, 30, ''], ['crocodile', 22, -14, 30, 'flip'], ['hippo', 76, -10, 56, ''], ['heron', 89, -18, 84, ''], ['shoebill-stork', 6, -16, 70, 'flip'], ['dragonfly', 94, 120, 26, 'hover m'], ['dragonfly', 4, 200, 22, 'hover late m']] },
+    forest:     { extra: [['birch-trees', 0.5, 'b150', 150, 'm fossil'], ['birch-trees', 93, 'b150', 130, 'm fossil'], ['mushrooms-cluster', 12, 'b150', 34, 'm c=#C0533A']],  fx: ['moon', 'mist'], trail: ['paw-bear', 'b175'], edge: 'pines', animals: [['panda', 30, -6, 74, 'art'], ['elk', 52, -10, 96, ''], ['moose-bull', 42, -10, 84, ''], ['owl', 97, 360, 44, 'm c=#8C6A3E'], ['glyph-tree', 2, 'b160', 220, 'm'], ['glyph-tree', 90, 'b160', 200, 'm'], ['moose', 70, -8, 66, ''], ['deer', 8, -10, 82, ''], ['polar-bear', 86, -10, 60, 'flip'], ['fox', 93, -10, 44, ''], ['owl', 3, 190, 52, 'm'], ['squirrel', 96, 160, 34, 'm'], ['rabbit', 14, -8, 28, '']], particles: ['firefly', 26] },
+    peaks:      { fx: ['clouds', 'rays'], trail: ['deer-track', 'b175'], edge: 'peaks', animals: [['bald-eagle', 93, 380, 88, 'art m'], ['vulture-soar', 66, -110, 40, 'soar c=#2F2A26'], ['eagle-soar', 40, -96, 30, 'soar late c=#4A2F1B'], ['arctic-tern', 25, -120, 24, 'fly d12'], ['swallow', 60, -120, 24, 'fly'], ['eagle-soar', 14, -112, 36, 'soar'], ['vulture-soar', 82, -120, 28, 'circle'], ['deer-track', 95, 120, 26, 'track m'], ['deer-track', 93, 170, 26, 'track m'], ['deer-track', 95.5, 220, 26, 'track m'], ['deer-track', 93.5, 270, 26, 'track m']] },
+    lagoon:     { fx: ['caustics', 'shimmer'], trail: ['paw-bird', 'b175'], edge: 'waves', animals: [['frigatebird', 50, -150, 30, 'fly slow d30'], ['flamingo', 12.5, -24, 64, 'c=#F07FA0'], ['flamingo', 5, -26, 84, 'c=#E8789A'], ['clownfish', 90, 380, 26, 'swim m c=#F07C2A'], ['tropical-fish', 6, 380, 32, 'swim m c=#F2C230'], ['glyph-nautilus', 1, 'b150', 150, 'm'], ['dolphin', 42, -40, 46, 'bob'], ['seagull', 30, -120, 24, 'fly slow'], ['flamingo', 5, -26, 84, ''], ['flamingo', 9, -22, 70, ''], ['eating-pelican', 70, -30, 56, ''], ['sea-turtle', 3, 260, 60, 'swim m'], ['tropical-fish', 94, 200, 34, 'swim back m'], ['clownfish', 96, 300, 28, 'swim m'], ['seahorse', 2.5, 'b170', 56, 'bob m'], ['coral', 95, 'b150', 90, 'm'], ['crab', 7, 'b150', 32, 'm']] },
+    tundra:     { fx: ['aurora'], trail: ['paw-bear', 'b175'], edge: 'ice', animals: [['walrus', 28, -18, 54, ''], ['seal', 40, -14, 34, ''], ['seal', 47, -12, 28, 'flip'], ['caribou', 62, -20, 92, ''], ['caribou', 68, -18, 74, 'flip'], ['arctic-tern', 20, -150, 26, 'fly d5'], ['arctic-tern', 23, -138, 20, 'fly d5'], ['arctic-tern', 76, 120, 22, 'fly d50'], ['polar-bear', 82, -24, 70, ''], ['penguin', 8, -20, 52, ''], ['penguin', 11, -18, 44, 'flip'], ['penguin', 13.5, -16, 38, ''], ['wolf-howl', 95, 140, 64, 'm'], ['fox', 3, 220, 40, 'm']], particles: ['snow', 40], flakes: 16 },
+    abyss:      { fx: ['rays', 'marine-snow'], edge: 'surface', animals: [['man-of-war', 58, 120, 140, 'art bob'], ['man-of-war', 30, 70, 90, 'art bob late'], ['jelly-pink', 2, 360, 120, 'art bob m'], ['jelly-cyan', 91, 600, 120, 'art bob late m'], ['jelly-pink', 96, 900, 80, 'art bob m'], ['narwhal', 38, 'b104', 40, 'glide back'], ['narwhal', 54, 'b128', 32, 'glide back late'], ['squid', 4, 'b560', 70, 'bob m'], ['giant-squid', 86, 'b40', 150, 'bob late m'], ['angler-fish', 3, 'b90', 56, 'm'], ['glow', 6.6, 'b142', 10, 'm'], ['whale-tail', 84, -26, 60, ''], ['whale', 1, 230, 110, 'glide m'], ['octopus', 93, 'b200', 110, 'bob m'], ['jellyfish', 95, 120, 60, 'bob m'], ['jellyfish', 4, 520, 44, 'bob late m'], ['manta-ray', 90, 420, 70, 'glide back m'], ['school-of-fish', 6, 'b220', 70, 'swim m']], particles: ['bubble', 30] },
+    aviary:     { fx: ['mist', 'petals'], edge: 'bush', over: branch, animals: [['peacock', 70, 'b160', 76, 'm c=#1F7A8C'], ['bird-of-paradise', 46, 90, 56, 'c=#E9A23B'], ['parrot', 30, 40, 44, 'c=#D7263D'], ['hummingbird', 8, 300, 28, 'hover m c=#1FA67A'], ['cassowary', 96, 'b160', 90, 'm c=#1E2A3A'], ['glyph-sunflower', 1, 'b180', 120, 'm'], ['parrot', 21, 80, 62, 'flip'], ['bird-of-paradise', 38.5, 122, 74, ''], ['toucan', 4.5, 52, 46, ''], ['hummingbird', 92, 120, 32, 'hover m'], ['peacock', 87, 'b160', 80, 'm'], ['crane-fly', 60, 30, 26, 'fly'], ['butterfly', 97, 300, 22, 'flutter m']] },
+    jurassic:   { edge: 'volcanic', trail: ['velociraptor-tracks', 'b230'], animals: [
+                  ['sauropod', 3, -10, 150, ''], ['sauropod', 14, -14, 96, ''], ['t-rex', 84, -8, 92, 'flip'], ['triceratops', 30, -8, 56, ''], ['triceratops', 37, -6, 40, ''],
+                  ['stegosaurus', 56, -8, 58, ''], ['velociraptor', 70, -8, 34, ''], ['velociraptor', 73, -6, 30, ''], ['velociraptor', 76, -8, 32, ''],
+                  ['pterodactylus', 22, -150, 40, 'fly d18'], ['pterodactylus', 26, -132, 30, 'fly d18'], ['pterodactylus', 46, -160, 34, 'soar'], ['dinosaur-egg', 47, -6, 16, ''], ['dinosaur-egg', 48.4, -6, 14, ''],
+                  ['ammonite-fossil', 8, 120, 60, 'fossil'], ['trilobite', 22, 190, 34, 'fossil'], ['dinosaur-bones', 40, 150, 90, 'fossil'], ['archaeopteryx-fossil', 62, 110, 64, 'fossil'],
+                  ['t-rex-skull', 78, 200, 70, 'fossil'], ['fishbone', 90, 120, 40, 'fossil'], ['ammonite-fossil', 52, 220, 40, 'fossil'], ['fern', 30, 100, 44, 'fossil'], ['ginkgo-leaf', 95, 230, 36, 'fossil'], ['trilobite', 70, 236, 26, 'fossil']] },
+    iceage:     { edge: 'glacier', trail: ['paw-cat', 'b230'], flakes: 18, animals: [
+                  ['mammoth', 6, -8, 96, ''], ['mammoth', 13, -8, 70, ''], ['mammoth', 18.5, -8, 48, ''], ['rhino', 32, -8, 56, 'c=#6B4A2B'], ['smilodon', 46, -8, 50, ''],
+                  ['megaloceros', 60, -8, 104, ''], ['polar-bear', 76, -8, 56, 'c=#5A3E2B'], ['bison', 88, -8, 54, 'c=#5C4330'], ['wolf-howl', 95, -150, 50, ''],
+                  ['mammoth', 40, 200, 120, 'fossil frozen'], ['snowflake', 12, 140, 40, 'fossil'], ['snowflake', 84, 210, 30, 'fossil'], ['dinosaur-bones', 70, 150, 70, 'fossil'], ['fishbone', 24, 220, 34, 'fossil']] },
+    sunset:     { fx: ['glow'], trail: ['paw-dog', 'b120'], edge: 'dusk', animals: [['oryx', 70, -20, 66, ''], ['ostrich', 24, -20, 46, ''], ['frigatebird', 30, -170, 24, 'fly slow d15'], ['arctic-tern', 66, -150, 18, 'fly d25'], ['elephant', 13, -24, 74, ''], ['elephant', 17.5, -22, 44, ''], ['giraffe', 85, -22, 112, ''], ['zebra', 93, -18, 50, ''], ['flock', 55, -120, 30, 'fly slow'], ['crane-fly', 40, -96, 18, 'fly']] },
   };
 
   const GLYPH = { 'glyph-fern': [260 / 420, null], 'glyph-tree': [1, () => fractalTree(rng(5), 200)], 'glyph-nautilus': [1, nautilus], 'glyph-sunflower': [1, () => flowerArt(null, 'sunflower', 1.6)] };
@@ -241,6 +277,12 @@
       p.style.setProperty('--d', n(between(r, 0, 12)) + 's'); p.style.setProperty('--s', n(between(r, 0.6, 1.4)));
       host.appendChild(p); } };
 
+  const FX_PARTS = { motes: 30, dust: 34, petals: 26, 'marine-snow': 60, sparks: 24 };
+  const fx = (host, list) => list.forEach(name => {
+    if (FX_PARTS[name]) return particles(host, [name, FX_PARTS[name]]);
+    const d = document.createElement('div'); d.className = 'fx fx-' + name;
+    if (name === 'clouds') for (let i = 0; i < 5; i++) { const c = document.createElement('i'); c.style.setProperty('--i', i); d.appendChild(c); }
+    host.appendChild(d); });
   const trail = (host, [file, at]) => { const t = document.createElement('div'); t.className = 'trail'; t.style.bottom = at.slice(1) + 'px';
     const u = `url("${new URL(A + file + '.svg', document.baseURI).href}")`, count = 34;
     for (let i = 0; i < count; i++) { const p = document.createElement('i'); p.style.webkitMaskImage = u; p.style.maskImage = u;
@@ -259,9 +301,10 @@
       e.className = 'edge edge-' + hab.edge; e.setAttribute('aria-hidden', 'true'); e.innerHTML = svg(h, body); sec.prepend(e); }
     const scene = document.createElement('div'); scene.className = 'scene'; scene.setAttribute('aria-hidden', 'true');
     if (hab.over) { const [h, body] = hab.over(r); scene.insertAdjacentHTML('beforeend', svg(h, body, 'over')); }
-    (hab.animals || []).forEach(a => place(scene, a));
+    (hab.animals || []).concat(hab.extra || []).forEach(a => place(scene, a));
     if (hab.particles) particles(scene, hab.particles);
     if (hab.flakes) flakes(scene, hab.flakes);
+    if (hab.fx) fx(scene, hab.fx);
     if (hab.trail) trail(scene, hab.trail);
     sec.prepend(scene);
     if (hab.foot) { const [h, body] = EDGE[hab.foot](r); const f = document.createElement('div');

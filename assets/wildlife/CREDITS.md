@@ -10,10 +10,11 @@ Source: https://github.com/game-icons/icons
 
 - **Delapouite** (https://delapouite.com): bison, camel, clownfish, coral, deer-track, dolphin, eating-pelican, elephant,
   flamingo, gorilla, hummingbird, kangaroo, manta-ray, ostrich, penguin, rabbit, school-of-fish, sea-turtle, seagull,
-  seahorse, shoebill-stork, squirrel, swallow, toucan, tropical-fish, beaver, whale-tail, giant-squid
-- **Lorc** (https://lorcblog.blogspot.com): angler-fish, squid, butterfly, crab, dragonfly, frog, jellyfish, lion, octopus, owl, snake, swan,
+  seahorse, shoebill-stork, squirrel, swallow, toucan, tropical-fish, beaver, whale-tail, giant-squid, fern, ginkgo-leaf,
+  mammoth, monstera-leaf, pterodactylus, t-rex-skull, velociraptor, velociraptor-tracks
+- **Lorc** (https://lorcblog.blogspot.com): ammonite, ammonite-fossil, dinosaur-bones, dinosaur-egg, fishbone, fossil, trilobite, angler-fish, squid, butterfly, crab, dragonfly, frog, jellyfish, lion, octopus, owl, snake, swan,
   vulture, wolf-howl
-- **Caro Asercion**: deer, fox, heron, sloth
+- **Caro Asercion**: archaeopteryx-fossil, birch-trees, deer, dodo, fox, heron, sloth
 - **Cathelineau**: polar-bear
 
 ## Noto Emoji (Google) — Apache License 2.0 (https://www.apache.org/licenses/LICENSE-2.0)
@@ -24,7 +25,7 @@ giraffe, hippo, leopard, moose, otter, parrot, rhino, tiger, whale, zebra
 
 ## Drawn for this site
 
-albatross, arctic-tern, bald-eagle, bird-of-paradise, caribou, cassowary, crane-fly, crocodile, eagle-soar, elk, flock, frigatebird, grass,
+albatross, arctic-tern, bald-eagle, caustics, megaloceros, plesiosaur, sauropod, smilodon, stegosaurus, t-rex, triceratops, bird-of-paradise, caribou, cassowary, crane-fly, crocodile, eagle-soar, elk, flock, frigatebird, grass,
 jelly-cyan, jelly-pink, man-of-war, moose-bull, narwhal, oryx, panda, paw-bear, paw-bird, paw-cat, paw-dog, peacock, seal, snowflake (Koch
 curve), vulture-soar, walrus, and the coat tiles coat-tiger, coat-leopard, coat-zebra, coat-giraffe. The Barnsley fern, fractal trees,
 nautilus spiral and flowers (lotus, hibiscus, orchid, passionflower, sunflower) are generated in `assets/js/nature.js`.
