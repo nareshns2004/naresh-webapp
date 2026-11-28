@@ -105,68 +105,34 @@
     sections.forEach(s => so.observe(s));
   }
 
-  // The endless procession above every footer: three lanes (sky, land, deep sea) looping left to right (decoration)
+  // Above every footer: an endless timeline of computing, oldest first, scrolling forward in time (decoration).
+  // Add milestones to TIMELINE: [icon in assets/tech/, year, name]. Dates are the well-documented firsts.
   const siteCss = document.querySelector('link[href*="site.css"]');
   const footEl = document.querySelector('.footer');
   if (siteCss && footEl) {
-    const WL = new URL('../wildlife/', siteCss.href);
-    const AR = { 't-rex': 1.43, sauropod: 1.05, triceratops: 1.67, stegosaurus: 1.85, plesiosaur: 2.2, smilodon: 2, megaloceros: 1.05, crocodile: 3.1, walrus: 1.54, seal: 2, narwhal: 3.6, oryx: 0.91, elk: 0.91, caribou: 0.91, 'moose-bull': 1.11, cassowary: 0.77,
-      peacock: 1.72, 'crane-fly': 3.3, 'arctic-tern': 2.1, frigatebird: 2.7, 'eagle-soar': 2.5, 'vulture-soar': 2.5, albatross: 4.8, flock: 3.2,
-      'man-of-war': 0.45, 'jelly-pink': 0.5, 'jelly-cyan': 0.5, panda: 0.93 };
-    // [file, height, options]  f = flip to face right, c=#hex colour, coat-*, art (full colour), up=N px above the lane floor
-    const LANES = {
-      sky: { speed: 46, items: [['eagle-soar', 30, 'up=10'], ['arctic-tern', 20, 'up=24'], ['vulture-soar', 38, 'c=#7A5A3A'], ['frigatebird', 22, 'up=18'],
-        ['crane-fly', 18, 'up=4'], ['crane-fly', 15, 'up=14'], ['crane-fly', 13, 'up=24'], ['albatross', 22, 'up=12'], ['eagle-soar', 26, 'c=#8A5A35 up=20'],
-        ['swallow', 18, 'up=6'], ['vulture-soar', 30, 'up=16'], ['seagull', 20, 'up=2'], ['flock', 22, 'up=20'], ['arctic-tern', 16, 'up=8'],
-        ['eagle-soar', 34, 'c=#9A6A3E up=2'], ['frigatebird', 26, 'up=22'], ['hummingbird', 16, 'up=10 c=#1FA67A'], ['vulture-soar', 42, 'c=#6E5A4A up=6'], ['albatross', 18, 'up=26'], ['pterodactylus', 34, 'c=#8A5A35 up=8'], ['pterodactylus', 26, 'c=#8A5A35 up=26']] },
-      land: { speed: 30, items: [
-        // savanna
-        ['elephant', 62], ['elephant', 34], ['giraffe', 78, 'f coat-giraffe'], ['zebra', 46, 'f coat-zebra'], ['zebra', 42, 'f coat-zebra'], ['rhino', 44, 'f'],
-        ['hippo', 40, 'f'], ['leopard', 34, 'f coat-leopard'], ['ostrich', 50], ['oryx', 58], ['lion', 34, 'c=#B87A2A'],
-        // desert & outback
-        ['camel', 56], ['kangaroo', 46],
-        // prairie & northern forest
-        ['bison', 46], ['bison', 40], ['deer', 52], ['rabbit', 18], ['fox', 26], ['elk', 68], ['moose-bull', 60], ['panda', 46, 'art'],
-        // amazon & asian jungle
-        ['leopard', 36, 'f coat-leopard'], ['tiger', 44, 'f coat-tiger'], ['gorilla', 44], ['cassowary', 54, 'c=#1E2A3A'], ['crocodile', 22],
-        ['frog', 16, 'c=#4E9A3E'], ['peacock', 40, 'c=#1F7A8C'], ['flamingo', 50, 'c=#E8789A'], ['heron', 50],
-        // polar ice
-        ['polar-bear', 44, 'c=#C9D6E2'], ['caribou', 62], ['caribou', 54], ['walrus', 36], ['seal', 22], ['penguin', 34], ['penguin', 30], ['penguin', 26], ['fox', 24, 'c=#D5DEE6'],
-        // ice age
-        ['mammoth', 66, 'c=#6B4A2B'], ['mammoth', 44, 'c=#6B4A2B'], ['smilodon', 34, 'c=#B07A3A'], ['megaloceros', 72, 'c=#7A5230'], ['rhino', 42, 'f c=#6B4A2B'], ['dodo', 30, 'c=#7A7A8C'],
-        // deep time
-        ['sauropod', 84, 'c=#5E6B3A'], ['stegosaurus', 44, 'c=#6B5A2E'], ['triceratops', 46, 'c=#7A5A3A'], ['velociraptor', 30, 'c=#5A4A3A'], ['velociraptor', 26, 'c=#5A4A3A'], ['t-rex', 70, 'c=#4A3A2A']] },
-      sea: { speed: 24, items: [['whale', 46, 'f'], ['narwhal', 22], ['narwhal', 18], ['dolphin', 34], ['manta-ray', 40, 'up=6'], ['jelly-pink', 46, 'art up=6'],
-        ['sea-turtle', 34], ['school-of-fish', 34], ['octopus', 36], ['man-of-war', 50, 'art'], ['angler-fish', 28], ['tropical-fish', 22, 'c=#F2C230'],
-        ['squid', 32], ['jelly-cyan', 42, 'art up=10'], ['clownfish', 18, 'c=#F07C2A'], ['seahorse', 30], ['giant-squid', 40], ['whale', 38, 'f'], ['crab', 18, 'c=#E4683A'], ['plesiosaur', 34, 'c=#A6D8EA'], ['ammonite', 26, 'c=#E8C9A0'], ['trilobite', 18, 'c=#C9A27A']] },
-    };
-    const proc = document.createElement('div'); proc.className = 'procession'; proc.setAttribute('aria-hidden', 'true');
-    Object.entries(LANES).forEach(([lane, { speed, items }]) => {
-      const L = document.createElement('div'); L.className = 'lane lane-' + lane;
-      const track = document.createElement('div'); track.className = 'track'; let half = 0;
-      for (let copy = 0; copy < 2; copy++) items.forEach(([file, h, opt = '']) => {
-        const t = opt.split(' '), w = Math.round(h * (AR[file] || 1)), gap = 26 + (h % 7) * 4, el = document.createElement('i');
-        el.className = 'pa' + (t.includes('f') ? ' flip' : '') + (t.includes('art') ? ' art' : '');
-        el.style.width = w + 'px'; el.style.height = h + 'px'; el.style.marginRight = gap + 'px';
-        const up = t.find(o => o.startsWith('up=')); if (up) el.style.marginBottom = up.slice(3) + 'px';
-        const col = t.find(o => o.startsWith('c=')); if (col) el.style.backgroundColor = col.slice(2);
-        const u = `url("${new URL(file + '.svg', WL).href}")`;
-        if (t.includes('art')) el.style.backgroundImage = u; else { el.style.webkitMaskImage = u; el.style.maskImage = u; }
-        const coat = t.find(o => o.startsWith('coat-')); if (coat) { el.style.backgroundImage = `url("${new URL(coat + '.svg', WL).href}")`; el.classList.add('coated'); }
-        if (!copy) half += w + gap;
-        track.appendChild(el); });
-      track.style.setProperty('--t', Math.round(half / speed) + 's');
-      L.appendChild(track); proc.appendChild(L); });
+    const TECH = new URL('../tech/', siteCss.href);
+    const TIMELINE = [
+      ['vacuum-tube', '1904', 'Vacuum tube'], ['mainframe', '1945', 'ENIAC'], ['transistor', '1947', 'Transistor'], ['hdd', '1956', 'Hard disk'],
+      ['ic-dip', '1958', 'Integrated circuit'], ['network', '1969', 'ARPANET'], ['cpu', '1971', 'Microprocessor'], ['floppy', '1971', 'Floppy disk'],
+      ['ethernet', '1973', 'Ethernet'], ['crt', '1981', 'Personal computer'], ['bits', '1983', 'TCP/IP'], ['globe', '1991', 'World Wide Web'],
+      ['wifi', '1997', 'Wi-Fi'], ['gpu', '1999', 'GPU'], ['cloud', '2006', 'Cloud'], ['phone', '2007', 'Smartphone'],
+      ['neural-net', '2012', 'Deep learning on GPUs'], ['attention', '2017', 'Transformer'], ['quantum-chip', '2019', '53-qubit processor'],
+      ['server-rack', '2020s', 'AI supercomputers'], ['photonic', 'Next', 'What comes next'],
+    ];
+    const proc = document.createElement('div'); proc.className = 'timeline-rail'; proc.setAttribute('aria-hidden', 'true');
+    const track = document.createElement('div'); track.className = 'track';
+    for (let copy = 0; copy < 2; copy++) TIMELINE.forEach(([icon, year, name]) => {
+      const el = document.createElement('span'); el.className = 'tl';
+      const u = `url("${new URL(icon + '.svg', TECH).href}")`;
+      el.innerHTML = '<i></i><b></b><em></em>'; el.querySelector('i').style.webkitMaskImage = el.querySelector('i').style.maskImage = u;
+      el.querySelector('b').textContent = year; el.querySelector('em').textContent = name;
+      track.appendChild(el); });
+    proc.appendChild(track);
+    const bus = document.createElement('div'); bus.className = 'bus'; proc.appendChild(bus);
     footEl.before(proc); footEl.classList.add('has-procession');
   }
 
-  // A trail of big-cat paw prints leading into the footer (decoration)
-  const foot = document.querySelector('.footer');
-  if (foot) { const row = document.createElement('div'); row.className = 'paw-row'; row.setAttribute('aria-hidden', 'true');
-    for (let i = 0; i < 24; i++) { const p = document.createElement('i'); p.style.setProperty('--i', i); p.style.setProperty('--y', (i % 2 ? 6 : -6) + 'px'); row.appendChild(p); }
-    foot.before(row); }
-
-  // Scroll progress (thin tricolour bar under the nav, with a hummingbird flying along it)
+  // Scroll progress (thin tricolour bar under the nav, with a chip riding along it)
   const nav = document.querySelector('.nav');
   if (nav && !reduceMotion.matches) {
     const bar = document.createElement('div'); bar.className = 'nav-progress'; bar.setAttribute('aria-hidden', 'true');

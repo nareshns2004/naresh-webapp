@@ -272,67 +272,47 @@ a.card:hover { border-color: var(--ink); transform: translateY(-2px); }
 .reveal.visible:nth-child(4) { transition-delay: 0.18s; } .reveal.visible:nth-child(5) { transition-delay: 0.24s; }
 .no-js .reveal { opacity: 1; transform: none; }
 
-/* ─── WILDLIFE (Nov 2026): shared bits; the habitats themselves live in home + wild.css ─── */
-.brand-mark {
-  border-radius: 2px 60% 2px 60%;                /* a leaf */
-  background: linear-gradient(135deg, #2E8B57, #12A3A8 55%, #C98A2B); background-size: 200% 200%;
+/* ─── TECHNOLOGY (Nov 2026): shared bits; the era bands themselves live in era.css (homepage only) ─── */
+.brand-mark {                                     /* a chip: pins drawn by a dashed outline */
+  border-radius: 4px; outline: 2px dashed color-mix(in srgb, var(--signal) 55%, transparent); outline-offset: 2px;
 }
-/* a hummingbird flies along the scroll-progress bar */
+/* a chip rides along the scroll-progress bar */
 .nav-prowler {
-  position: absolute; bottom: 0; left: calc(var(--progress, 0) * (100% - 26px)); width: 26px; height: 18px;
-  background: var(--signal); pointer-events: none;
-  -webkit-mask: url(../wildlife/hummingbird.svg) center / contain no-repeat; mask: url(../wildlife/hummingbird.svg) center / contain no-repeat;
+  position: absolute; bottom: -7px; left: calc(var(--progress, 0) * (100% - 16px)); width: 16px; height: 16px;
+  background: var(--signal); pointer-events: none; filter: drop-shadow(0 0 4px color-mix(in srgb, var(--signal) 60%, transparent));
+  -webkit-mask: url(../tech/cpu.svg) center / contain no-repeat; mask: url(../tech/cpu.svg) center / contain no-repeat;
 }
-/* footer: grass, and a slow parade of animals walking across it */
+/* footer: a circuit trace along the top edge (no-JS fallback for the timeline) */
 .footer { position: relative; border-top: 0; }
 .footer::before {
-  content: ''; position: absolute; left: 0; right: 0; top: -2px; height: 12px; background: color-mix(in srgb, #2E8B57 55%, var(--paper));
-  -webkit-mask: url(../wildlife/grass.svg) left bottom / 46px 12px repeat-x; mask: url(../wildlife/grass.svg) left bottom / 46px 12px repeat-x;
-}
-.footer::after {
-  --m: url(../wildlife/elephant.svg), url(../wildlife/elephant.svg), url(../wildlife/camel.svg), url(../wildlife/deer.svg), url(../wildlife/bison.svg), url(../wildlife/kangaroo.svg);
-  content: ''; position: absolute; top: -50px; left: 0; width: 470px; height: 50px; pointer-events: none;
-  background: color-mix(in srgb, #4E7A3A 70%, var(--paper)); opacity: 0.8;
-  -webkit-mask-image: var(--m); mask-image: var(--m);
-  -webkit-mask-position: 0 100%, 72px 100%, 130px 100%, 214px 100%, 290px 100%, 390px 100%; mask-position: 0 100%, 72px 100%, 130px 100%, 214px 100%, 290px 100%, 390px 100%;
-  -webkit-mask-size: 64px 50px, 40px 30px, 70px 50px, 62px 46px, 80px 46px, 58px 46px; mask-size: 64px 50px, 40px 30px, 70px 50px, 62px 46px, 80px 46px, 58px 46px;
-  -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat;
-  animation: parade 90s linear infinite;
+  content: ''; position: absolute; left: 0; right: 0; top: -1px; height: 2px;
+  background: linear-gradient(90deg, var(--signal), var(--copper), var(--signal)) 0 0 / 200% 100%; opacity: 0.6;
 }
 .art-credit { flex-basis: 100%; font-size: 0.68rem; color: var(--text-dim); }
 .art-credit a { color: inherit; }
-.paw-row { max-width: var(--max); margin: 4rem auto -3.5rem; padding: 0 1.25rem; display: flex; justify-content: space-between; pointer-events: none; }
-.paw-row i { width: 15px; height: 15px; background: color-mix(in srgb, #8A6A3E 70%, var(--paper)); opacity: 0; transform: translateY(var(--y)) rotate(90deg);
-  -webkit-mask: url(../wildlife/paw-cat.svg) center / contain no-repeat; mask: url(../wildlife/paw-cat.svg) center / contain no-repeat;
-  animation: pawrow 14s linear infinite; animation-delay: calc(var(--i) * 0.35s); }
-@keyframes pawrow { 0% { opacity: 0; } 3% { opacity: 0.6; } 50% { opacity: 0.35; } 80%, 100% { opacity: 0; } }
-/* the procession: sky, land and deep-sea lanes marching left to right in an endless loop */
-.procession { margin-top: 5rem; pointer-events: none; }
-.lane { position: relative; overflow: hidden; }
-.lane-sky { height: 70px; --c: color-mix(in srgb, #5A73A0 72%, var(--ink)); }
-.lane-land { height: 92px; --c: color-mix(in srgb, #6F8A3E 78%, var(--ink)); }
-.lane-land::after { content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 12px; background: color-mix(in srgb, #2E8B57 55%, var(--paper));
-  -webkit-mask: url(../wildlife/grass.svg) left bottom / 46px 12px repeat-x; mask: url(../wildlife/grass.svg) left bottom / 46px 12px repeat-x; }
-.lane-sea { height: 78px; --c: #8FD3E8; background: linear-gradient(180deg, #1C5D8A, #0C2240 70%, #071830); }
-.lane-sea::before { content: ''; position: absolute; inset: 0 0 auto; height: 3px; background: linear-gradient(90deg, transparent, rgba(160, 220, 255, 0.5), transparent); }
-.track { position: absolute; left: 0; bottom: 6px; display: flex; align-items: flex-end; width: max-content; animation: march var(--t, 120s) linear infinite; }
-.lane-sea .track { bottom: 12px; }
-.pa { display: block; flex: none; background-color: var(--c);
-  -webkit-mask-position: center bottom; mask-position: center bottom; -webkit-mask-size: contain; mask-size: contain; -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat; }
-.pa.flip { transform: scaleX(-1); }
-.pa.coated { background-size: 24px 24px; }
-.pa.art { background-color: transparent; background-position: center bottom; background-size: contain; background-repeat: no-repeat; }
-@keyframes march { from { transform: translateX(-50%); } to { transform: translateX(0); } }
+/* the timeline rail: computing history scrolling forward in time, above every footer */
+.timeline-rail { position: relative; margin-top: 5rem; padding: 0.5rem 0 1.1rem; overflow: hidden; pointer-events: none;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent); mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent); }
+.timeline-rail .track { display: flex; width: max-content; animation: march 160s linear infinite; }
+.tl { flex: none; width: 132px; display: grid; justify-items: center; gap: 0.15rem; position: relative; font-family: var(--font-mono); }
+.tl i { width: 34px; height: 34px; margin-bottom: 16px; background: var(--graphite); opacity: 0.85;
+  -webkit-mask: center / contain no-repeat; mask: center / contain no-repeat; }
+.tl b { font-size: 0.78rem; font-weight: 600; color: var(--copper); }
+.tl em { font-style: normal; font-size: 0.62rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-dim); text-align: center; line-height: 1.25; max-width: 120px; }
+.tl::after { content: ''; position: absolute; top: 38px; left: 50%; width: 7px; height: 7px; margin-left: -3.5px; border-radius: 50%;
+  background: var(--paper); border: 2px solid var(--copper); z-index: 1; }
+.timeline-rail .bus { position: absolute; left: 0; right: 0; top: calc(0.5rem + 42.5px); height: 2px; z-index: 0;
+  background: linear-gradient(90deg, transparent 0 40%, var(--signal) 48% 52%, transparent 60%) 0 0 / 600px 100% repeat-x, var(--rule-strong);
+  animation: bus 4s linear infinite; }
+.timeline-rail .track { position: relative; z-index: 1; }
+@keyframes march { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+@keyframes bus { to { background-position: 600px 0, 0 0; } }
 .footer.has-procession { margin-top: 0; }
-.footer.has-procession::before, .footer.has-procession::after { display: none; }
-.procession + .paw-row { margin: 0.6rem auto 0; }
-@keyframes parade { from { left: -480px; } to { left: 100%; } }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after { animation: none !important; transition: none !important; }
   .reveal { opacity: 1; transform: none; }
   .nav-progress, .nav-prowler { display: none; }
-  .paw-row i { opacity: 0.35; }
-  .track { animation: none; }
+  .track, .timeline-rail .bus { animation: none; }
 }
