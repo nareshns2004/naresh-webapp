@@ -31,7 +31,8 @@
 .scene .over { position: absolute; left: 0; }
 
 /* ─── eras: a green-and-blue palette, from blueprint blue to circuit green to quantum indigo ─── */
-[data-era="ic"]          { --hue: #2F8F5B; }
+[data-era="transistor"]  { --hue: #2F8F5B; }
+[data-era="ic"]          { --hue: #2E9A70; }
 [data-era="cpu"]         { --hue: #23867E; }
 [data-era="crypto"]      { --hue: #1E9E6E;
   --band-bg: radial-gradient(45% 40% at 85% 20%, color-mix(in srgb, #1E9E6E 12%, transparent), transparent 70%), var(--band); }
@@ -64,7 +65,7 @@
 [data-era="cluster"] .card { background: color-mix(in srgb, #0B1624 85%, transparent); }
 
 /* hero, 1947: a blueprint grid lit by the warm glow of a vacuum tube */
-[data-era="transistor"] { --hue: #2B6FA0; --band: var(--paper); padding-bottom: 10rem; }
+[data-era="origin"]     { --hue: #2B6FA0; --band: var(--paper); padding-bottom: 10rem; }
 .hero::before {
   inset: 0 auto 0 50%; width: 100vw; transform: translateX(-50%); mask-image: none; opacity: 1; z-index: -3;
   background:
@@ -75,7 +76,7 @@
 }
 .proof { margin-bottom: 150px; }
 .section[data-era="next"] { padding-bottom: 5rem; }
-.section[data-era="web"], .section[data-era="cloud"], .section[data-era="llm"], .section[data-era="gpu"], .section[data-era="transformer"] { padding-bottom: 13rem; }   /* room for the interludes' skylines */
+.section[data-era="transistor"], .section[data-era="web"], .section[data-era="cloud"], .section[data-era="llm"], .section[data-era="gpu"], .section[data-era="transformer"] { padding-bottom: 13rem; }   /* room for the interludes' skylines */
 
 /* ─── interludes: a cutaway between sections (no content) ─── */
 .interlude { height: 620px; }
@@ -89,14 +90,13 @@
 [data-era="internet"] { --hue: #1E88B5;
   --band-bg: radial-gradient(45% 55% at 50% 40%, color-mix(in srgb, #39C5E0 14%, transparent), transparent 70%),
              linear-gradient(180deg, var(--band) 0 80%, color-mix(in srgb, #1E6FA0 22%, var(--paper)) 80%); }
-[data-era="chain"] { --hue: #2A9D8F; }
 [data-era="deep"] { --hue: #3F6FD0;
   --band-bg: radial-gradient(50% 60% at 50% 55%, color-mix(in srgb, #39C5E0 14%, transparent), transparent 70%), var(--band); }
 .interlude[data-era="deep"] { height: 560px; }
+.interlude[data-era="ic"] { height: 480px; }
 [data-era="quantum"] { --hue: #4C6FD8;
   --band-bg: radial-gradient(40% 50% at 50% 70%, color-mix(in srgb, #39C5E0 14%, transparent), transparent 70%),
              radial-gradient(30% 40% at 20% 30%, color-mix(in srgb, #4C6FD8 12%, transparent), transparent 70%), var(--band); }
-.interlude[data-era="chain"] { height: 520px; }
 .interlude[data-era="quantum"] { height: 600px; }
 
 /* ─── floating icons and emoji ─── */
