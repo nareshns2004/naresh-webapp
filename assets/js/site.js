@@ -112,12 +112,16 @@
   if (siteCss && footEl) {
     const TECH = new URL('../tech/', siteCss.href);
     const TIMELINE = [
-      ['vacuum-tube', '1904', 'Vacuum tube'], ['mainframe', '1945', 'ENIAC'], ['transistor', '1947', 'Transistor'], ['hdd', '1956', 'Hard disk'],
-      ['ic-dip', '1958', 'Integrated circuit'], ['network', '1969', 'ARPANET'], ['cpu', '1971', 'Microprocessor'], ['floppy', '1971', 'Floppy disk'],
-      ['ethernet', '1973', 'Ethernet'], ['crt', '1981', 'Personal computer'], ['bits', '1983', 'TCP/IP'], ['globe', '1991', 'World Wide Web'],
-      ['wifi', '1997', 'Wi-Fi'], ['gpu', '1999', 'GPU'], ['cloud', '2006', 'Cloud'], ['phone', '2007', 'Smartphone'],
-      ['neural-net', '2012', 'Deep learning on GPUs'], ['attention', '2017', 'Transformer'], ['quantum-chip', '2019', '53-qubit processor'],
-      ['server-rack', '2020s', 'AI supercomputers'], ['photonic', 'Next', 'What comes next'],
+      ['vacuum-tube', '1904', 'Vacuum tube'], ['mainframe', '1945', 'ENIAC'], ['transistor', '1947', 'Transistor'], ['satellite', '1957', 'Sputnik'],
+      ['ic-dip', '1958', 'Integrated circuit'], ['rocket', '1969', 'Apollo 11'], ['network', '1969', 'ARPANET'], ['cpu', '1971', 'Microprocessor'],
+      ['ethernet', '1973', 'Ethernet'], ['key', '1976', 'Public-key crypto'], ['crt', '1981', 'Personal computer'], ['bits', '1983', 'TCP/IP'],
+      ['bug', '1988', 'Morris worm'], ['telescope', '1990', 'Hubble'], ['browser', '1991', 'World Wide Web'], ['search', '1993', 'Mosaic browser'],
+      ['wifi', '1997', 'Wi-Fi'], ['gpu', '1999', 'GPU'], ['dna', '2003', 'Human genome'], ['cloud', '2006', 'Cloud'], ['phone', '2007', 'Smartphone'],
+      ['blockchain', '2009', 'Bitcoin blockchain'], ['neural-net', '2012', 'Deep learning on GPUs'], ['robot', '2016', 'AlphaGo'],
+      ['attention', '2017', 'Transformer'], ['quantum-chip', '2019', '53-qubit processor'], ['dna', '2020', 'AlphaFold 2'], ['server-rack', '2020', 'GPT-3'],
+      ['telescope', '2021', 'James Webb'], ['chat', '2022', 'ChatGPT'], ['sparkle', '2023', 'Claude'], ['shield', '2024', 'Post-quantum standards'],
+      ['qubit', '2024', 'Willow: error correction'], ['ai-chip', '2025', 'AI agents'], ['fusion', 'Next', 'Fusion power'], ['bci', 'Next', 'Brain–computer interfaces'],
+      ['quantum-chip', 'Next', 'Fault-tolerant quantum'], ['planet', 'Next', 'Humans on Mars'],
     ];
     const proc = document.createElement('div'); proc.className = 'timeline-rail'; proc.setAttribute('aria-hidden', 'true');
     const track = document.createElement('div'); track.className = 'track';
