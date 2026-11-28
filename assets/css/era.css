@@ -39,7 +39,7 @@
 [data-era="gpu"]         { --hue: #4E9A3E; }
 [data-era="cloud"]       { --hue: #3A86C8;
   --band-bg: linear-gradient(180deg, color-mix(in srgb, #3A86C8 16%, var(--paper)), var(--band)); }
-[data-era="learning"]    { --hue: #2A8C9E; }
+[data-era="transformer"] { --hue: #2A8C9E; }
 [data-era="llm"]         { --hue: #1F9C8A;
   --band-bg: radial-gradient(40% 40% at 85% 15%, color-mix(in srgb, #39C5E0 12%, transparent), transparent 70%),
              radial-gradient(35% 35% at 10% 85%, color-mix(in srgb, #2BA38A 12%, transparent), transparent 70%), var(--band); }
@@ -75,7 +75,7 @@
 }
 .proof { margin-bottom: 150px; }
 .section[data-era="next"] { padding-bottom: 5rem; }
-.section[data-era="web"], .section[data-era="cloud"], .section[data-era="llm"] { padding-bottom: 12rem; }   /* room for the interludes' skylines */
+.section[data-era="web"], .section[data-era="cloud"], .section[data-era="llm"], .section[data-era="gpu"], .section[data-era="transformer"] { padding-bottom: 13rem; }   /* room for the interludes' skylines */
 
 /* ─── interludes: a cutaway between sections (no content) ─── */
 .interlude { height: 620px; }
@@ -90,6 +90,9 @@
   --band-bg: radial-gradient(45% 55% at 50% 40%, color-mix(in srgb, #39C5E0 14%, transparent), transparent 70%),
              linear-gradient(180deg, var(--band) 0 80%, color-mix(in srgb, #1E6FA0 22%, var(--paper)) 80%); }
 [data-era="chain"] { --hue: #2A9D8F; }
+[data-era="deep"] { --hue: #3F6FD0;
+  --band-bg: radial-gradient(50% 60% at 50% 55%, color-mix(in srgb, #39C5E0 14%, transparent), transparent 70%), var(--band); }
+.interlude[data-era="deep"] { height: 560px; }
 [data-era="quantum"] { --hue: #4C6FD8;
   --band-bg: radial-gradient(40% 50% at 50% 70%, color-mix(in srgb, #39C5E0 14%, transparent), transparent 70%),
              radial-gradient(30% 40% at 20% 30%, color-mix(in srgb, #4C6FD8 12%, transparent), transparent 70%), var(--band); }
@@ -105,6 +108,11 @@
 .ti-soft { --o: 0.16; }
 .ti-spin { animation: spin var(--t, 30s) linear infinite; }
 .ti-pulse { animation: pulse 3.2s ease-in-out infinite alternate, float var(--t, 9s) ease-in-out infinite alternate; }
+.tlg {
+  position: absolute; display: block; fill: var(--c, var(--deep)); opacity: 0.5;
+  animation: float var(--t, 10s) ease-in-out infinite alternate; animation-delay: calc(var(--d, 0s) * -1);
+}
+.tlg-soft { opacity: 0.2; }
 .te {
   position: absolute; display: block; font-size: var(--fs, 22px); line-height: 1; opacity: 0.42; filter: saturate(0.8);
   animation: float var(--t, 11s) ease-in-out infinite alternate; animation-delay: calc(var(--d, 0s) * -1);
@@ -162,11 +170,11 @@
 
 @media (max-width: 1279px) { .ti-m, .te-m { display: none; } }
 @media (max-width: 860px) {
-  .ti { --o: 0.28; } .ti-soft { display: none; } .te { opacity: 0.3; }
+  .ti { --o: 0.28; } .ti-soft, .tlg-soft { display: none; } .te { opacity: 0.3; }
   .era-dial { left: 0.6rem; bottom: 0.6rem; padding: 0.35rem 0.6rem 0.4rem 0.45rem; }
   .era-dial i { width: 22px; height: 22px; } .era-dial .yr { font-size: 0.9rem; } .era-dial .hint { display: none; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .ti, .te, .sig, .led { animation: none !important; }
+  .ti, .te, .tlg, .sig, .led { animation: none !important; }
 }
 @media print, (max-width: 600px) { .era-dial { display: none; } }

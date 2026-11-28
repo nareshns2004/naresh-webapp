@@ -1,11 +1,11 @@
 /* era.js (index.html only): the time-machine layer.
    Scrolling the homepage travels forward through computing history. Every section is an era band (data-era):
    1947 transistor → 1958 integrated circuit → 1971 microprocessor → 1976 public-key crypto / cyber security → 1991 the web →
-   (the internet revolution) → 1999 GPU → 2006 cloud → (2009 blockchain) → 2012 deep learning → 2020 foundation models →
+   (the internet revolution) → 1999 GPU → 2006 cloud → (2009 blockchain) → (2012 AlexNet) → 2017 Transformer → 2020 foundation models →
    2022 ChatGPT, Claude & LLMs → (quantum, now) → the future.
    Every era matches its section: Security is the cyber-security era, Writing the web, References the LLM era.
    This file draws each era's skyline (the border above the section), floats that era's technology icons and emoji,
-   draws the three interludes (internet, blockchain, quantum), and runs the fixed "time machine" dial. Shapes come from a seeded RNG, so every
+   draws the four interludes (internet, blockchain, AlexNet, quantum), and runs the fixed "time machine" dial. Shapes come from a seeded RNG, so every
    visit draws the same picture. Decoration only: aria-hidden, static under reduced motion.
    Icons: assets/tech/ (drawn for this site, see assets/tech/CREDITS.md). Colours come from each band's CSS variables. */
 (() => {
@@ -99,23 +99,6 @@
         if (r() < 0.5) b += S(`M${n(x + s * 2)} ${n(150 - s)}h${n(between(r, 14, 30))}`, '--glow', 2, 'stroke-dasharray="4 4" opacity=".8"');
         x += s * 2 + between(r, 14, 36); }
       return [h, b + base(150, h)]; },
-    // 1999: a long GPU cooler: fin stacks, heat pipes, fans behind
-    heatsink(r) { const h = 160; let b = '';
-      for (let x = 60; x < W; x += between(r, 160, 260)) { const rr = between(r, 34, 52); b += C(x, 150 - rr * 0.7, rr, '--back') + S(`M${n(x - rr * 0.7)} ${n(150 - rr * 0.7)}h${n(rr * 1.4)}M${n(x)} ${n(150 - rr * 1.4)}v${n(rr * 1.4)}`, '--back2', 3); }
-      for (let x = -20; x < W + 40;) { const run = Math.floor(between(r, 14, 36)), hh = between(r, 40, 80);
-        for (let k = 0; k < run; k++) b += R(x + k * 7, 140 - hh, 3, hh, '--back2');
-        b += S(`M${n(x + 10)} 142V${n(140 - hh * 0.75)}M${n(x + run * 7 - 10)} 142V${n(140 - hh * 0.75)}`, '--deep', 5, 'opacity=".75"');
-        x += run * 7 + between(r, 10, 30); }
-      b += R(-60, 136, W + 120, 8, '--deep', 'opacity=".8"');
-      return [h, b + base(144, h)]; },
-    // 2006: rows of racks in a warehouse-scale computer, cable trays above, status LEDs
-    racks(r) { const h = 180; let b = S(`M-40 22H${W + 40}`, '--back2', 4);
-      for (let x = 30; x < W; x += 54) b += S(`M${x} 22q12 ${n(between(r, 14, 30))} 24 0`, '--back2', 1.4, 'opacity=".7"');
-      for (let x = -10; x < W + 40;) { const w = between(r, 44, 58), hh = between(r, 110, 140), y = 170 - hh;
-        b += R(x, y, w, hh, '--back2', 'rx="2"');
-        for (let u = y + 8; u < 164; u += 9) { b += R(x + 5, u, w - 10, 6, '--back', 'rx="1"'); if (r() < 0.5) b += led(r, x + w - 9, u + 3, 1.6); }
-        x += w + between(r, 3, 6); if (r() < 0.12) x += 40; }
-      return [h, b + base(170, h)]; },
     // 2012: layers of a neural network spanning the page, signals flowing forward
     neurons(r) { const h = 170; let b = '', cols = [];
       for (let x = 20; x < W; x += between(r, 90, 140)) { const k = Math.floor(between(r, 3, 6)), ys = []; for (let i = 0; i < k; i++) ys.push(30 + (i + 0.5) * 110 / k + between(r, -6, 6)); cols.push([x, ys]); }
@@ -130,14 +113,87 @@
         const x1 = xs[a], x2 = xs[bb], top = 90 - Math.min(80, (x2 - x1) * 0.35);
         b += S(`M${n(x1)} 92Q${n((x1 + x2) / 2)} ${n(top)} ${n(x2)} 92`, '--deep', between(r, 0.8, 2.4), `opacity="${n(between(r, 0.25, 0.7))}"`); }
       return [h, b + base(140, h)]; },
-    // 2020s: a machine hall: tall racks, glowing optical cabling overhead
-    superpod(r) { const h = 150; let b = '';
-      for (let i = 0; i < 7; i++) { const y = 14 + i * 3; b += S(`M-40 ${y}C360 ${y + 30} 1080 ${y - 20} ${W + 40} ${y + 8}`, '--deep', 1.4, 'opacity=".45"'); }
-      for (let x = -10; x < W + 40;) { const w = between(r, 46, 60), hh = between(r, 90, 116), y = 142 - hh;
-        b += R(x, y, w, hh, '--back', 'rx="2"') + R(x + 4, y + 4, w - 8, hh - 8, '--back2', 'rx="1" opacity=".55"');
-        for (let u = y + 10; u < 136; u += 7) if (r() < 0.55) b += `<rect x="${n(x + 8)}" y="${n(u)}" width="${n(between(r, 6, w - 20))}" height="2" class="led" style="fill:var(--glow);--d:${n(between(r, 0, 3))}s" opacity=".8"/>`;
-        x += w + 4; if (r() < 0.1) x += 34; }
-      return [h, b + base(142, h)]; },
+    // 1999: a graphics card seen edge-on: GPU die between HBM stacks, power stages, memory, fans, I/O bracket, gold fingers
+    board(r) { const h = 170, g = 132; let b = R(-60, g, W + 120, 16, '--deep', 'opacity=".85"'); let last = '';
+      for (let x = 0; x < W + 20; x += 9) if (r() < 0.8) b += `<rect x="${x}" y="${g + 16}" width="6" height="8" style="fill:#C9A14A" opacity=".85"/>`;
+      const mods = {
+        die(x) { let o = R(x, g - 10, 170, 10, '--back2', 'rx="1"') + R(x + 20, g - 16, 130, 6, '--back');
+          o += R(x + 55, g - 32, 60, 16, '--deep', 'rx="2"') + R(x + 62, g - 29, 46, 2, '--glow', 'opacity=".8"');
+          for (const hx of [x + 24, x + 124]) for (let k = 0; k < 5; k++) o += R(hx, g - 20 - k * 5, 22, 4, k % 2 ? '--deep' : '--back2', 'rx="1"');
+          return [o, 180]; },
+        vrm(x) { let o = '', w = 0; for (let k = 0; k < 6; k++) { o += R(x + w, g - 16, 15, 16, '--deep', 'rx="3"') + R(x + w + 3, g - 13, 9, 3, '--back2'); w += 20; }
+          for (let k = 0; k < 5; k++) o += R(x + w + k * 11, g - 24, 8, 24, '--back2', 'rx="4"') + R(x + w + k * 11, g - 24, 8, 3, '--deep', 'rx="1.5"'); return [o, w + 60]; },
+        fans(x) { let o = ''; for (let k = 0; k < 2; k++) { const cx = x + 60 + k * 120, cy = g - 40; o += C(cx, cy, 52, '--back') + C(cx, cy, 52, '--band', 'opacity=".0"');
+          for (let a = 0; a < 7; a++) { const t = a * 0.8976; o += S(`M${n(cx)} ${n(cy)}Q${n(cx + 30 * Math.cos(t + 0.5))} ${n(cy + 30 * Math.sin(t + 0.5))} ${n(cx + 48 * Math.cos(t))} ${n(cy + 48 * Math.sin(t))}`, '--back2', 4); }
+          o += C(cx, cy, 12, '--deep'); } return [R(x, g - 10, 240, 10, '--deep', 'opacity=".6"') + o, 250]; },
+        mem(x) { let o = ''; for (let k = 0; k < 6; k++) o += R(x + k * 26, g - 7, 22, 7, '--deep', 'rx="1"') + R(x + k * 26 + 3, g - 6, 6, 1.5, '--glow', 'opacity=".6"'); return [o, 166]; },
+        io(x) { let o = R(x, g - 92, 16, 92, '--back2', 'rx="2"'); for (let k = 0; k < 4; k++) o += R(x + 4, g - 84 + k * 20, 8, 12, '--deep', 'rx="1"'); return [o, 50]; },
+        fins(x) { let o = ''; const run = Math.floor(between(r, 14, 24)), hh = between(r, 40, 66); for (let k = 0; k < run; k++) o += R(x + k * 7, g - hh, 3, hh, '--back2');
+          o += S(`M${n(x + 8)} ${g}V${n(g - hh * 0.8)}M${n(x + run * 7 - 8)} ${g}V${n(g - hh * 0.8)}`, '--deep', 5, 'opacity=".75"'); return [o, run * 7 + 16]; },
+      };
+      for (let x = -30; x < W + 40;) { let k; do k = pick(r, Object.keys(mods)); while (k === last); last = k; const [o, w] = mods[k](x); b += o; x += w + between(r, 10, 30); }
+      return [h, b + base(g + 24, h)]; },
+    // 2006: a data-centre floor: compute racks, storage arrays, a tape library, a spine switch with fibre, cooling, batteries
+    datacenter(r) { const h = 200, g = 184, FIB = ['#39C5E0', '#F2C230', '#3CCB7F', '#7FA3FF']; let b = S(`M-40 16H${W + 40}`, '--back2', 6), last = '';
+      for (let x = -40; x < W + 40; x += 22) b += R(x, g, 20, 16, '--back', 'opacity=".6"');
+      const frame = (x, w, hh) => R(x, g - hh, w, hh, '--back2', 'rx="2"') + R(x + 3, g - hh + 3, w - 6, hh - 6, '--back', 'rx="1" opacity=".55"');
+      const mods = {
+        compute(x) { const w = 54, hh = between(r, 130, 160); let o = frame(x, w, hh); for (let u = g - hh + 8; u < g - 8; u += 8) { o += R(x + 6, u, w - 12, 5, '--deep', 'rx="1" opacity=".55"'); if (r() < 0.6) o += led(r, x + w - 10, u + 2.5, 1.5); } return [o, w]; },
+        storage(x) { const w = 60, hh = between(r, 120, 150); let o = frame(x, w, hh);
+          for (let y = g - hh + 10; y < g - 20; y += 22) for (let k = 0; k < 6; k++) { o += R(x + 6 + k * 8.4, y, 6, 18, '--deep', 'rx="1" opacity=".7"'); if (r() < 0.4) o += led(r, x + 9 + k * 8.4, y + 15, 1.2); } return [o, w]; },
+        tape(x) { const w = 110, hh = 140; let o = frame(x, w, hh) + R(x + 10, g - hh + 12, w - 20, hh - 40, '--band', 'rx="2" opacity=".9"');
+          for (let s = 0; s < 5; s++) for (let k = 0; k < 11; k++) o += `<rect x="${n(x + 14 + k * 8)}" y="${n(g - hh + 18 + s * 19)}" width="6" height="14" rx="1" style="fill:${pick(r, FIB)}" opacity=".75"/>`;
+          o += S(`M${x + 20} ${g - hh + 30}h70M${x + 60} ${g - hh + 30}v38l12 6`, '--deep', 3) + R(x + 68, g - hh + 70, 12, 10, '--deep', 'rx="2"');
+          o += R(x + 14, g - 22, w - 28, 8, '--deep', 'rx="2" opacity=".6"'); return [o, w]; },
+        spine(x) { const w = 58, hh = 150; let o = frame(x, w, hh);
+          for (let y = g - hh + 10; y < g - 10; y += 10) for (let k = 0; k < 5; k++) o += R(x + 6 + k * 9.5, y, 7, 5, '--deep', 'rx="1"');
+          for (let k = 0; k < 9; k++) { const c = pick(r, FIB), sx = x + 8 + k * 5; o += `<path d="M${n(sx)} ${g - hh + 12}C${n(sx)} 60 ${n(sx + between(r, -120, 120))} 50 ${n(sx + between(r, -200, 200))} 18" style="fill:none;stroke:${c}" stroke-width="1.6" opacity=".8"/>`; }
+          return [o, w]; },
+        crac(x) { const w = 80, hh = 104; let o = frame(x, w, hh);
+          for (const cy of [g - hh + 30, g - hh + 72]) { o += C(x + w / 2, cy, 18, '--deep', 'opacity=".25"'); for (let a = 0; a < 6; a++) o += S(`M${n(x + w / 2)} ${n(cy)}l${n(16 * Math.cos(a * 1.047))} ${n(16 * Math.sin(a * 1.047))}`, '--deep', 3); o += C(x + w / 2, cy, 4, '--deep'); }
+          o += SIG(`M${x + w / 2} ${g - hh - 4}V${g - hh - 60}`, 2, '8 30', r, 0.7); return [o, w]; },
+        ups(x) { const w = 64, hh = 96; let o = frame(x, w, hh);
+          for (let y = g - hh + 10; y < g - 12; y += 16) o += R(x + 8, y, w - 16, 11, '--deep', 'rx="2" opacity=".75"') + R(x + 12, y + 4, between(r, 10, w - 28), 3, '--glow', 'opacity=".9"');
+          return [o + `<path d="M${x + w / 2 + 3} ${g - hh - 22}l-8 12h6l-4 10 10-13h-6l4-9z" style="fill:#F2C230"/>`, w]; },
+      };
+      for (let x = -20; x < W + 40;) { let k; do k = pick(r, ['compute', 'compute', 'storage', 'storage', 'spine', 'spine', 'crac', 'ups', 'tape']); while (k === last); last = k; const [o, w] = mods[k](x); b += o; x += w + between(r, 4, 16); }
+      return [h, b + base(g + 14, h)]; },
+    // 2020: an AI supercomputer: GPU node trays, an NVLink switch with its copper spine, liquid-cooling manifolds, InfiniBand, a coolant unit
+    superpod(r) { const h = 180, g = 168; let b = '', last = '';
+      for (let i = 0; i < 6; i++) { const y = 12 + i * 3; b += S(`M-40 ${y}C360 ${y + 30} 1080 ${y - 20} ${W + 40} ${y + 8}`, '--deep', 1.4, 'opacity=".45"'); }
+      const frame = (x, w, hh) => R(x, g - hh, w, hh, '--back', 'rx="2"');
+      const mods = {
+        node(x) { const w = 66, hh = between(r, 118, 140); let o = frame(x, w, hh);
+          for (let y = g - hh + 6; y < g - 14; y += 15) { o += R(x + 4, y, w - 8, 12, '--back2', 'rx="1" opacity=".7"'); for (let k = 0; k < 8; k++) o += R(x + 7 + k * 7, y + 3, 5, 6, '--glow', 'opacity=".35"'); o += led(r, x + w - 8, y + 6, 1.4); }
+          return [o, w]; },
+        nvswitch(x) { const w = 66, hh = 140; let o = frame(x, w, hh);
+          for (let k = 0; k < 22; k++) o += `<path d="M${n(x + 5 + k * 2.6)} ${g - hh + 6}V${g - hh + 70}" style="stroke:#C37A3E" stroke-width="1.6" opacity=".85"/>`;
+          for (let y = g - hh + 78; y < g - 8; y += 9) for (let k = 0; k < 6; k++) o += R(x + 6 + k * 9.5, y, 7, 5, '--deep', 'rx="1"');
+          return [o, w]; },
+        manifold(x) { const hh = 146; let o = '';
+          [['#3AA0E8', 0], ['#E8704A', 14]].forEach(([c, dx]) => { o += `<rect x="${x + dx}" y="${g - hh}" width="8" height="${hh}" rx="4" style="fill:${c}" opacity=".75"/>`;
+            for (let y = g - hh + 14; y < g; y += 18) o += `<circle cx="${x + dx + 4}" cy="${y}" r="4.5" style="fill:${c}"/>`; });
+          return [o, 30]; },
+        ib(x) { const w = 62, hh = 110; let o = frame(x, w, hh);
+          for (let y = g - hh + 10; y < g - 10; y += 9) for (let k = 0; k < 6; k++) o += R(x + 5 + k * 9.2, y, 7, 5, '--deep', 'rx="1" opacity=".8"');
+          for (let k = 0; k < 6; k++) { const d = `M${n(x + 8 + k * 9)} ${g - hh}C${n(x + k * 9)} ${g - hh - 40} ${n(x + between(r, -160, 220))} 40 ${n(x + between(r, -240, 300))} 16`; o += S(d, '--deep', 1.4, 'opacity=".55"') + SIG(d, 2, '10 200', r); }
+          return [o, w]; },
+        cdu(x) { const w = 78, hh = 92; let o = frame(x, w, hh) + R(x + 10, g - hh + 10, 30, hh - 30, '--back2', 'rx="12"') + C(x + 58, g - 30, 12, '--deep') + C(x + 58, g - 30, 5, '--glow');
+          o += `<path d="M${x + 40} ${g - hh + 24}h18v${hh - 66}" style="fill:none;stroke:#3AA0E8" stroke-width="4"/><path d="M${x + 40} ${g - 30}h6" style="fill:none;stroke:#E8704A" stroke-width="4"/>`;
+          return [o, w]; },
+      };
+      for (let x = -20; x < W + 40;) { let k; do k = pick(r, Object.keys(mods)); while (k === last); last = k; const [o, w] = mods[k](x); b += o; x += w + between(r, 4, 12); }
+      return [h, b + base(g, h)]; },
+    // 2022: a conversation skyline: chat bubbles, a model typing, sparkles
+    chat(r) { const h = 170, g = 150; let b = '';
+      for (let x = -20, i = 0; x < W + 40; i++) { const w = between(r, 90, 210), hh = between(r, 34, 64), y = between(r, 40, g - hh - 14), left = i % 2 === 0;
+        const tail = left ? `M${n(x + 18)} ${n(y + hh)}l-8 14 22-14z` : `M${n(x + w - 18)} ${n(y + hh)}l8 14-22-14z`;
+        b += `<path d="${tail}" ${fill(left ? '--back2' : '--back')}/>` + R(x, y, w, hh, left ? '--back2' : '--back', 'rx="14"');
+        if (r() < 0.3) for (let k = 0; k < 3; k++) b += `<circle cx="${n(x + 22 + k * 12)}" cy="${n(y + hh / 2)}" r="3.6" class="led" style="fill:var(--deep);--d:${n(k * 0.4)}s"/>`;
+        else for (let k = 0; k < Math.floor(hh / 16); k++) b += R(x + 14, y + 11 + k * 14, (w - 28) * between(r, 0.5, 1), 5, '--deep', 'rx="2.5" opacity=".55"');
+        if (r() < 0.35) { const sx = x + w - 6, sy = y - 4; b += `<path d="M${n(sx)} ${n(sy - 9)}l2.6 6.4 6.4 2.6-6.4 2.6-2.6 6.4-2.6-6.4-6.4-2.6 6.4-2.6z" ${fill('--glow')}/>`; }
+        x += w + between(r, 16, 40); }
+      return [h, b + base(g, h)]; },
     // quantum: superposed waves and a probability-density packet
     wave(r) { const h = 150; let b = '';
       for (let k = 0; k < 5; k++) { const A = between(r, 8, 22), L = between(r, 120, 260), ph = between(r, 0, 6), y0 = 70 + k * 10; let d = '';
@@ -193,6 +249,19 @@
           b += SIG(`M${x1} ${n(y1)}L${x2} ${n(y2)}`, 2, '6 40', r); }
         prev = hs; }
       return [h, b, 'top:90px']; },
+    // 2012: the classic convolutional net picture: an image, shrinking stacks of feature maps, dense layers, a class
+    deep(r) { const h = 300; let b = '';
+      const box = (x, y, w, hh, dz, v, op) => `<path d="M${n(x)} ${n(y)}h${n(w)}l${n(dz)} ${n(-dz)}h${n(-w)}z" ${fill(v)} opacity="${op}"/>` +
+        `<path d="M${n(x + w)} ${n(y)}l${n(dz)} ${n(-dz)}v${n(hh)}l${n(-dz)} ${n(dz)}z" ${fill(v)} opacity="${op * 0.8}"/>` + `<rect x="${n(x)}" y="${n(y)}" width="${n(w)}" height="${n(hh)}" opacity="${op}" style="fill:var(${v});stroke:var(--band)" stroke-width="1"/>`;
+      for (let gx = 0; gx < 8; gx++) for (let gy = 0; gy < 8; gy++) b += R(130 + gx * 14, 90 + gy * 14, 13, 13, '--back2', `opacity="${n(between(r, 0.3, 1))}"`);
+      const stacks = [[340, 70, 30, 150, 46], [520, 100, 40, 100, 36], [700, 124, 50, 64, 26], [880, 136, 56, 44, 20], [1030, 140, 60, 36, 16]];
+      stacks.forEach(([x, y, w, hh, dz], i) => { for (let k = 3; k >= 0; k--) b += box(x + k * 7, y + k * 3, w, hh, dz, i % 2 ? '--back2' : '--deep', 0.35 + k * 0.12); });
+      const dense = [[1180, 8], [1270, 8], [1360, 4]]; let prev = null;
+      dense.forEach(([x, k]) => { const ys = []; for (let i = 0; i < k; i++) ys.push(150 - (k - 1) * 11 + i * 22);
+        if (prev) prev[1].forEach(y1 => ys.forEach(y2 => b += S(`M${prev[0]} ${n(y1)}L${x} ${n(y2)}`, '--back2', 0.8, 'opacity=".6"')));
+        ys.forEach(y => b += C(x, y, 6, '--deep')); prev = [x, ys]; });
+      b += SIG('M250 150H330M480 150H515M640 150H700M800 150H880M985 150H1030M1120 150H1170', 2.2, '14 60', r);
+      return [h, b, 'top:96px']; },
     // quantum: a dilution refrigerator (the "chandelier") with its qubit chip, Bloch spheres either side
     quantum(r) { const h = 400, cx = 720; let b = C(cx, 300, 120, '--glow', 'opacity=".1"');
       const gold = 'style="fill:#C9A14A"', plates = [[40, 300], [100, 240], [160, 180], [220, 128], [276, 80]];
@@ -215,39 +284,52 @@
   };
 
   /* ── eras: icons that float in the band, emoji, skyline and the dial label ── */
+  // icons: names in assets/tech/; 'logo:<id>' = a Simple Icons mark from assets/icons/tech-logos.svg, in its brand colour
   const ERA = {
     transistor:  { year: 1947, label: 'The transistor', icon: 'transistor',
-      icons: ['transistor', 'vacuum-tube', 'ai-chip', 'transistor-symbol', 'qubit', 'oscilloscope', 'rocket', 'dna', 'atom', 'robot'], emoji: ['💡', '🤖', '🚀', '⚛️', '🧠'] },
+      icons: ['transistor', 'vacuum-tube', 'ai-chip', 'transistor-symbol', 'qubit', 'oscilloscope', 'rocket', 'dna', 'atom', 'robot', 'resistor', 'telescope'], emoji: ['💡', '🤖', '🚀', '⚛️', '🧠', '🔭'] },
     ic:          { year: 1958, label: 'Integrated circuit', icon: 'ic-dip', edge: 'dip',
-      icons: ['ic-dip', 'gate-and', 'gate-or', 'gate-not', 'transistor-symbol', 'wafer', 'ic-dip', 'rocket', 'satellite'], emoji: ['🧮', '🔬', '🛰️', '🌕'] },
+      icons: ['ic-dip', 'gate-and', 'logo:arduino', 'gate-or', 'gate-not', 'logo:raspberrypi', 'transistor-symbol', 'wafer', 'satellite', 'rocket', 'capacitor', 'diode'], emoji: ['🧮', '🔬', '🛰️', '🌕', '📻'] },
     cpu:         { year: 1971, label: 'Microprocessor', icon: 'cpu', edge: 'silicon',
-      icons: ['cpu', 'ic-dip', 'bits', 'gear', 'punch-card', 'floppy', 'hdd', 'wafer', 'ai-chip', 'telescope'], emoji: ['💾', '🧮', '⌨️', '🕹️'] },
+      icons: ['cpu', 'logo:intel', 'ram', 'logo:arm', 'floppy', 'logo:amd', 'punch-card', 'logo:riscv', 'hdd', 'logo:c', 'terminal', 'logo:linux', 'wafer', 'logo:gnu'], emoji: ['💾', '🧮', '⌨️', '🕹️'] },
     crypto:      { year: 1976, label: 'Public-key crypto', icon: 'shield', edge: 'vault',
-      icons: ['shield', 'key', 'lock-chip', 'fingerprint', 'firewall', 'bug', 'hash', 'shield', 'key', 'network'], emoji: ['🔐', '🛡️', '🔑', '🕵️', '🐛'] },
+      icons: ['shield', 'logo:letsencrypt', 'key', 'logo:wireguard', 'fingerprint', 'logo:signal', 'firewall', 'logo:wireshark', 'bug', 'logo:kalilinux', 'hash', 'lock-chip'], emoji: ['🔐', '🛡️', '🔑', '🕵️', '🐛'] },
     web:         { year: 1991, label: 'World Wide Web', icon: 'browser', edge: 'desks',
-      icons: ['browser', 'globe', 'email', 'search', 'crt', 'laptop', 'wifi', 'phone', 'chat'], emoji: ['🌐', '💻', '✉️', '🔎', '📱', '💬'] },
+      icons: ['browser', 'logo:html5', 'email', 'logo:javascript', 'search', 'logo:firefoxbrowser', 'crt', 'logo:wikipedia', 'wifi', 'logo:webassembly', 'chat', 'logo:stackoverflow'], emoji: ['🌐', '💻', '✉️', '🔎', '📱', '💬'] },
     internet:    { year: null, label: 'The internet revolution', icon: 'globe', edge: 'mesh', over: 'internet', icons: [], emoji: [] },
-    gpu:         { year: 1999, label: 'The GPU', icon: 'gpu', edge: 'heatsink',
-      icons: ['gpu', 'ai-chip', 'neural-net', 'gpu', 'vr', 'nic', 'cpu', 'drone'], emoji: ['🎮', '⚡', '🥽', '🔥'] },
-    cloud:       { year: 2006, label: 'The cloud', icon: 'cloud', edge: 'racks',
-      icons: ['cloud', 'server-rack', 'switch', 'network', 'phone', 'lock-chip', 'nic', 'cloud'], emoji: ['☁️', '🗄️', '🌐', '📱'] },
+    gpu:         { year: 1999, label: 'The GPU', icon: 'gpu', edge: 'board',
+      icons: ['gpu', 'logo:nvidia', 'fan', 'logo:amd', 'vr', 'logo:opencv', 'ram', 'logo:python', 'drone', 'ai-chip'], emoji: ['🎮', '⚡', '🥽', '🔥', '🖼️'] },
+    cloud:       { year: 2006, label: 'The cloud', icon: 'cloud', edge: 'datacenter',
+      icons: ['cloud', 'logo:linux', 'database', 'logo:kubernetes', 'container', 'logo:docker', 'router', 'logo:ubuntu', 'ssd', 'logo:postgresql', 'terminal', 'logo:redis',
+              'fiber', 'logo:apachekafka', 'droplet', 'logo:ceph', 'solar', 'logo:nginx', 'switch', 'logo:terraform', 'server-rack', 'logo:prometheus'], emoji: ['☁️', '🗄️', '🌐', '🐧', '📦'] },
     chain:       { year: 2009, label: 'Blockchain', icon: 'blockchain', edge: 'blocks', over: 'chain', icons: [], emoji: [] },
-    learning:    { year: 2012, label: 'Deep learning', icon: 'neural-net', edge: 'neurons',
-      icons: ['neural-net', 'attention', 'robot', 'ai-chip', 'dna', 'robot-arm', 'sparkle', 'drone'], emoji: ['🧠', '🤖', '🧬', '📊', '♟️'] },
+    deep:        { year: 2012, label: 'Deep learning on GPUs', icon: 'neural-net', edge: 'neurons', over: 'deep', icons: [], emoji: [] },
+    transformer: { year: 2017, label: 'The Transformer', icon: 'attention', edge: 'tokens',
+      icons: ['attention', 'logo:pytorch', 'neural-net', 'logo:tensorflow', 'robot', 'logo:huggingface', 'dna', 'logo:jupyter', 'sparkle', 'logo:keras', 'robot-arm', 'logo:numpy'], emoji: ['🧠', '🤖', '🧬', '📊', '♟️'] },
     cluster:     { year: 2020, label: 'Foundation models', icon: 'server-rack', edge: 'superpod',
-      icons: ['gpu', 'server-rack', 'nic', 'fiber', 'switch', 'ai-chip', 'network', 'gpu'], emoji: ['🧠', '⚡', '🛰️'] },
-    llm:         { year: 2022, label: 'ChatGPT, Claude & LLMs', icon: 'chat', edge: 'tokens',
-      icons: ['chat', 'sparkle', 'attention', 'robot', 'chat', 'ai-chip', 'shield', 'bci', 'sparkle'], emoji: ['💬', '✨', '🤖', '🧠', '📚'] },
+      icons: ['gpu', 'logo:nvidia', 'droplet', 'logo:ray', 'fiber', 'logo:pytorch', 'switch', 'logo:kubernetes', 'ai-chip', 'logo:opentelemetry', 'fan', 'logo:cplusplus'], emoji: ['🧠', '⚡', '🛰️', '💧'] },
+    llm:         { year: 2022, label: 'ChatGPT, Claude & LLMs', icon: 'chat', edge: 'chat',
+      icons: ['chat', 'logo:claude', 'sparkle', 'logo:anthropic', 'attention', 'logo:googlegemini', 'robot', 'logo:mistralai', 'shield', 'logo:meta', 'bci', 'logo:ollama', 'logo:huggingface', 'logo:langchain'], emoji: ['💬', '✨', '🤖', '🧠', '📚'] },
     quantum:     { year: 'Now', label: 'Quantum computing', icon: 'qubit', edge: 'wave', over: 'quantum', icons: [], emoji: [] },
     next:        { year: 'Next', label: 'The future', icon: 'rocket', edge: 'horizon',
-      icons: ['rocket', 'planet', 'fusion', 'bci', 'robot-arm', 'qubit', 'photonic', 'dna', 'telescope', 'drone'], emoji: ['🚀', '🪐', '🧬', '🔭', '🦾', '🌌'] },
+      icons: ['rocket', 'planet', 'logo:qiskit', 'fusion', 'bci', 'logo:rust', 'robot-arm', 'solar', 'photonic', 'dna', 'telescope', 'drone'], emoji: ['🚀', '🪐', '🧬', '🔭', '🦾', '🌌'] },
   };
+  const LOGO = { amd: '#ED1C24', android: '#3DDC84', anthropic: null, apachekafka: null, arduino: '#00878F', arm: '#0091BD', c: '#A8B9CC', ceph: '#EF5C55', claude: '#D97757',
+    cplusplus: '#00599C', docker: '#2496ED', firefoxbrowser: '#FF7139', gnu: '#A42E2B', googlegemini: '#8E75B2', html5: '#E34F26', huggingface: '#FFD21E', intel: '#0071C5',
+    javascript: '#F7DF1E', jupyter: '#F37626', kalilinux: '#557C94', keras: '#D00000', kubernetes: '#326CE5', langchain: '#7FC8FF', letsencrypt: '#2C6CB0', linux: '#FCC624',
+    meta: '#0467DF', mistralai: '#FA520F', nginx: '#009639', numpy: '#4DABCF', nvidia: '#76B900', ollama: null, opencv: '#5C3EE8', opentelemetry: null, postgresql: '#4169E1',
+    prometheus: '#E6522C', python: '#3776AB', pytorch: '#EE4C2C', qiskit: '#6929C4', raspberrypi: '#A22846', ray: '#028CF0', redis: '#FF4438', riscv: '#3A4FB0', rust: null,
+    signal: '#3B45FD', stackoverflow: '#F58025', tensorflow: '#FF6F00', terraform: '#844FBA', ubuntu: '#E95420', webassembly: '#654FF0', wikipedia: null, wireguard: '#88171A', wireshark: '#1679A7' };
   const SPIN = new Set(['atom', 'gear', 'qubit', 'planet']);
   const PULSE = new Set(['ai-chip', 'quantum-chip', 'cryostat', 'wifi', 'sparkle', 'chat', 'shield']);
   const url = f => `url("${new URL(A + f + '.svg', document.baseURI).href}")`;
 
   const float = (scene, era, r) => {
     era.icons.forEach((f, i) => {
+      if (f.startsWith('logo:')) { const id = f.slice(5), margin = r() < 0.6, sz = n(between(r, margin ? 26 : 22, margin ? 44 : 34));
+        const x = margin ? (r() < 0.5 ? between(r, 0.5, 8.5) : between(r, 91.5, 98.5)) : between(r, 4, 94);
+        scene.insertAdjacentHTML('beforeend', `<svg class="tlg${margin ? ' ti-m' : ' tlg-soft'}" style="left:${n(x)}%;top:${n(between(r, 4, 86))}%;width:${sz}px;height:${sz}px;--c:${LOGO[id] || 'var(--deep)'};--d:${n(between(r, 0, 9))}s;--t:${n(between(r, 8, 14))}s;--dx:${n(between(r, -16, 16))}px" aria-hidden="true" focusable="false"><use href="assets/icons/tech-logos.svg#${id}"/></svg>`);
+        return; }
       const el = document.createElement('i'), margin = i % 2 === 0, sz = n(between(r, margin ? 34 : 26, margin ? 62 : 44));
       const x = margin ? (r() < 0.5 ? between(r, 0.5, 8) : between(r, 92, 98.5)) : between(r, 4, 94);
       el.className = 'ti' + (margin ? ' ti-m' : ' ti-soft') + (SPIN.has(f) ? ' ti-spin' : '') + (PULSE.has(f) ? ' ti-pulse' : '');

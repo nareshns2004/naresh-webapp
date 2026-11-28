@@ -8,3 +8,9 @@ refrigerator, photonics and more). They are single-colour and used as CSS masks 
 The skylines and interlude cutaways are generated in `assets/js/era.js`. Emoji render in the visitor's system font.
 
 Released with the rest of the site under the repository LICENSE.
+
+## Technology logos
+
+The floating technology logos on the homepage come from `assets/icons/tech-logos.svg`, built from
+[Simple Icons](https://simpleicons.org) (CC0-1.0). Each mark is a trademark of its owner and is shown only to name the
+technology; it does not imply endorsement.
