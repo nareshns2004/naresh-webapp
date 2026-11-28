@@ -1,9 +1,11 @@
 /* era.js (index.html only): the time-machine layer.
    Scrolling the homepage travels forward through computing history. Every section is an era band (data-era):
-   1947 transistor → 1958 integrated circuit → 1971 microprocessor → 1969–83 networks → 1991 the web → (inside the die)
-   → 1999 GPU → 2006 cloud → (2012 deep learning) → 2017 Transformer → 2020s AI supercomputers → 2019+ quantum → next.
+   1947 transistor → 1958 integrated circuit → 1971 microprocessor → 1976 public-key crypto / cyber security → 1991 the web →
+   (the internet revolution) → 1999 GPU → 2006 cloud → (2009 blockchain) → 2012 deep learning → 2020 foundation models →
+   2022 ChatGPT, Claude & LLMs → (quantum, now) → the future.
+   Every era matches its section: Security is the cyber-security era, Writing the web, References the LLM era.
    This file draws each era's skyline (the border above the section), floats that era's technology icons and emoji,
-   draws the two interlude cutaways, and runs the fixed "time machine" dial. Shapes come from a seeded RNG, so every
+   draws the three interludes (internet, blockchain, quantum), and runs the fixed "time machine" dial. Shapes come from a seeded RNG, so every
    visit draws the same picture. Decoration only: aria-hidden, static under reduced motion.
    Icons: assets/tech/ (drawn for this site, see assets/tech/CREDITS.md). Colours come from each band's CSS variables. */
 (() => {
@@ -78,12 +80,25 @@
         else { b += `<path d="M${n(x)} 120c0-12 4-16 9-16s9 4 9 16z" ${fill('--deep')}/>` + S(`M${n(x + 9)} 104c0-10 12-8 14-20`, '--deep', 1.4); x += 46; }
       }
       return [h, b + base(120, h)]; },
-    // inside the die: FinFET fins with gates wrapped across them
-    fins(r) { const h = 150; let b = '';
-      for (let x = -20; x < W + 40;) { const group = Math.floor(between(r, 3, 7)), hh = between(r, 50, 90);
-        for (let g = 0; g < group; g++) b += R(x + g * 18, 140 - hh, 9, hh, '--back2', 'rx="3"');
-        const gw = group * 18 + 10; b += R(x - 8, 140 - hh * 0.62, gw, 16, '--deep', 'rx="3" opacity=".9"'); x += gw + between(r, 14, 40); }
-      return [h, b + base(138, h)]; },
+    // cyber security: binary rain falling onto a firewall, padlocks along the top
+    vault(r) { const h = 170; let b = '';
+      for (let x = 8; x < W; x += 22) for (let y = 50; y < 96; y += 14) if (r() < 0.55)
+        b += `<text x="${x}" y="${y}" class="${r() < 0.15 ? 'led' : ''}" style="font:600 11px var(--font-mono);fill:var(--back2);--d:${n(between(r, 0, 3))}s" opacity="${n(between(r, 0.35, 0.9))}">${r() < 0.5 ? 0 : 1}</text>`;
+      for (let row = 0; row < 4; row++) { const y = 112 + row * 12;
+        for (let x = row % 2 ? -18 : -40; x < W + 40; x += 38) b += R(x, y, 35, 10, row % 2 ? '--back2' : '--deep', `rx="1" opacity="${row % 2 ? 1 : 0.8}"`); }
+      for (let x = 70; x < W; x += between(r, 170, 260)) {
+        b += S(`M${n(x - 7)} 92v-6a7 7 0 0 1 14 0v6`, '--deep', 3) + R(x - 12, 92, 24, 19, '--deep', 'rx="3"') + C(x, 100, 2.6, '--band') + R(x - 1, 101, 2, 5, '--band'); }
+      return [h, b + base(160, h)]; },
+    // blockchain: isometric blocks stacked like a skyline
+    blocks(r) { const h = 160; let b = '';
+      const cube = (x, y, s) => `<path d="M${n(x)} ${n(y)}l${n(s)} ${n(-s * 0.55)} ${n(s)} ${n(s * 0.55)} ${n(-s)} ${n(s * 0.55)}z" ${fill('--back')}/>` +
+        `<path d="M${n(x)} ${n(y)}l${n(s)} ${n(s * 0.55)}v${n(s)}l${n(-s)} ${n(-s * 0.55)}z" ${fill('--back2')}/>` +
+        `<path d="M${n(x + s)} ${n(y + s * 0.55)}l${n(s)} ${n(-s * 0.55)}v${n(s)}l${n(-s)} ${n(s * 0.55)}z" ${fill('--deep')} opacity=".85"/>`;
+      for (let x = -30; x < W + 40;) { const s = between(r, 22, 34), stack = Math.floor(between(r, 1, 4));
+        for (let k = 0; k < stack; k++) b += cube(x, 150 - s * 1.55 - k * s, s);
+        if (r() < 0.5) b += S(`M${n(x + s * 2)} ${n(150 - s)}h${n(between(r, 14, 30))}`, '--glow', 2, 'stroke-dasharray="4 4" opacity=".8"');
+        x += s * 2 + between(r, 14, 36); }
+      return [h, b + base(150, h)]; },
     // 1999: a long GPU cooler: fin stacks, heat pipes, fans behind
     heatsink(r) { const h = 160; let b = '';
       for (let x = 60; x < W; x += between(r, 160, 260)) { const rr = between(r, 34, 52); b += C(x, 150 - rr * 0.7, rr, '--back') + S(`M${n(x - rr * 0.7)} ${n(150 - rr * 0.7)}h${n(rr * 1.4)}M${n(x)} ${n(150 - rr * 1.4)}v${n(rr * 1.4)}`, '--back2', 3); }
@@ -140,64 +155,95 @@
       return [h, `<rect x="-60" y="${vy}" width="${W + 120}" height="${h - vy + 4}" ${fill('--band')} opacity=".55"/>` + b]; },
   };
 
-  /* ── interlude cutaways (drawn across the whole band) ── */
+  /* ── interludes (drawn across the whole band) ── */
+  const T = (x, y, txt, size, v, extra = '') => `<text x="${n(x)}" y="${n(y)}" style="font:600 ${size}px var(--font-mono);fill:var(${v})" ${extra}>${txt}</text>`;
+  const hex = (r, k) => { let s = ''; for (let i = 0; i < k; i++) s += '0123456789abcdef'[Math.floor(r() * 16)]; return s; };
   const OVER = {
-    // cross-section of a chip: copper interconnect stacked above the transistors (not to scale)
-    die(r) { const h = 340; let b = '';
-      const layers = [[40, 10, 26], [74, 9, 22], [104, 8, 18], [130, 6, 14], [152, 5, 10], [170, 4, 8]];
-      b += R(-60, 0, W + 120, 186, '--band', 'opacity=".2"');
-      layers.forEach(([y, th, pitch], li) => { b += R(-60, y - 6, W + 120, th + 12, '--back', `opacity="${n(0.25 + li * 0.05)}"`);
-        for (let x = -20; x < W + 20; x += pitch * between(r, 1.6, 3.2)) { const w = pitch * between(r, 0.9, 2.6); b += `<rect x="${n(x)}" y="${y}" width="${n(w)}" height="${th}" style="fill:var(--cu)" opacity=".85"/>`;
-          if (li < layers.length - 1 && r() < 0.45) b += `<rect x="${n(x + w / 2 - 2)}" y="${y + th}" width="4" height="${n(layers[li + 1][0] - y - th)}" style="fill:var(--cu)" opacity=".7"/>`; } });
-      b += R(-60, 186, W + 120, h - 186, '--si');
-      for (let x = 20; x < W; x += 64) { b += R(x, 178, 22, 8, '--deep') + R(x - 14, 186, 12, 10, '--back2') + R(x + 24, 186, 12, 10, '--back2') + `<rect x="${x + 9}" y="174" width="4" height="4" style="fill:var(--cu)"/>`;
-        b += S(`M${x - 8} 196v-14M${x + 30} 196v-14`, '--deep', 2, 'opacity=".5"'); }
-      for (let i = 0; i < 70; i++) b += C(between(r, 0, W), between(r, 210, h - 10), between(r, 1, 2.2), '--deep', 'opacity=".25"');
-      return [h, b, 'top:86px']; },
-    // 2012: the classic convolutional net picture: an image, shrinking stacks of feature maps, dense layers, a class
-    deep(r) { const h = 300; let b = '';
-      const box = (x, y, w, hh, dz, v, op) => `<path d="M${n(x)} ${n(y)}h${n(w)}l${n(dz)} ${n(-dz)}h${n(-w)}z" ${fill(v)} opacity="${op}"/>` +
-        `<path d="M${n(x + w)} ${n(y)}l${n(dz)} ${n(-dz)}v${n(hh)}l${n(-dz)} ${n(dz)}z" ${fill(v)} opacity="${op * 0.8}"/>` + `<rect x="${n(x)}" y="${n(y)}" width="${n(w)}" height="${n(hh)}" opacity="${op}" style="fill:var(${v});stroke:var(--band)" stroke-width="1"/>`;
-      for (let gx = 0; gx < 8; gx++) for (let gy = 0; gy < 8; gy++) b += R(130 + gx * 14, 90 + gy * 14, 13, 13, '--back2', `opacity="${n(between(r, 0.3, 1))}"`);
-      const stacks = [[340, 70, 30, 150, 46], [520, 100, 40, 100, 36], [700, 124, 50, 64, 26], [880, 136, 56, 44, 20], [1030, 140, 60, 36, 16]];
-      stacks.forEach(([x, y, w, hh, dz], i) => { for (let k = 3; k >= 0; k--) b += box(x + k * 7, y + k * 3, w, hh, dz, i % 2 ? '--back2' : '--deep', 0.35 + k * 0.12); });
-      const dense = [[1180, 8], [1270, 8], [1360, 4]]; let prev = null;
-      dense.forEach(([x, k]) => { const ys = []; for (let i = 0; i < k; i++) ys.push(150 - (k - 1) * 11 + i * 22);
-        if (prev) prev[1].forEach(y1 => ys.forEach(y2 => b += S(`M${prev[0]} ${n(y1)}L${x} ${n(y2)}`, '--back2', 0.8, 'opacity=".6"')));
-        ys.forEach(y => b += C(x, y, 6, '--deep')); prev = [x, ys]; });
-      b += SIG('M250 150H330M480 150H515M640 150H700M800 150H880M985 150H1030M1120 150H1170', 2.2, '14 60', r);
-      return [h, b, 'top:96px']; },
+    // the internet revolution: a wired globe, browsers, email and search around it, undersea fibre below
+    internet(r) { const h = 400, cx = 720, cy = 175, G = 140; let b = '';
+      b += C(cx, cy, G + 30, '--glow', 'opacity=".08"') + C(cx, cy, G, '--band', 'opacity=".7"') + S(`M${cx - G} ${cy}a${G} ${G} 0 1 0 ${2 * G} 0a${G} ${G} 0 1 0 ${-2 * G} 0`, '--deep', 2);
+      for (const lat of [-60, -30, 0, 30, 60]) { const a = lat * Math.PI / 180; b += `<ellipse cx="${cx}" cy="${n(cy - G * Math.sin(a))}" rx="${n(G * Math.cos(a))}" ry="${n(G * Math.cos(a) * 0.16)}" style="fill:none;stroke:var(--back2)" stroke-width="1.2"/>`; }
+      for (const lon of [20, 50, 75]) b += `<ellipse cx="${cx}" cy="${cy}" rx="${n(G * Math.sin(lon * Math.PI / 180))}" ry="${G}" style="fill:none;stroke:var(--back2)" stroke-width="1.2"/>`;
+      const city = []; for (let i = 0; i < 16; i++) { const la = between(r, -1.0, 1.1), lo = between(r, -1.35, 1.35); city.push([cx + G * Math.cos(la) * Math.sin(lo), cy - G * Math.sin(la)]); }
+      for (let i = 0; i < 22; i++) { const [x1, y1] = pick(r, city), [x2, y2] = pick(r, city); if (x1 === x2) continue;
+        const mx = (x1 + x2) / 2, my = (y1 + y2) / 2, dx = mx - cx, dy = my - cy, L = Math.hypot(dx, dy) || 1, lift = 30 + Math.hypot(x2 - x1, y2 - y1) * 0.25;
+        const d = `M${n(x1)} ${n(y1)}Q${n(mx + dx / L * lift)} ${n(my + dy / L * lift)} ${n(x2)} ${n(y2)}`; b += S(d, '--deep', 1.2, 'opacity=".5"') + SIG(d, 2.2, '8 220', r); }
+      city.forEach(([x, y]) => b += C(x, y, 3.5, '--deep') + C(x, y, 8, '--glow', 'opacity=".25"'));
+      const panel = (x, y, w, hh, kind) => { let o = R(x, y, w, hh, '--band', 'rx="6" opacity=".92"') + `<rect x="${n(x)}" y="${n(y)}" width="${w}" height="${hh}" rx="6" style="fill:none;stroke:var(--deep)" stroke-width="1.6"/>`;
+        if (kind === 'browser') { o += S(`M${x} ${y + 16}h${w}`, '--deep', 1.4) + [8, 16, 24].map(k => C(x + k, y + 8, 2.2, '--deep')).join('') + R(x + 34, y + 4, w - 42, 8, '--back', 'rx="4"') + T(x + 38, y + 11, 'http://', 7, '--deep');
+          o += R(x + 10, y + 26, w * 0.35, hh - 36, '--back2', 'rx="2"'); for (let k = 0; k < 4; k++) o += R(x + w * 0.42 + 6, y + 28 + k * 11, w * between(r, 0.25, 0.48), 4, '--back2', 'rx="2"'); }
+        if (kind === 'email') o += S(`M${x} ${y}l${w / 2} ${hh * 0.6} ${w / 2} ${-hh * 0.6}`, '--deep', 1.6) + T(x + w / 2 - 6, y + hh - 10, '@', 14, '--deep');
+        if (kind === 'search') o += C(x + 18, y + hh / 2, 7, '--band', 'style="fill:none;stroke:var(--deep)" stroke-width="2"') + S(`M${x + 23} ${y + hh / 2 + 5}l6 6`, '--deep', 2.4) + R(x + 38, y + hh / 2 - 3, w - 52, 6, '--back2', 'rx="3"');
+        if (kind === 'chat') for (let k = 0; k < 3; k++) o += R(x + 10 + (k % 2) * 30, y + 10 + k * 14, w - 50, 9, k % 2 ? '--back2' : '--back', 'rx="4.5"');
+        return o; };
+      [[150, 50, 190, 120, 'browser', 340], [1100, 40, 190, 120, 'browser', 1100], [300, 230, 120, 70, 'email', 420], [1010, 230, 190, 40, 'search', 1010], [70, 210, 140, 60, 'chat', 210], [1240, 200, 140, 60, 'chat', 1240]]
+        .forEach(([x, y, w, hh, k, ax]) => { b += S(`M${ax} ${y + hh / 2}L${cx + (ax < cx ? -G : G) * 0.9} ${cy + between(r, -40, 40)}`, '--deep', 1, 'stroke-dasharray="3 5" opacity=".6"') + panel(x, y, w, hh, k); });
+      for (let k = 0; k < 4; k++) { let d = `M-40 ${348 + k * 9}`; for (let x = 0; x <= W + 40; x += 120) d += `Q${x - 60} ${n(340 + k * 9 + between(r, -10, 10))} ${x} ${348 + k * 9}`;
+        b += S(d, '--back2', 1.6) + SIG(d, 2.2, '18 260', r); }
+      return [h, b, 'top:70px']; },
+    // blockchain: blocks of transactions, each sealed with the hash of the one before
+    chain(r) { const h = 300; let b = '', prev = '0000000000';
+      for (let i = 0; i < 6; i++) { const x = 40 + i * 236, y = 70 + (i % 2) * 34, w = 186, hh = 132, hs = '00' + hex(r, 8);
+        b += R(x + 6, y + 6, w, hh, '--back2', 'rx="8" opacity=".6"') + R(x, y, w, hh, '--band', 'rx="8"') + `<rect x="${x}" y="${y}" width="${w}" height="${hh}" rx="8" style="fill:none;stroke:var(--deep)" stroke-width="1.8"/>`;
+        b += R(x, y, w, 24, '--deep', 'rx="8"') + R(x, y + 14, w, 10, '--deep') + T(x + 12, y + 16, i ? `BLOCK ${i}` : 'BLOCK 0 · GENESIS', 10, '--band');
+        b += T(x + 12, y + 42, `prev #${prev}…`, 9.5, '--deep', 'opacity=".75"') + T(x + 12, y + 58, `hash #${hs}…`, 9.5, '--deep');
+        for (let k = 0; k < 4; k++) b += R(x + 12, y + 72 + k * 13, between(r, 70, 160), 6, k % 2 ? '--back' : '--back2', 'rx="3"');
+        if (i < 5) { const x1 = x + w, y1 = y + hh / 2, x2 = x + 236, y2 = 70 + ((i + 1) % 2) * 34 + hh / 2, mx = (x1 + x2) / 2, my = (y1 + y2) / 2;
+          b += `<ellipse cx="${n(mx - 9)}" cy="${n(my)}" rx="13" ry="7" style="fill:none;stroke:var(--deep)" stroke-width="3.4"/><ellipse cx="${n(mx + 9)}" cy="${n(my)}" rx="13" ry="7" style="fill:none;stroke:var(--glow)" stroke-width="3.4"/>`;
+          b += SIG(`M${x1} ${n(y1)}L${x2} ${n(y2)}`, 2, '6 40', r); }
+        prev = hs; }
+      return [h, b, 'top:90px']; },
+    // quantum: a dilution refrigerator (the "chandelier") with its qubit chip, Bloch spheres either side
+    quantum(r) { const h = 400, cx = 720; let b = C(cx, 300, 120, '--glow', 'opacity=".1"');
+      const gold = 'style="fill:#C9A14A"', plates = [[40, 300], [100, 240], [160, 180], [220, 128], [276, 80]];
+      for (let k = 0; k < plates.length - 1; k++) { const [y, w] = plates[k], [y2, w2] = plates[k + 1];
+        for (const s of [-1, 1]) b += `<path d="M${n(cx + s * (w2 / 2 - 8))} ${y + 8}V${y2}" style="stroke:#B08A3A" stroke-width="5"/>`;
+        for (let c = -2; c <= 2; c++) { const x = cx + c * w2 / 6; let d = `M${n(x)} ${y + 8}`; for (let yy = y + 14; yy < y2; yy += 10) d += `Q${n(x + 6)} ${yy - 5} ${n(x)} ${yy}`; b += S(d, '--deep', 1.2, 'opacity=".7"'); } }
+      plates.forEach(([y, w]) => b += `<rect x="${cx - w / 2}" y="${y}" width="${w}" height="9" rx="2" ${gold}/>` + `<rect x="${cx - w / 2}" y="${y + 9}" width="${w}" height="3" style="fill:#8C6A28"/>`);
+      b += `<rect x="${cx - 26}" y="300" width="52" height="30" rx="3" ${gold}/>` + R(cx - 16, 306, 32, 18, '--deep', 'rx="2"');
+      for (let i = 0; i < 3; i++) for (let j = 0; j < 2; j++) b += `<circle cx="${cx - 9 + i * 9}" cy="${311 + j * 8}" r="2.2" class="led" style="fill:var(--glow);--d:${n(between(r, 0, 3))}s"/>`;
+      b += S(`M${cx - 70} 30h140`, '--deep', 4);
+      const bloch = (x, y, R0, a) => { const vx = x + R0 * 0.8 * Math.cos(a), vy = y - R0 * 0.8 * Math.sin(a);
+        return C(x, y, R0, '--band', 'opacity=".6"') + S(`M${x - R0} ${y}a${R0} ${R0} 0 1 0 ${2 * R0} 0a${R0} ${R0} 0 1 0 ${-2 * R0} 0`, '--deep', 1.8) +
+          `<ellipse cx="${x}" cy="${y}" rx="${R0}" ry="${n(R0 * 0.3)}" style="fill:none;stroke:var(--back2)" stroke-width="1.4" stroke-dasharray="4 4"/>` + S(`M${x} ${y - R0 - 8}v${2 * R0 + 16}`, '--back2', 1.2) +
+          S(`M${x} ${y}L${n(vx)} ${n(vy)}`, '--glow', 3) + C(vx, vy, 5, '--glow') + T(x - 9, y - R0 - 14, '|0⟩', 12, '--deep') + T(x - 9, y + R0 + 24, '|1⟩', 12, '--deep'); };
+      b += bloch(330, 170, 80, 0.9) + bloch(1110, 190, 70, 2.3);
+      for (let i = 0; i < 5; i++) for (let j = 0; j < 3; j++) { const x = 60 + i * 34, y = 300 + j * 30;
+        if (i < 4) b += S(`M${x} ${y}h34`, '--back2', 1.4); if (j < 2) b += S(`M${x} ${y}v30`, '--back2', 1.4); b += S(`M${x - 7} ${y}h14M${x} ${y - 7}v14`, '--deep', 3.4); }
+      for (let i = 0; i < 4; i++) { let d = ''; for (let x = 1230; x <= 1420; x += 4) d += (d ? 'L' : 'M') + x + ' ' + n(320 + i * 14 + 10 * Math.sin((x + i * 30) / 14) * Math.exp(-(((x - 1325) / 70) ** 2))); b += S(d, i % 2 ? '--back2' : '--deep', 1.6); }
+      return [h, b, 'top:60px']; },
   };
 
   /* ── eras: icons that float in the band, emoji, skyline and the dial label ── */
   const ERA = {
     transistor:  { year: 1947, label: 'The transistor', icon: 'transistor',
-      icons: ['vacuum-tube', 'transistor', 'transistor-symbol', 'resistor', 'capacitor', 'diode', 'oscilloscope', 'battery', 'vacuum-tube', 'transistor'], emoji: ['💡', '🔋', '📻', '🔌', '⚡'] },
+      icons: ['transistor', 'vacuum-tube', 'ai-chip', 'transistor-symbol', 'qubit', 'oscilloscope', 'rocket', 'dna', 'atom', 'robot'], emoji: ['💡', '🤖', '🚀', '⚛️', '🧠'] },
     ic:          { year: 1958, label: 'Integrated circuit', icon: 'ic-dip', edge: 'dip',
-      icons: ['ic-dip', 'gate-and', 'gate-or', 'gate-not', 'transistor-symbol', 'resistor', 'wafer', 'ic-dip', 'capacitor'], emoji: ['🧮', '🔬', '⚙️', '📟'] },
+      icons: ['ic-dip', 'gate-and', 'gate-or', 'gate-not', 'transistor-symbol', 'wafer', 'ic-dip', 'rocket', 'satellite'], emoji: ['🧮', '🔬', '🛰️', '🌕'] },
     cpu:         { year: 1971, label: 'Microprocessor', icon: 'cpu', edge: 'silicon',
-      icons: ['cpu', 'ic-dip', 'bits', 'gear', 'punch-card', 'tape', 'hdd', 'floppy', 'mainframe', 'wafer'], emoji: ['💾', '🧮', '⌨️', '🖲️'] },
-    net:         { year: 1983, label: 'ARPANET → TCP/IP', icon: 'network', edge: 'mesh',
-      icons: ['network', 'globe', 'ethernet', 'switch', 'antenna', 'lock-chip', 'wifi', 'fiber', 'satellite', 'nic'], emoji: ['📡', '🌐', '🔐', '☎️', '🛰️'] },
-    web:         { year: 1991, label: 'The World Wide Web', icon: 'globe', edge: 'desks',
-      icons: ['crt', 'laptop', 'globe', 'floppy', 'phone', 'wifi', 'bits', 'ethernet', 'crt'], emoji: ['💻', '🖥️', '🖱️', '💿', '📱', '✉️'] },
-    die:         { year: null, label: 'Inside the die', icon: 'wafer', edge: 'fins', over: 'die', icons: [], emoji: [] },
+      icons: ['cpu', 'ic-dip', 'bits', 'gear', 'punch-card', 'floppy', 'hdd', 'wafer', 'ai-chip', 'telescope'], emoji: ['💾', '🧮', '⌨️', '🕹️'] },
+    crypto:      { year: 1976, label: 'Public-key crypto', icon: 'shield', edge: 'vault',
+      icons: ['shield', 'key', 'lock-chip', 'fingerprint', 'firewall', 'bug', 'hash', 'shield', 'key', 'network'], emoji: ['🔐', '🛡️', '🔑', '🕵️', '🐛'] },
+    web:         { year: 1991, label: 'World Wide Web', icon: 'browser', edge: 'desks',
+      icons: ['browser', 'globe', 'email', 'search', 'crt', 'laptop', 'wifi', 'phone', 'chat'], emoji: ['🌐', '💻', '✉️', '🔎', '📱', '💬'] },
+    internet:    { year: null, label: 'The internet revolution', icon: 'globe', edge: 'mesh', over: 'internet', icons: [], emoji: [] },
     gpu:         { year: 1999, label: 'The GPU', icon: 'gpu', edge: 'heatsink',
-      icons: ['gpu', 'cpu', 'ai-chip', 'oscilloscope', 'gear', 'nic', 'gpu', 'battery'], emoji: ['🎮', '⚡', '🖥️', '🔥'] },
+      icons: ['gpu', 'ai-chip', 'neural-net', 'gpu', 'vr', 'nic', 'cpu', 'drone'], emoji: ['🎮', '⚡', '🥽', '🔥'] },
     cloud:       { year: 2006, label: 'The cloud', icon: 'cloud', edge: 'racks',
-      icons: ['cloud', 'server-rack', 'switch', 'network', 'globe', 'hdd', 'nic', 'lock-chip', 'cloud'], emoji: ['☁️', '🗄️', '🌐', '📱'] },
-    deep:        { year: 2012, label: 'Deep learning on GPUs', icon: 'neural-net', edge: 'neurons', over: 'deep', icons: [], emoji: [] },
-    transformer: { year: 2017, label: 'The Transformer', icon: 'attention', edge: 'tokens',
-      icons: ['attention', 'neural-net', 'robot', 'ai-chip', 'bits', 'attention', 'neural-net'], emoji: ['🤖', '🧠', '💬', '✨'] },
-    cluster:     { year: '2020s', label: 'AI supercomputers', icon: 'server-rack', edge: 'superpod',
+      icons: ['cloud', 'server-rack', 'switch', 'network', 'phone', 'lock-chip', 'nic', 'cloud'], emoji: ['☁️', '🗄️', '🌐', '📱'] },
+    chain:       { year: 2009, label: 'Blockchain', icon: 'blockchain', edge: 'blocks', over: 'chain', icons: [], emoji: [] },
+    learning:    { year: 2012, label: 'Deep learning', icon: 'neural-net', edge: 'neurons',
+      icons: ['neural-net', 'attention', 'robot', 'ai-chip', 'dna', 'robot-arm', 'sparkle', 'drone'], emoji: ['🧠', '🤖', '🧬', '📊', '♟️'] },
+    cluster:     { year: 2020, label: 'Foundation models', icon: 'server-rack', edge: 'superpod',
       icons: ['gpu', 'server-rack', 'nic', 'fiber', 'switch', 'ai-chip', 'network', 'gpu'], emoji: ['🧠', '⚡', '🛰️'] },
-    quantum:     { year: 'Now', label: 'Quantum computing', icon: 'qubit', edge: 'wave',
-      icons: ['qubit', 'quantum-chip', 'cryostat', 'atom', 'photonic', 'qubit', 'atom', 'cryostat'], emoji: ['⚛️', '🔬', '🧊', '🌌'] },
-    next:        { year: 'Next', label: 'What we build next', icon: 'photonic', edge: 'horizon',
-      icons: ['photonic', 'fiber', 'atom', 'ai-chip', 'satellite', 'qubit', 'robot'], emoji: ['🚀', '🛰️', '✨', '🌌'] },
+    llm:         { year: 2022, label: 'ChatGPT, Claude & LLMs', icon: 'chat', edge: 'tokens',
+      icons: ['chat', 'sparkle', 'attention', 'robot', 'chat', 'ai-chip', 'shield', 'bci', 'sparkle'], emoji: ['💬', '✨', '🤖', '🧠', '📚'] },
+    quantum:     { year: 'Now', label: 'Quantum computing', icon: 'qubit', edge: 'wave', over: 'quantum', icons: [], emoji: [] },
+    next:        { year: 'Next', label: 'The future', icon: 'rocket', edge: 'horizon',
+      icons: ['rocket', 'planet', 'fusion', 'bci', 'robot-arm', 'qubit', 'photonic', 'dna', 'telescope', 'drone'], emoji: ['🚀', '🪐', '🧬', '🔭', '🦾', '🌌'] },
   };
-  const SPIN = new Set(['atom', 'gear', 'qubit']);
-  const PULSE = new Set(['ai-chip', 'quantum-chip', 'cryostat', 'wifi']);
+  const SPIN = new Set(['atom', 'gear', 'qubit', 'planet']);
+  const PULSE = new Set(['ai-chip', 'quantum-chip', 'cryostat', 'wifi', 'sparkle', 'chat', 'shield']);
   const url = f => `url("${new URL(A + f + '.svg', document.baseURI).href}")`;
 
   const float = (scene, era, r) => {
@@ -237,7 +283,8 @@
     const set = idx => { const sec = timed[idx], era = ERA[sec.dataset.era]; if (shown === idx) return;
       const from = shown === null ? null : ERA[timed[shown].dataset.era].year; shown = idx;
       ic.style.webkitMaskImage = ic.style.maskImage = url(era.icon);
-      dial.style.setProperty('--dial', getComputedStyle(sec).getPropertyValue('--deep').trim() || 'var(--signal)');
+      const probe = document.createElement('i'); probe.style.cssText = 'position:absolute;color:var(--deep)'; sec.appendChild(probe);
+      dial.style.setProperty('--dial', getComputedStyle(probe).color); probe.remove();
       nm.textContent = era.label; ticks.forEach((t, k) => t.classList.toggle('on', k <= idx));
       cancelAnimationFrame(raf);
       if (RM || typeof era.year !== 'number' || typeof from !== 'number') { yr.textContent = era.year; return; }

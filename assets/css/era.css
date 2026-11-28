@@ -30,20 +30,21 @@
 .scene { top: 0; bottom: 0; transform: translateX(-50%); z-index: -1; overflow: hidden; }
 .scene .over { position: absolute; left: 0; }
 
-/* ─── eras ─── */
+/* ─── eras: a green-and-blue palette, from blueprint blue to circuit green to quantum indigo ─── */
 [data-era="ic"]          { --hue: #2F8F5B; }
-[data-era="cpu"]         { --hue: #B8863B; }
-[data-era="net"]         { --hue: #1F8FA0; }
-[data-era="web"]         { --hue: #7A5AC8; }
-[data-era="gpu"]         { --hue: #5E9A2E; }
-[data-era="cloud"]       { --hue: #4A90D9;
-  --band-bg: linear-gradient(180deg, color-mix(in srgb, #4A90D9 16%, var(--paper)), var(--band)); }
-[data-era="transformer"] { --hue: #B04A9C; }
-[data-era="quantum"]     { --hue: #7C5CE0;
-  --band-bg: radial-gradient(40% 40% at 85% 20%, color-mix(in srgb, #39C5E0 12%, transparent), transparent 70%),
-             radial-gradient(35% 35% at 10% 80%, color-mix(in srgb, #8B5CF6 12%, transparent), transparent 70%), var(--band); }
-[data-era="next"]        { --hue: #E0703A;
-  --band-bg: radial-gradient(60% 50% at 50% 100%, color-mix(in srgb, #F2A65A 22%, transparent), transparent 70%), var(--band); }
+[data-era="cpu"]         { --hue: #23867E; }
+[data-era="crypto"]      { --hue: #1E9E6E;
+  --band-bg: radial-gradient(45% 40% at 85% 20%, color-mix(in srgb, #1E9E6E 12%, transparent), transparent 70%), var(--band); }
+[data-era="web"]         { --hue: #2C7DA0; }
+[data-era="gpu"]         { --hue: #4E9A3E; }
+[data-era="cloud"]       { --hue: #3A86C8;
+  --band-bg: linear-gradient(180deg, color-mix(in srgb, #3A86C8 16%, var(--paper)), var(--band)); }
+[data-era="learning"]    { --hue: #2A8C9E; }
+[data-era="llm"]         { --hue: #1F9C8A;
+  --band-bg: radial-gradient(40% 40% at 85% 15%, color-mix(in srgb, #39C5E0 12%, transparent), transparent 70%),
+             radial-gradient(35% 35% at 10% 85%, color-mix(in srgb, #2BA38A 12%, transparent), transparent 70%), var(--band); }
+[data-era="next"]        { --hue: #1FA6A0;
+  --band-bg: radial-gradient(60% 50% at 50% 100%, color-mix(in srgb, #39C5E0 20%, transparent), transparent 70%), var(--band); }
 
 /* AI supercomputers (the book): a dark machine-hall band in both themes, with its own scoped tokens */
 [data-era="cluster"] {
@@ -63,22 +64,21 @@
 [data-era="cluster"] .card { background: color-mix(in srgb, #0B1624 85%, transparent); }
 
 /* hero, 1947: a blueprint grid lit by the warm glow of a vacuum tube */
-[data-era="transistor"] { --hue: #3A6EA5; --band: var(--paper); padding-bottom: 10rem; }
+[data-era="transistor"] { --hue: #2B6FA0; --band: var(--paper); padding-bottom: 10rem; }
 .hero::before {
   inset: 0 auto 0 50%; width: 100vw; transform: translateX(-50%); mask-image: none; opacity: 1; z-index: -3;
   background:
-    radial-gradient(260px 200px at 82% 30%, color-mix(in srgb, #F2A65A 22%, transparent), transparent 70%),
-    linear-gradient(color-mix(in srgb, #3A6EA5 14%, transparent) 1px, transparent 1px) 0 0 / 56px 56px,
-    linear-gradient(90deg, color-mix(in srgb, #3A6EA5 14%, transparent) 1px, transparent 1px) 0 0 / 56px 56px,
-    linear-gradient(180deg, color-mix(in srgb, #3A6EA5 10%, var(--paper)), var(--paper));
+    radial-gradient(260px 200px at 82% 30%, color-mix(in srgb, #39C5E0 18%, transparent), transparent 70%),
+    linear-gradient(color-mix(in srgb, #2B6FA0 14%, transparent) 1px, transparent 1px) 0 0 / 56px 56px,
+    linear-gradient(90deg, color-mix(in srgb, #2B6FA0 14%, transparent) 1px, transparent 1px) 0 0 / 56px 56px,
+    linear-gradient(180deg, color-mix(in srgb, #2B6FA0 10%, var(--paper)), var(--paper));
 }
 .proof { margin-bottom: 150px; }
 .section[data-era="next"] { padding-bottom: 5rem; }
-.section[data-era="web"], .section[data-era="cloud"] { padding-bottom: 12rem; }   /* room for the interludes' skylines */
+.section[data-era="web"], .section[data-era="cloud"], .section[data-era="llm"] { padding-bottom: 12rem; }   /* room for the interludes' skylines */
 
 /* ─── interludes: a cutaway between sections (no content) ─── */
 .interlude { height: 620px; }
-[data-era="deep"].interlude { height: 580px; }
 .interlude::before { content: ''; position: absolute; inset: 0; background: var(--band-bg, var(--band)); z-index: -3; }
 .interlude-label {
   position: absolute; left: 50%; top: 34px; transform: translateX(-50%); width: max-content; max-width: 90vw; text-align: center; z-index: 1;
@@ -86,10 +86,15 @@
   color: color-mix(in srgb, var(--ink) 78%, var(--deep)); padding: 0.25rem 0.8rem; border-radius: 999px; border: 1px solid color-mix(in srgb, var(--deep) 40%, transparent);
   background: color-mix(in srgb, var(--paper) 70%, transparent);
 }
-[data-era="die"] { --hue: #C0763A; --cu: #C37A3E; --si: color-mix(in srgb, #6B7A8F 55%, var(--paper));
-  --band-bg: linear-gradient(180deg, var(--band), color-mix(in srgb, #6B7A8F 20%, var(--paper))); }
-[data-era="deep"] { --hue: #5B5BD6;
-  --band-bg: radial-gradient(50% 60% at 50% 55%, color-mix(in srgb, #5B5BD6 14%, transparent), transparent 70%), var(--band); }
+[data-era="internet"] { --hue: #1E88B5;
+  --band-bg: radial-gradient(45% 55% at 50% 40%, color-mix(in srgb, #39C5E0 14%, transparent), transparent 70%),
+             linear-gradient(180deg, var(--band) 0 80%, color-mix(in srgb, #1E6FA0 22%, var(--paper)) 80%); }
+[data-era="chain"] { --hue: #2A9D8F; }
+[data-era="quantum"] { --hue: #4C6FD8;
+  --band-bg: radial-gradient(40% 50% at 50% 70%, color-mix(in srgb, #39C5E0 14%, transparent), transparent 70%),
+             radial-gradient(30% 40% at 20% 30%, color-mix(in srgb, #4C6FD8 12%, transparent), transparent 70%), var(--band); }
+.interlude[data-era="chain"] { height: 520px; }
+.interlude[data-era="quantum"] { height: 600px; }
 
 /* ─── floating icons and emoji ─── */
 .ti {
