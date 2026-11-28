@@ -1,0 +1,167 @@
+/* index.html only: the time-machine layer (drawn by assets/js/era.js).
+   Scrolling the homepage travels forward through computing history: every section is an era band
+   (1947 transistor → integrated circuit → microprocessor → networks → the web → GPU → cloud → Transformer →
+   AI supercomputers → quantum → what comes next). A band sets --hue; everything else is mixed from it and the
+   page's own --paper, so light and dark themes both work without a second palette:
+     --band  the band's background        --back / --back2  far and middle skyline layers
+     --deep  icons and skyline fronts     --glow  LEDs and signals
+   Decoration only (hues are never status colours); text stays on the datasheet tokens. */
+
+[data-era] {
+  position: relative; isolation: isolate;
+  --band: color-mix(in srgb, var(--hue) 10%, var(--paper));
+  --back: color-mix(in srgb, var(--hue) 22%, var(--paper));
+  --back2: color-mix(in srgb, var(--hue) 40%, var(--paper));
+  --deep: color-mix(in srgb, var(--hue) 68%, var(--ink) 14%);
+  --glow: color-mix(in srgb, var(--hue) 70%, #FFFFFF 30%);
+  --grid: color-mix(in srgb, var(--hue) 16%, transparent);
+}
+.section[data-era] { padding: 4.5rem 1.25rem 9rem; }
+.section[data-era]::before {               /* full-bleed band behind a max-width section, with a faint circuit grid */
+  content: ''; position: absolute; top: 0; bottom: 0; left: 50%; width: 100vw; transform: translateX(-50%); z-index: -3;
+  background:
+    linear-gradient(var(--grid) 1px, transparent 1px) 0 0 / 48px 48px,
+    linear-gradient(90deg, var(--grid) 1px, transparent 1px) 0 0 / 48px 48px,
+    var(--band-bg, var(--band));
+}
+.edge, .scene { position: absolute; left: 50%; width: 100vw; pointer-events: none; line-height: 0; }
+.edge { top: 0; transform: translate(-50%, -100%); z-index: -2; }
+.edge svg { display: block; }
+.scene { top: 0; bottom: 0; transform: translateX(-50%); z-index: -1; overflow: hidden; }
+.scene .over { position: absolute; left: 0; }
+
+/* ─── eras ─── */
+[data-era="ic"]          { --hue: #2F8F5B; }
+[data-era="cpu"]         { --hue: #B8863B; }
+[data-era="net"]         { --hue: #1F8FA0; }
+[data-era="web"]         { --hue: #7A5AC8; }
+[data-era="gpu"]         { --hue: #5E9A2E; }
+[data-era="cloud"]       { --hue: #4A90D9;
+  --band-bg: linear-gradient(180deg, color-mix(in srgb, #4A90D9 16%, var(--paper)), var(--band)); }
+[data-era="transformer"] { --hue: #B04A9C; }
+[data-era="quantum"]     { --hue: #7C5CE0;
+  --band-bg: radial-gradient(40% 40% at 85% 20%, color-mix(in srgb, #39C5E0 12%, transparent), transparent 70%),
+             radial-gradient(35% 35% at 10% 80%, color-mix(in srgb, #8B5CF6 12%, transparent), transparent 70%), var(--band); }
+[data-era="next"]        { --hue: #E0703A;
+  --band-bg: radial-gradient(60% 50% at 50% 100%, color-mix(in srgb, #F2A65A 22%, transparent), transparent 70%), var(--band); }
+
+/* AI supercomputers (the book): a dark machine-hall band in both themes, with its own scoped tokens */
+[data-era="cluster"] {
+  --hue: #39C5E0;
+  --paper: #0B1624; --paper-2: #112033; --rule: #22374F; --rule-strong: #33506F;
+  --ink: #E6F1F8; --ink-2: #C3D6E4; --graphite: #91A9BF;
+  --signal: #8DB8FF; --copper: #F4A26A; --fault: #FF8A80; --on-ink: #0B1624;
+  --bg: var(--paper); --bg2: var(--paper); --bg3: var(--paper-2); --border: var(--rule); --border-bright: var(--rule-strong);
+  --accent: var(--signal); --accent2: var(--copper); --ok: var(--ink); --warn: var(--copper); --bad: var(--fault);
+  --text: var(--ink); --text-mid: var(--ink-2); --text-dim: var(--graphite);
+  --band: #0B1624; --back: #16304A; --back2: #1E4466; --deep: #5FC9E6; --glow: #7FE3F5; --grid: rgba(95, 201, 230, 0.07);
+  --band-bg: radial-gradient(40% 30% at 30% 0%, rgba(95, 201, 230, 0.16), transparent 70%),
+             radial-gradient(30% 25% at 85% 70%, rgba(139, 92, 246, 0.10), transparent 70%),
+             linear-gradient(180deg, #0B1624, #08111D 55%, #050B14);
+  color: var(--ink);
+}
+[data-era="cluster"] .card { background: color-mix(in srgb, #0B1624 85%, transparent); }
+
+/* hero, 1947: a blueprint grid lit by the warm glow of a vacuum tube */
+[data-era="transistor"] { --hue: #3A6EA5; --band: var(--paper); padding-bottom: 10rem; }
+.hero::before {
+  inset: 0 auto 0 50%; width: 100vw; transform: translateX(-50%); mask-image: none; opacity: 1; z-index: -3;
+  background:
+    radial-gradient(260px 200px at 82% 30%, color-mix(in srgb, #F2A65A 22%, transparent), transparent 70%),
+    linear-gradient(color-mix(in srgb, #3A6EA5 14%, transparent) 1px, transparent 1px) 0 0 / 56px 56px,
+    linear-gradient(90deg, color-mix(in srgb, #3A6EA5 14%, transparent) 1px, transparent 1px) 0 0 / 56px 56px,
+    linear-gradient(180deg, color-mix(in srgb, #3A6EA5 10%, var(--paper)), var(--paper));
+}
+.proof { margin-bottom: 150px; }
+.section[data-era="next"] { padding-bottom: 5rem; }
+.section[data-era="web"], .section[data-era="cloud"] { padding-bottom: 12rem; }   /* room for the interludes' skylines */
+
+/* ─── interludes: a cutaway between sections (no content) ─── */
+.interlude { height: 620px; }
+[data-era="deep"].interlude { height: 580px; }
+.interlude::before { content: ''; position: absolute; inset: 0; background: var(--band-bg, var(--band)); z-index: -3; }
+.interlude-label {
+  position: absolute; left: 50%; top: 34px; transform: translateX(-50%); width: max-content; max-width: 90vw; text-align: center; z-index: 1;
+  font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.14em; text-transform: uppercase;
+  color: color-mix(in srgb, var(--ink) 78%, var(--deep)); padding: 0.25rem 0.8rem; border-radius: 999px; border: 1px solid color-mix(in srgb, var(--deep) 40%, transparent);
+  background: color-mix(in srgb, var(--paper) 70%, transparent);
+}
+[data-era="die"] { --hue: #C0763A; --cu: #C37A3E; --si: color-mix(in srgb, #6B7A8F 55%, var(--paper));
+  --band-bg: linear-gradient(180deg, var(--band), color-mix(in srgb, #6B7A8F 20%, var(--paper))); }
+[data-era="deep"] { --hue: #5B5BD6;
+  --band-bg: radial-gradient(50% 60% at 50% 55%, color-mix(in srgb, #5B5BD6 14%, transparent), transparent 70%), var(--band); }
+
+/* ─── floating icons and emoji ─── */
+.ti {
+  position: absolute; display: block; background: var(--deep); opacity: var(--o, 0.5);
+  -webkit-mask: center / contain no-repeat; mask: center / contain no-repeat;
+  animation: float var(--t, 9s) ease-in-out infinite alternate; animation-delay: calc(var(--d, 0s) * -1);
+}
+.ti-soft { --o: 0.16; }
+.ti-spin { animation: spin var(--t, 30s) linear infinite; }
+.ti-pulse { animation: pulse 3.2s ease-in-out infinite alternate, float var(--t, 9s) ease-in-out infinite alternate; }
+.te {
+  position: absolute; display: block; font-size: var(--fs, 22px); line-height: 1; opacity: 0.42; filter: saturate(0.8);
+  animation: float var(--t, 11s) ease-in-out infinite alternate; animation-delay: calc(var(--d, 0s) * -1);
+}
+@keyframes float { from { translate: 0 0; rotate: -4deg; } to { translate: var(--dx, 14px) -18px; rotate: 5deg; } }
+@keyframes spin  { to { rotate: 360deg; } }
+@keyframes pulse { from { opacity: calc(var(--o, 0.5) * 0.5); } to { opacity: var(--o, 0.5); } }
+
+/* signals: pulses running along a skyline's traces, LEDs blinking */
+.sig { animation: sig 3.6s linear infinite; animation-delay: calc(var(--d, 0s) * -1); }
+@keyframes sig { to { stroke-dashoffset: -240; } }
+.led { animation: led 2.4s steps(2) infinite; animation-delay: calc(var(--d, 0s) * -1); }
+@keyframes led { 50% { opacity: 0.25; } }
+
+/* ─── kicker: the era's icon + its year ─── */
+.kicker-icon {
+  order: -1; width: 30px; height: 30px; margin-right: 0.7rem; background: var(--deep, var(--accent));
+  -webkit-mask: center / contain no-repeat; mask: center / contain no-repeat;
+}
+.section-head .section-kicker { display: flex; align-items: center; flex-wrap: wrap; }
+.era-tag {
+  margin-left: 0.75rem; padding: 0.1rem 0.55rem; border-radius: 999px; letter-spacing: 0.08em;
+  color: var(--deep); border: 1px solid color-mix(in srgb, var(--deep) 45%, transparent);
+  background: color-mix(in srgb, var(--paper) 60%, transparent);
+}
+.era-tag b { font-weight: 600; }
+
+/* problem cards: a big technology watermark in the corner */
+.problem { position: relative; overflow: hidden; }
+.problem::before {
+  content: ''; position: absolute; top: 0.9rem; right: 1rem; width: 72px; height: 72px; background: var(--pc); opacity: 0.13; pointer-events: none;
+  -webkit-mask: var(--wm) top right / contain no-repeat; mask: var(--wm) top right / contain no-repeat;
+}
+.problems > :nth-child(1) { --wm: url(../tech/server-rack.svg); }
+.problems > :nth-child(2) { --wm: url(../tech/gpu.svg); }
+.problems > :nth-child(3) { --wm: url(../tech/lock-chip.svg); }
+
+/* ─── the time machine: a fixed dial showing the year you've scrolled to ─── */
+.era-dial {
+  position: fixed; left: 1rem; bottom: 1rem; z-index: 40; pointer-events: none;
+  display: grid; grid-template-columns: auto auto; align-items: center; gap: 0.1rem 0.6rem;
+  padding: 0.5rem 0.8rem 0.55rem 0.6rem; border-radius: 10px; border: 1px solid var(--rule-strong);
+  background: color-mix(in srgb, var(--paper) 88%, transparent); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+  box-shadow: 0 6px 24px -12px rgba(0, 0, 0, 0.35); font-family: var(--font-mono); color: var(--ink);
+  transition: opacity 0.4s;
+}
+.era-dial i { grid-row: span 2; width: 28px; height: 28px; background: var(--dial, var(--signal)); -webkit-mask: center / contain no-repeat; mask: center / contain no-repeat; }
+.era-dial .yr { font-size: 1.05rem; font-weight: 600; letter-spacing: 0.02em; font-variant-numeric: tabular-nums; }
+.era-dial .nm { font-size: 0.66rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--graphite); }
+.era-dial .ticks { grid-column: 1 / -1; display: flex; gap: 3px; margin-top: 0.35rem; }
+.era-dial .ticks b { flex: 1; height: 3px; min-width: 8px; border-radius: 2px; background: var(--rule-strong); transition: background 0.3s; }
+.era-dial .ticks b.on { background: var(--dial, var(--signal)); }
+.era-dial .hint { grid-column: 1 / -1; font-size: 0.6rem; color: var(--graphite); letter-spacing: 0.06em; margin-top: 0.25rem; }
+.era-dial.moved .hint { display: none; }
+
+@media (max-width: 1279px) { .ti-m, .te-m { display: none; } }
+@media (max-width: 860px) {
+  .ti { --o: 0.28; } .ti-soft { display: none; } .te { opacity: 0.3; }
+  .era-dial { left: 0.6rem; bottom: 0.6rem; padding: 0.35rem 0.6rem 0.4rem 0.45rem; }
+  .era-dial i { width: 22px; height: 22px; } .era-dial .yr { font-size: 0.9rem; } .era-dial .hint { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ti, .te, .sig, .led { animation: none !important; }
+}
+@media print, (max-width: 600px) { .era-dial { display: none; } }
